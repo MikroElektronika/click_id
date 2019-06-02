@@ -29,13 +29,13 @@ string = "Simple UART Interface"
 ; - Class and protocol of bundle and cport must be marked as 0x00.
 ;
 ;Control protocol on CPort 0
-;[cport-descriptor 0]
-;bundle = 0
-;protocol = 0x00
+[cport-descriptor 0]
+bundle = 0
+protocol = 0x00
 
 ;Control protocol Bundle 0
-;[bundle-descriptor 0]
-;class = 0
+[bundle-descriptor 0]
+class = 0
 
 ; UART protocol on CPort 1
 [cport-descriptor 1]
