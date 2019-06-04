@@ -1,0 +1,138 @@
+{
+    "PBP1": {
+        "SPI" : "spi0",
+        "I2C" : "i2c1",
+        "UART" : "uart4",
+        "P1_04" : "gpio",
+        "spipins":{
+            "P1_06" : "spi_cs",
+            "P1_08" : "spi_sclk",
+            "P1_10" : "spi",
+            "P1_12" : "spi"
+        },
+        "P2_01" : "pwm",
+        "P2_03" : "gpio",
+        "uartpins":{
+        "P2_05" : "uart",
+        "P2_07" : "uart"
+        },
+        "i2cpins":{
+        "P2_09" : "i2c",
+        "P2_11" : "i2c"
+        }
+    },
+    "PBP2": {
+        "SPI" : "spi1",
+        "I2C" : "i2c2",
+        "UART" : "uart0",
+        "P2_33" : "gpio",
+        "spipins":{
+            "P2_31" : "spi_cs",
+            "P2_29" : "spi_sclk",
+            "P2_27" : "spi",
+            "P2_25" : "spi"
+        },
+        "P1_36" : "pwm",
+        "P1_34" : "gpio",
+        "uartpins":{
+            "P1_32" : "uart",
+            "P1_30" : "uart"
+        },
+        "i2cpins":{
+            "P1_28" : "i2c",
+            "P1_26" : "i2c"
+        }
+    },
+    "BBP1": {
+        "SPI" : "spi1",
+        "I2C" : "i2c2",
+        "P9_12" : "gpio",
+        "spipins":{
+            "P9_28" : "spi_cs",
+            "P9_31" : "spi_sclk",
+            "P9_29" : "spi",
+            "P9_30" : "spi"
+        },
+        "P9_14" : "pwm",
+        "P9_15" : "gpio",
+        "uartpins":{
+            "P9_22" : "uart",
+            "P9_21" : "uart"
+        },
+        "i2cpins":{
+            "P9_19" : "i2c",
+            "P9_20" : "i2c"
+        }
+    },
+    "BBP2": {
+        "SPI" : "spi1",
+        "I2C" : "i2c2",
+        "P9_23" : "gpio",
+        "spipins":{
+            "P9_42" : "spi_cs",
+            "P9_31" : "spi_sclk",
+            "P9_29" : "spi",
+            "P9_30" : "spi"
+        },
+        "P9_16" : "pwm",
+        "P9_15" : "gpio",
+        "uartpins":{
+            "P9_26" : "uart",
+            "P9_24" : "uart"
+        },
+        "i2cpins":{
+            "P9_19" : "i2c",
+            "P9_20" : "i2c"
+        }
+    },
+    "BBP3": {
+        "SPI" : "spi2",
+        "I2C" : "i2c2",
+        "P8_14" : "gpio",
+        "spipins":{
+            "P9_17" : "spi_cs",
+            "P9_22" : "spi_sclk",
+            "P9_21" : "spi",
+            "P9_18" : "spi"
+        },
+        "P8_19" : "pwm",
+        "P8_18" : "gpio",
+        "uartpins":{
+            "P9_26" : "uart",
+            "P9_24" : "uart"
+        },
+        "i2cpins":{
+            "P9_19" : "i2c",
+            "P9_20" : "i2c"
+        }
+    },
+    "BBP4": {
+        "SPI" : "spi1",
+        "I2C" : "i2c2",
+        "P8_16" : "gpio",
+        "spipins":{
+            "P8_10" : "spi_cs",
+            "P9_31" : "spi_sclk",
+            "P9_29" : "spi",
+            "P9_30" : "spi"
+        },
+        "P8_13" : "pwm",
+        "P8_17" : "gpio",
+        "uartpins":{
+            "P9_11" : "uart",
+            "P9_13" : "uart"
+        },
+        "i2cpins":{
+            "P9_19" : "i2c",
+            "P9_20" : "i2c"
+        }
+    },
+    "G1": {
+        "P9_19" : "i2c",
+        "P9_20" : "i2c"
+    },
+    "G2": {
+        "P9_21" : "uart",
+        "P9_22" : "uart"
+    }
+}

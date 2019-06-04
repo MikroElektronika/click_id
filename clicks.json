@@ -1,0 +1,25 @@
+{
+    "rtc6": {
+        "type" : "i2c",
+        "driver" : "mcp7941x",
+        "address" : "0x6f",
+        "info" : [
+            "RTC 6 Click",
+            "Use Command : sudo hwclock -r --rtc /dev/rtc1 to display the RTC Date and Time",
+            "use cat /sys/class/rtc/rtc1/date  to get the RTC Date",
+            "use cat /sys/class/rtc/rtc1/time  to get the RTC Time",
+            "use cat /sys/class/rtc/rtc1/since_epoch  to get the number of seconds that have elapsed since January 1, 1970 (midnight UTC/GMT)"       
+        ]
+    },
+    "weather": {
+        "type" : "i2c",
+        "driver" : "bme280",
+        "address" : "0x76",
+        "info" : [
+            "Weather Click",
+            "use  cat /sys/bus/iio/devices/iio\\:device1/in_humidityrelative_input to get the Relative Humidity",
+            "use  cat /sys/bus/iio/devices/iio\\:device1/in_temp_input to get the Temperature",
+            "use  cat /sys/bus/iio/devices/iio\\:device1/in_pressure_input to get the Pressure"       
+        ]
+    }
+}
