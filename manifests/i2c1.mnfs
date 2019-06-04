@@ -1,5 +1,5 @@
 ;
-; Simple PWM Interface Manifest
+; Simple I2C Interface Manifest
 ;
 ; Copyright 2015 Google Inc.
 ; Copyright 2015 Linaro Ltd.
@@ -21,7 +21,7 @@ string = Project Ara
 
 ; Interface product string (id can't be 0)
 [string-descriptor 2]
-string = Simple PWM Interface
+string = i2c-1
 
 ; Control cport and bundle are optional.
 ; - Control cport's id must be 0 and its bundle number must be 0.
@@ -37,10 +37,10 @@ protocol = 0x00
 [bundle-descriptor 0]
 class = 0
 
-; PWMs protocol on CPort 1
+; SPI protocol on CPort 1
 [cport-descriptor 1]
 bundle = 1
-protocol = 0x09
+protocol = 0x03
 
 ; Bundle 1
 [bundle-descriptor 1]
