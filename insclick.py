@@ -49,6 +49,8 @@ def loadclick():
     else:
         print("Only I2C Clicks Supported")
         sys.exit(1)
+    for info in clickdata["info"]:
+        print info
     
 def getPlatform():
     with open('/proc/device-tree/model','r') as f:
