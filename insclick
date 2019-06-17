@@ -48,8 +48,20 @@ def loadclick():
             copyfile("manifests/i2c2.mnfb", "/tmp/gbsim/hotplug-module/i2c1.mnfb")
         time.sleep(3)
         os.system("echo "+ clickdata["driver"] +" "+ clickdata["address"] + " | sudo tee /sys/class/i2c-adapter/i2c-3/new_device") # 3 needs to be changed    
+    elif(clickdata["type"]=="spi"):
+        for pins in pindata["spipins"]:
+            os.system("config-pin "+ pins +" "+pindata["spipins"][pins])
+        if(pindata["SPI"]=="spi0" and args.click[0]=="microSD"):
+            copyfile("manifests/microsd_spi1.mnfb", "/tmp/gbsim/hotplug-module/microsd_spi1.mnfb")
+        elif(pindata["SPI"]=="spi0" and args.click[0]=="oledc"):
+            os.system("config-pin P2_01 gpio")
+            os.system("config-pin P1_04 gpio")
+            os.system("config-pin P2_03 hi")
+            copyfile("manifests/oledc_spi1.mnfb", "/tmp/gbsim/hotplug-module/oledc_spi1.mnfb")
+            time.sleep(3)
+            os.system("sudo modprobe fbtft_device custom name=fb_ssd1351 speed=6000000 busnum=3 buswidth=8 gpios=reset:89,dc:50 fps=40") # needs to be changed hardcoded for PB P1
     else:
-        print("Only I2C Clicks Supported")
+        print("Only I2C and SPI Clicks Supported")
         sys.exit(1)
     for info in clickdata["info"]:
         print info
