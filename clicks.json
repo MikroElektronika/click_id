@@ -34,7 +34,51 @@
         "info" : [
             "OLEDC Click",
             "random text will be diplayed on the screen if setup was successful",
-            "use  sudo fbi -T 1 -a NameofImage to display an image"      
-        ]
+            "use  sudo fbi -T 1 -a NameofImage to display an image",
+            "use sudo screen /dev/tty1 to enter a conole on the OLED Screen",
+            "echo text | sudo tee /dev/vcs1 (or /dev/tty1) to display some text on the display"      
+        ],
+        "reset" : {
+            "PBP1" : 89,
+            "PBP2" : 45,
+            "BBP1" : 60,
+            "BBP2" : 49,
+            "BBP3" : 26,
+            "BBP4" : 46
+        },
+        "dc" : {
+            "PBP1" : 50,
+            "PBP2" : 110,
+            "BBP1" : 50,
+            "BBP2" : 51,
+            "BBP3" : 22,
+            "BBP4" : 23
+        }
+    },
+    "oledb": {
+        "type" : "spi",
+        "info" : [
+            "OLEDB Click",
+            "blinking cursor will be diplayed on the screen if setup was successful",
+            "use  sudo fbi -T 1 -a NameofImage to display an image",
+            "use sudo screen /dev/tty1 to enter a conole on the OLED Screen",
+            "echo text | sudo tee /dev/vcs1 (or /dev/tty1) to display some text on the display"         
+        ],
+        "reset" : {
+            "PBP1" : 89,
+            "PBP2" : 45,
+            "BBP1" : 60,
+            "BBP2" : 49,
+            "BBP3" : 26,
+            "BBP4" : 46
+        },
+        "dc" : {
+            "PBP1" : 50,
+            "PBP2" : 110,
+            "BBP1" : 50,
+            "BBP2" : 51,
+            "BBP3" : 22,
+            "BBP4" : 23
+        }
     }
 }
