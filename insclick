@@ -59,7 +59,7 @@ def loadclick():
             os.system("config-pin " + list(pindata)[2] + " hi")
             copyfile("manifests/oled.mnfb", "/tmp/gbsim/hotplug-module/oled.mnfb")
             time.sleep(2)
-            os.system("sudo modprobe fbtft_device custom name=fb_ssd1351 speed=6000000 busnum=3 buswidth=8 gpios=reset:"+str(clickdata["reset"][port])+",dc:"+str(clickdata["dc"][port])+" width=96 height=96 fps=40") # needs to be changed hardcoded for PB P1
+            os.system("sudo modprobe fbtft_device custom name=fb_ssd1351 speed=6000000 busnum=3 buswidth=8 gpios=reset:"+str(clickdata["reset"][port])+",dc:"+str(clickdata["dc"][port])+" width=128 height=128 fps=40") # needs to be changed hardcoded for PB P1
         elif(args.click[0]=="oledb"):
             os.system("config-pin " + list(pindata)[1] + " gpio")
             os.system("config-pin " + list(pindata)[8] + " gpio")
