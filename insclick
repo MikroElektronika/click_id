@@ -7,6 +7,11 @@ import os
 import time
 from shutil import copyfile
 
+pathprefix=""
+
+if os.path.exists("/home/debian/manifesto/"):
+    pathprefix="/home/debian/manifesto/"
+
 def loadclick():
     parser = argparse.ArgumentParser(description = "CLI for inserting Mikroe Clicks through Greybus")
     parser.add_argument('click', type=str, nargs=1, help='Click name : rtc6 , weather ')
@@ -33,38 +38,38 @@ def loadclick():
         else:
            print("Beaglebone Black Supports only p1,p2,p3 and p4 slots")
            sys.exit(1) 
-    with open('clicks.json') as f:
+    with open(pathprefix+'clicks.json') as f:
         clickdatajson = json.load(f)
     clickdata=clickdatajson[args.click[0]]
-    with open('pinconfig.json') as f:
+    with open(pathprefix+'pinconfig.json') as f:
         pindatajson = json.load(f)
     pindata=pindatajson[port]
     if(clickdata["type"]=="i2c"):
         for pins in pindata["i2cpins"]:
             os.system("config-pin "+ pins +" "+pindata["i2cpins"][pins])
         if(pindata["I2C"]=="i2c1"):
-            copyfile("manifests/i2c1.mnfb", "/tmp/gbsim/hotplug-module/i2c1.mnfb")
+            copyfile(pathprefix+"manifests/i2c1.mnfb", "/tmp/gbsim/hotplug-module/i2c1.mnfb")
         elif(pindata["I2C"]=="i2c2"):
-            copyfile("manifests/i2c2.mnfb", "/tmp/gbsim/hotplug-module/i2c1.mnfb")
+            copyfile(pathprefix+"manifests/i2c2.mnfb", "/tmp/gbsim/hotplug-module/i2c1.mnfb")
         time.sleep(2)
         os.system("echo "+ clickdata["driver"] +" "+ clickdata["address"] + " | sudo tee /sys/class/i2c-adapter/i2c-3/new_device") # 3 needs to be changed    
     elif(clickdata["type"]=="spi"):
         for pins in pindata["spipins"]:
             os.system("config-pin "+ pins +" "+pindata["spipins"][pins])
         if(args.click[0]=="microSD"):
-            copyfile("manifests/microsd_spi1.mnfb", "/tmp/gbsim/hotplug-module/microsd_spi1.mnfb")
+            copyfile(pathprefix+"manifests/microsd_spi1.mnfb", "/tmp/gbsim/hotplug-module/microsd_spi1.mnfb")
         elif(args.click[0]=="oledc"):
             os.system("config-pin " + list(pindata)[1] + " gpio")
             os.system("config-pin " + list(pindata)[8] + " gpio")
             os.system("config-pin " + list(pindata)[2] + " hi")
-            copyfile("manifests/oled.mnfb", "/tmp/gbsim/hotplug-module/oled.mnfb")
+            copyfile(pathprefix+"manifests/oled.mnfb", "/tmp/gbsim/hotplug-module/oled.mnfb")
             time.sleep(2)
             os.system("sudo modprobe fbtft_device custom name=fb_ssd1351 speed=6000000 busnum=3 buswidth=8 gpios=reset:"+str(clickdata["reset"][port])+",dc:"+str(clickdata["dc"][port])+" width=128 height=128 fps=40") # needs to be changed hardcoded for PB P1
         elif(args.click[0]=="oledb"):
             os.system("config-pin " + list(pindata)[1] + " gpio")
             os.system("config-pin " + list(pindata)[8] + " gpio")
             os.system("config-pin " + list(pindata)[2] + " hi")
-            copyfile("manifests/oled.mnfb", "/tmp/gbsim/hotplug-module/oled.mnfb")
+            copyfile(pathprefix+"manifests/oled.mnfb", "/tmp/gbsim/hotplug-module/oled.mnfb")
             time.sleep(2)
             os.system("sudo modprobe fbtft_device custom name=fb_ssd1306 speed=6000000 busnum=3 buswidth=8 gpios=reset:"+str(clickdata["reset"][port])+",dc:"+str(clickdata["dc"][port])+" width=96 height=39 fps=40") # needs to be changed hardcoded for PB P1      
     else:

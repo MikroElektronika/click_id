@@ -6,11 +6,16 @@ import sys
 import os
 import time
 
+pathprefix=""
+
+if os.path.exists("/home/debian/manifesto/"):
+    pathprefix="/home/debian/manifesto/"
+
 def removeclick():
     parser = argparse.ArgumentParser(description = "CLI for removing Mikroe Clicks through Greybus")
     parser.add_argument('click', type=str, nargs=1, help='Click name : rtc6 , weather, microSD, oledc, oledb ')
     args = parser.parse_args()
-    with open('clicks.json') as f:
+    with open(pathprefix+'clicks.json') as f:
         clickdatajson = json.load(f)
     clickdata=clickdatajson[args.click[0]]
     if(clickdata["type"]=="i2c"):
