@@ -5,57 +5,30 @@ ConfigParser-style input file.
 
 Provided under BSD license. See *LICENSE* for details.
 
+# INSCLICK/RMCLICk
+
+A python CLI for easy loading/unloading of MikroElektronika Click Boards through Greybus Manifests
+
 ## Install
 
-Put 'manifesto' in your PATH; Python 2.7 is supported, and Python 2.6
-may work as well. Python 3 should work also.
+For installing the utilities, generating the manifest blobs and adding the insclick/rmclick CLI to path, run the installation script:
 
-## Running Manifesto
-
-`$ manifesto test.mnfs`
-
-Generates *test.mnfb* in same directory as source file
-
-## Example
-
-### Simple I2C Module
 ```
-;
-; Simple I2C Module Manifest
-;
-
-[manifest-header]
-version-major = 0
-version-minor = 1
-
-[module-descriptor]
-vendor = 0xdead
-product = 0xbeef
-version = 1
-vendor-string-id = 1
-product-string-id = 2
-serial-number = 0
-
-; I2C function on CPort 1
-[function-descriptor "0"]
-cport = 1
-function-type = 0x07
-
-; Module vendor string (id can't be 0)
-[string-descriptor "0"]
-id = 1
-string = Project Ara
-
-; Module product string (id can't be 0)
-[string-descriptor "1"]
-id = 2
-string = Simple I2C Module
-
-; CPort 1
-[cport-descriptor "1"]
-id = 1
+sudo sh install.sh
 ```
+## Loading Clicks
 
-### Build Simple I2C Module manifest blob
+```
+sudo insclick rtc6 (clickname) p1 (portname :p1 ,p2 ,p3 ,p4)
 
-manifesto examples/simple-i2c-module.mnfs
+```
+Here the argument `portname` corresponds to the slot in which the click is connected , the PocketBeagle Mikrobus position 1 and Beaglebone Mikrobus Cape Position 1 corresponds to p1, the PocketBeagle Mikrobus position 2 and Beaglebone Mikrobus Cape Position 2 corresponds to p2, p3 and p4 corresponds to the slots 3 and 4 in the Beaglebone Mikrobus Cape The CLI also supports g1 and g2 slots which corresponds to the I2C and UART grove ports on the Seedstudio Beaglebone Green. 
+The argument `clickname` corresponds to the click name , for example `rtc6` `weather` etc.
+
+## Unloading the Clicks
+
+The rmclick utility/command can be used to remove/free the Greybus Interface and Unload the Click, the rmclick usage is:
+
+```
+sudo rmclick oledc (clickname)
+```
