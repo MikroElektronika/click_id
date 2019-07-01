@@ -5,7 +5,7 @@ ConfigParser-style input file.
 
 Provided under BSD license. See *LICENSE* for details.
 
-# INSCLICK/RMCLICk
+# INSCLICK/RMCLICK
 
 A python CLI for easy loading/unloading of MikroElektronika Click Boards through Greybus Manifests
 
