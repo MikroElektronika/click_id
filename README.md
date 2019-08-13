@@ -32,3 +32,39 @@ The rmclick utility/command can be used to remove/free the Greybus Interface and
 ```
 sudo rmclick oledc (clickname)
 ```
+
+## Mikrobus Tests
+
+The test directory contains some simple python based tests to verify the peripheral creation by gbsim and verify the correct transfers between virtual interfaces in greybus and actual physical interfaces  (for example : greybus gpio <-> physical mikrobus gpio)
+
+### Test Mikrobus GPIO
+
+```
+sudo startgbsim
+cp manifests/gpio.mnfb /tmp/gbsim/hotplug-modules/
+sudo python gb-gpio_test.py
+```
+
+### Test Mikrobus GPIO IRQ
+
+```
+sudo startgbsim
+cp manifests/gpio.mnfb /tmp/gbsim/hotplug-modules/
+sudo python gb-gpioirq_test.py
+```
+
+### Test Mikrobus SPI
+
+```
+sudo startgbsim
+cp manifests/oled.mnfb /tmp/gbsim/hotplug-modules/
+sudo python gb-spi_test.py
+```
+
+### Test Mikrobus I2C
+
+```
+sudo startgbsim
+cp manifests/i2c1.mnfb /tmp/gbsim/hotplug-modules/
+sudo python gb-i2c_test.py
+```
