@@ -1,4 +1,5 @@
-#!/usr/bin/env python
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
 
 import argparse
 import json
@@ -6,37 +7,46 @@ import sys
 import os
 import time
 
-pathprefix=""
+pathprefix = ''
 
-if os.path.exists("/home/debian/manifesto/"):
-    pathprefix="/home/debian/manifesto/"
+if os.path.exists('/home/debian/manifesto/'):
+    pathprefix = '/home/debian/manifesto/'
+
 
 def removeclick():
-    parser = argparse.ArgumentParser(description = "CLI for removing Mikroe Clicks through Greybus")
-    parser.add_argument('click', type=str, nargs=1, help='Click name : rtc6 , weather, microSD, oledc, oledb ')
+    parser = \
+        argparse.ArgumentParser(description='CLI for removing Mikroe Clicks through Greybus'
+                                )
+    parser.add_argument('click', type=str, nargs=1,
+                        help='Click name : rtc6 , weather, microSD, oledc, oledb '
+                        )
     args = parser.parse_args()
-    with open(pathprefix+'clicks.json') as f:
+    with open(pathprefix + 'clicks.json') as f:
         clickdatajson = json.load(f)
-    clickdata=clickdatajson[args.click[0]]
-    if(clickdata["type"]=="i2c"):
-        os.system("echo "+ " "+ clickdata["address"] + " | sudo tee /sys/class/i2c-adapter/i2c-3/delete_device") # 3 needs to be changed
-        if os.path.isfile("/tmp/gbsim/hotplug-module/i2c1.mnfb"):
-                os.remove("/tmp/gbsim/hotplug-module/i2c1.mnfb")
-        if os.path.isfile("/tmp/gbsim/hotplug-module/i2c2.mnfb"):
-                os.remove("/tmp/gbsim/hotplug-module/i2c2.mnfb")
-    elif(clickdata["type"]=="spi"):
-        if(args.click[0]=="oledc"):
-            os.system("sudo rmmod -f fb_ssd1351")
-            os.system("sudo rmmod -f fbtft_device")
-            os.system("sudo rmmod -f fbtft")
-            if os.path.isfile("/tmp/gbsim/hotplug-module/oled.mnfb"):
-                os.remove("/tmp/gbsim/hotplug-module/oled.mnfb")
-        elif(args.click[0]=="oledb"):
-            os.system("sudo rmmod -f fb_ssd1306")
-            os.system("sudo rmmod -f fbtft_device")
-            os.system("sudo rmmod -f fbtft")
-            if os.path.isfile("/tmp/gbsim/hotplug-module/oled.mnfb"):
-                os.remove("/tmp/gbsim/hotplug-module/oled.mnfb")
+    clickdata = clickdatajson[args.click[0]]
+    if clickdata['type'] == 'i2c':
+        os.system('echo ' + ' ' + clickdata['address']
+                  + ' | sudo tee /sys/class/i2c-adapter/i2c-3/delete_device'
+                  )
+        if os.path.isfile('/tmp/gbsim/hotplug-module/' + args.click[0]
+                          + '.mnfb'):
+            os.remove('/tmp/gbsim/hotplug-module/' + args.click[0]
+                      + '.mnfb')
+    elif clickdata['type'] == 'spi':
+        if clickdata['class'] == 'ordinary':
+            if os.path.isfile('/tmp/gbsim/hotplug-module/'
+                              + args.click[0] + '.mnfb'):
+                os.remove('/tmp/gbsim/hotplug-module/' + args.click[0]
+                          + '.mnfb')
+        elif clickdata['class'] == 'display':
+            os.system('sudo rmmod -f ' + clickdata['driver'])
+            os.system('sudo rmmod -f fbtft_device')
+            os.system('sudo rmmod -f fbtft')
+            if os.path.isfile('/tmp/gbsim/hotplug-module/'
+                              + args.click[0] + '.mnfb'):
+                os.remove('/tmp/gbsim/hotplug-module/' + args.click[0]
+                          + '.mnfb')
+
 
 if __name__ == '__main__':
     removeclick()

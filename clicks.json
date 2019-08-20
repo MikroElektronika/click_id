@@ -1,84 +1,85 @@
 {
     "rtc6": {
-        "type" : "i2c",
-        "driver" : "mcp7941x",
-        "address" : "0x6f",
-        "info" : [
+        "type": "i2c",
+        "class": "ordinary",
+        "driver": "mcp7941x",
+        "address": "0x6f",
+        "info": [
             "RTC 6 Click",
             "Use Command : sudo hwclock -r --rtc /dev/rtc1 to display the RTC Date and Time",
             "use cat /sys/class/rtc/rtc1/date  to get the RTC Date",
             "use cat /sys/class/rtc/rtc1/time  to get the RTC Time",
-            "use cat /sys/class/rtc/rtc1/since_epoch  to get the number of seconds that have elapsed since January 1, 1970 (midnight UTC/GMT)"       
+            "use cat /sys/class/rtc/rtc1/since_epoch  to get the number of seconds that have elapsed since January 1, 1970 (midnight UTC/GMT)"
         ]
     },
     "weather": {
-        "type" : "i2c",
-        "driver" : "bme280",
-        "address" : "0x76",
-        "info" : [
+        "type": "i2c",
+        "driver": "bme280",
+        "class": "ordinary",
+        "address": "0x76",
+        "info": [
             "Weather Click",
             "use  cat /sys/bus/iio/devices/iio\\:device1/in_humidityrelative_input to get the Relative Humidity",
             "use  cat /sys/bus/iio/devices/iio\\:device1/in_temp_input to get the Temperature",
-            "use  cat /sys/bus/iio/devices/iio\\:device1/in_pressure_input to get the Pressure"       
+            "use  cat /sys/bus/iio/devices/iio\\:device1/in_pressure_input to get the Pressure"
         ]
     },
     "microSD": {
-        "type" : "spi",
-        "info" : [
+        "type": "spi",
+        "class": "ordinary",
+        "info": [
             "microSD Click",
-            "usage information will be updated soon"      
+            "usage information will be updated soon"
         ]
     },
     "oledc": {
-        "type" : "spi",
-        "info" : [
+        "type": "spi",
+        "class": "display",
+        "driver": "fb_ssd1351",
+        "width": "128",
+        "height": "128",
+        "speed": "6000000",
+        "buswidth": "8",
+        "fps": "40",
+        "info": [
             "OLEDC Click",
             "random text will be diplayed on the screen if setup was successful",
             "use  sudo fbi -T 1 -a NameofImage to display an image",
             "use sudo screen /dev/tty1 to enter a conole on the OLED Screen",
-            "echo text | sudo tee /dev/vcs1 (or /dev/tty1) to display some text on the display"      
-        ],
-        "reset" : {
-            "PBP1" : 89,
-            "PBP2" : 45,
-            "BBP1" : 60,
-            "BBP2" : 49,
-            "BBP3" : 26,
-            "BBP4" : 46
-        },
-        "dc" : {
-            "PBP1" : 50,
-            "PBP2" : 110,
-            "BBP1" : 50,
-            "BBP2" : 51,
-            "BBP3" : 22,
-            "BBP4" : 23
-        }
+            "echo text | sudo tee /dev/vcs1 (or /dev/tty1) to display some text on the display"
+        ]
     },
     "oledb": {
-        "type" : "spi",
-        "info" : [
+        "type": "spi",
+        "class": "display",
+        "driver": "fb_ssd1306",
+        "width": "96",
+        "height": "39",
+        "speed": "6000000",
+        "buswidth": "8",
+        "fps": "40",
+        "info": [
             "OLEDB Click",
             "blinking cursor will be diplayed on the screen if setup was successful",
             "use  sudo fbi -T 1 -a NameofImage to display an image",
             "use sudo screen /dev/tty1 to enter a conole on the OLED Screen",
-            "echo text | sudo tee /dev/vcs1 (or /dev/tty1) to display some text on the display"         
-        ],
-        "reset" : {
-            "PBP1" : 89,
-            "PBP2" : 45,
-            "BBP1" : 60,
-            "BBP2" : 49,
-            "BBP3" : 26,
-            "BBP4" : 46
-        },
-        "dc" : {
-            "PBP1" : 50,
-            "PBP2" : 110,
-            "BBP1" : 50,
-            "BBP2" : 51,
-            "BBP3" : 22,
-            "BBP4" : 23
-        }
+            "echo text | sudo tee /dev/vcs1 (or /dev/tty1) to display some text on the display"
+        ]
+    },
+    "mpu9dof": {
+        "type": "i2c",
+        "class": "platform",
+        "driver": "mpu9150",
+        "address": "0x68",
+        "info": [
+            "MPU9DOF Click",
+            "Use Command : cat /sys/bus/iio/devices/iio\\:device1/in_accel_x_raw to display the x-direction raw acceleration",
+            "use cat /sys/bus/iio/devices/iio\\:device1/in_accel_y_raw to display the y-direction raw acceleration",
+            "use cat /sys/bus/iio/devices/iio\\:device1/in_accel_z_raw to display the z-direction raw acceleration",
+            "use cat /sys/bus/iio/devices/iio\\:device1/in_anglvel_x_raw to display the x-direction raw angular velocity",
+            "use cat /sys/bus/iio/devices/iio\\:device1/in_anglvel_y_raw to display the y-direction raw angular velocity",
+            "use cat /sys/bus/iio/devices/iio\\:device1/in_anglvel_z_raw to display the z-direction raw angular velocity",
+            "use cat /sys/bus/iio/devices/iio\\:device1/in_temp_raw to display the raw tmeperature reading"
+        ]
     }
 }
