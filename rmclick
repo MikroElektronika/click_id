@@ -25,13 +25,16 @@ def removeclick():
         clickdatajson = json.load(f)
     clickdata = clickdatajson[args.click[0]]
     if clickdata['type'] == 'i2c':
-        os.system('echo ' + ' ' + clickdata['address']
-                  + ' | sudo tee /sys/class/i2c-adapter/i2c-3/delete_device'
-                  )
+        if clickdata['class'] == 'ordinary':
+            os.system('echo ' + ' ' + clickdata['address']
+                    + ' | sudo tee /sys/class/i2c-adapter/i2c-3/delete_device'
+                    )        
+        elif clickdata['class'] == 'platform':
+            os.system('sudo rmmod -f mikrobus_i2c_device')
         if os.path.isfile('/tmp/gbsim/hotplug-module/' + args.click[0]
-                          + '.mnfb'):
+                    + '.mnfb'):
             os.remove('/tmp/gbsim/hotplug-module/' + args.click[0]
-                      + '.mnfb')
+                        + '.mnfb')
     elif clickdata['type'] == 'spi':
         if clickdata['class'] == 'ordinary':
             if os.path.isfile('/tmp/gbsim/hotplug-module/'
@@ -42,6 +45,12 @@ def removeclick():
             os.system('sudo rmmod -f ' + clickdata['driver'])
             os.system('sudo rmmod -f fbtft_device')
             os.system('sudo rmmod -f fbtft')
+            if os.path.isfile('/tmp/gbsim/hotplug-module/'
+                              + args.click[0] + '.mnfb'):
+                os.remove('/tmp/gbsim/hotplug-module/' + args.click[0]
+                          + '.mnfb')
+        elif clickdata['class'] == 'platform':
+            os.system('sudo rmmod -f mikrobus_spi_device')
             if os.path.isfile('/tmp/gbsim/hotplug-module/'
                               + args.click[0] + '.mnfb'):
                 os.remove('/tmp/gbsim/hotplug-module/' + args.click[0]

@@ -69,12 +69,14 @@ def loadclick():
                       + ' | sudo tee /sys/class/i2c-adapter/i2c-3/new_device'
                       )
         elif clickdata['class'] == 'platform':
-            os.system('sudo modprobe mikrobus_i2c_device name='
-                      + args.click[0] + 'port=' + port)
+           os.system('config-pin ' + pindata['INTGPIO']['name'] + ' in'
+                      )
+           os.system('sudo modprobe mikrobus_i2c_device custom name='
+                      + clickdata['driver'] + ' busno=3 ' + ' address=' +
+                      clickdata["address"] + ' irq_gpio=' + pindata['INTGPIO']['GPIONUM'])
     elif clickdata['type'] == 'spi':
         for pins in pindata['SPIPINS']:
-            os.system('config-pin ' + pins + ' ' + pindata['SPIPINS'
-                      ][pins])
+            os.system('config-pin ' + pins + ' ' + pindata['SPIPINS'][pins])
         if clickdata['class'] == 'ordinary':
             copyfile(pathprefix + 'manifests/' + args.click[0] + '.mnfb'
                      , '/tmp/gbsim/hotplug-module/' + args.click[0]
@@ -100,12 +102,13 @@ def loadclick():
                       + clickdata['height'] + ' fps=' + clickdata['fps'
                       ])
         elif clickdata['class'] == 'platform':
-            copyfile(pathprefix + 'manifests/platform.mnfb',
+            copyfile(pathprefix + 'manifests/platformspi.mnfb',
                      '/tmp/gbsim/hotplug-module/' + args.click[0]
                      + '.mnfb')
             time.sleep(2)
-            os.system('sudo modprobe mikrobus_spi_device name='
-                      + args.click[0] + 'port=' + port)
+            os.system('sudo modprobe mikrobus_spi_device custom name='
+                      + clickdata['driver'] + ' busno=3 csno=1 irq_gpio=' 
+                      + pindata['INTGPIO']['GPIONUM'] + ' max_speed=' + clickdata['speed'])
     else:
         print 'Only I2C and SPI Clicks Supported'
         sys.exit(1)

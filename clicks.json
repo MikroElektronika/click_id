@@ -82,4 +82,15 @@
             "use cat /sys/bus/iio/devices/iio\\:device1/in_temp_raw to display the raw tmeperature reading"
         ]
     }
+    ,
+    "eth": {
+        "type": "spi",
+        "class": "platform",
+        "driver": "enc28j60",
+        "speed": "16000000",
+        "info": [
+            "ETH Click",
+            "usage information will be updated soon"
+        ]
+    }
 }
