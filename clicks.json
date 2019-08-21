@@ -81,8 +81,7 @@
             "use cat /sys/bus/iio/devices/iio\\:device1/in_anglvel_z_raw to display the z-direction raw angular velocity",
             "use cat /sys/bus/iio/devices/iio\\:device1/in_temp_raw to display the raw tmeperature reading"
         ]
-    }
-    ,
+    },
     "eth": {
         "type": "spi",
         "class": "platform",
@@ -90,6 +89,16 @@
         "speed": "16000000",
         "info": [
             "ETH Click",
+            "usage information will be updated soon"
+        ]
+    },
+    "temp_hum": {
+        "type": "i2c",
+        "class": "platform",
+        "driver": "hts221",
+        "address": "0x5f",
+        "info": [
+            "Temperature and Humidity Click",
             "usage information will be updated soon"
         ]
     }
