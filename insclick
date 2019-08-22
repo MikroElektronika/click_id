@@ -63,16 +63,17 @@ def loadclick():
                      '/tmp/gbsim/hotplug-module/' + args.click[0]
                      + '.mnfb')
         time.sleep(2)
+        gbi2c=getGreybusResourceNo("i2c")
         if clickdata['class'] == 'ordinary':
             os.system('echo ' + clickdata['driver'] + ' '
                       + clickdata['address']
-                      + ' | sudo tee /sys/class/i2c-adapter/i2c-3/new_device'
+                      + ' | sudo tee /sys/class/i2c-adapter/i2c-' + gbi2c + '/new_device'
                       )
         elif clickdata['class'] == 'platform':
            os.system('config-pin ' + pindata['INTGPIO']['name'] + ' in'
                       )
            os.system('sudo modprobe mikrobus_i2c_device custom name='
-                      + clickdata['driver'] + ' busno=3 ' + ' address=' +
+                      + clickdata['driver'] + ' busno=' + gbi2c + ' address=' +
                       clickdata["address"] + ' irq_gpio=' + pindata['INTGPIO']['GPIONUM'])
     elif clickdata['type'] == 'spi':
         for pins in pindata['SPIPINS']:
@@ -92,9 +93,10 @@ def loadclick():
                      '/tmp/gbsim/hotplug-module/' + args.click[0]
                      + '.mnfb')
             time.sleep(2)
+            gbspi=getGreybusResourceNo("spi")
             os.system('sudo modprobe fbtft_device custom name='
                       + clickdata['driver'] + ' speed='
-                      + clickdata['speed'] + ' busnum=' + '3'
+                      + clickdata['speed'] + ' busnum=' + gbspi
                       + ' buswidth=' + clickdata['buswidth']
                       + ' gpios=reset:' + pindata['RSTGPIO']['GPIONUM']
                       + ',dc:' + pindata['PWMGPIO']['GPIONUM']
@@ -107,7 +109,7 @@ def loadclick():
                      + '.mnfb')
             time.sleep(2)
             os.system('sudo modprobe mikrobus_spi_device custom name='
-                      + clickdata['driver'] + ' busno=3 csno=1 irq_gpio=' 
+                      + clickdata['driver'] + ' busno=' + gbspi +' csno=1 irq_gpio=' 
                       + pindata['INTGPIO']['GPIONUM'] + ' max_speed=' + clickdata['speed'])
     else:
         print 'Only I2C and SPI Clicks Supported'
@@ -123,7 +125,15 @@ def getPlatform():
             return 'PB'
         else:
             return 'BB'
-
+def getGreybusResourceNo(bus):
+    resourcelist=[]
+    if bus=="spi":
+        for filename in os.listdir("/sys/class/spi_master/"):
+                resourcelist.append(int(filename.replace("spi",'')))
+    elif bus=="i2c":
+        for filename in os.listdir("/sys/class/i2c-adapter/"):
+                resourcelist.append(int(filename.replace("i2c-",'')))
+    return str(sorted(resourcelist,reverse=True)[0])
 
 if __name__ == '__main__':
     loadclick()
