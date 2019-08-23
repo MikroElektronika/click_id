@@ -91,7 +91,7 @@ def loadclick():
             os.system('config-pin ' + pindata['INTGPIO']['name'] + ' hi'
                       )
             copyfile(pathprefix + 'manifests/display.mnfb',
-                     '/tmp/gbsim/hotplug-module/' + args.click[0]
+                     '/tmp/gbsim' + str(gbsim) + '/hotplug-module/' + args.click[0]
                      + '.mnfb')
             time.sleep(2)
             gbspi=getGreybusResourceNo("spi")
