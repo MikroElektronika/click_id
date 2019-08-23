@@ -17,11 +17,11 @@ product-string-id = 2
 
 ; Interface vendor string (id can't be 0)
 [string-descriptor 1]
-string = Project Ara
+string = Mikroelektronika
 
 ; Interface product string (id can't be 0)
 [string-descriptor 2]
-string = i2c-2
+string = Mikrobus I2C Device
 
 ; Control cport and bundle are optional.
 ; - Control cport's id must be 0 and its bundle number must be 0.

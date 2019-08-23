@@ -17,7 +17,7 @@ product-string-id = 2
 
 ; Interface vendor string (id can't be 0)
 [string-descriptor 1]
-string = Project Ara
+string = Mikroelektronika
 
 ; Interface product string (id can't be 0)
 [string-descriptor 2]

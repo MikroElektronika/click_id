@@ -27,20 +27,26 @@ def loadclick():
     if platform == 'PB':
         if args.port[0].lower() == 'p1':
             port = 'PBP1'
+            gbsim = 0
         elif args.port[0].lower() == 'p2':
             port = 'PBP2'
+            gbsim = 1
         else:
             print 'PocketBeagle Supports only p1 and p2 slots'
             sys.exit(1)
     elif platform == 'BB':
         if args.port[0].lower() == 'p1':
             port = 'BBP1'
+            gbsim = 0
         elif args.port[0].lower() == 'p2':
             port = 'BBP2'
+            gbsim = 1
         elif args.port[0].lower() == 'p3':
             port = 'BBP3'
+            gbsim = 2
         elif args.port[0].lower() == 'p4':
             port = 'BBP4'
+            gbsim = 3
         else:
             print 'Beaglebone Black Supports only p1,p2,p3 and p4 slots'
             sys.exit(1)
@@ -54,13 +60,8 @@ def loadclick():
         for pins in pindata['I2CPINS']:
             os.system('config-pin ' + pins + ' ' + pindata['I2CPINS'
                       ][pins])
-        if pindata['I2C'] == 'i2c1':
-            copyfile(pathprefix + 'manifests/i2c1.mnfb',
-                     '/tmp/gbsim/hotplug-module/' + args.click[0]
-                     + '.mnfb')
-        elif pindata['I2C'] == 'i2c2':
-            copyfile(pathprefix + 'manifests/i2c2.mnfb',
-                     '/tmp/gbsim/hotplug-module/' + args.click[0]
+        copyfile(pathprefix + 'manifests/i2c.mnfb',
+        '/tmp/gbsim' + str(gbsim) + '/hotplug-module/' + args.click[0]
                      + '.mnfb')
         time.sleep(2)
         gbi2c=getGreybusResourceNo("i2c")
@@ -80,7 +81,7 @@ def loadclick():
             os.system('config-pin ' + pins + ' ' + pindata['SPIPINS'][pins])
         if clickdata['class'] == 'ordinary':
             copyfile(pathprefix + 'manifests/' + args.click[0] + '.mnfb'
-                     , '/tmp/gbsim/hotplug-module/' + args.click[0]
+                     , '/tmp/gbsim' + str(gbsim) + '/hotplug-module/' + args.click[0]
                      + '.mnfb')
         elif clickdata['class'] == 'display':
             os.system('config-pin ' + pindata['RSTGPIO']['name']
@@ -105,7 +106,7 @@ def loadclick():
                       ])
         elif clickdata['class'] == 'platform':
             copyfile(pathprefix + 'manifests/platformspi.mnfb',
-                     '/tmp/gbsim/hotplug-module/' + args.click[0]
+                     '/tmp/gbsim' + str(gbsim) + '/hotplug-module/' + args.click[0]
                      + '.mnfb')
             time.sleep(2)
             os.system('sudo modprobe mikrobus_spi_device custom name='
