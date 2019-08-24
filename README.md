@@ -5,6 +5,12 @@ ConfigParser-style input file.
 
 Provided under BSD license. See *LICENSE* for details.
 
+### Creating a Manifest Blob
+
+For creating a manifest blob(.mnfb) from a manifest file(.mnfs) :
+```
+ manifesto -o /path/to/output.mnfb  /path/to/input.mnfs
+```
 ## INSCLICK/RMCLICK
 
 A python CLI for easy loading/unloading of MikroElektronika Click Boards through Greybus Manifests
@@ -30,7 +36,7 @@ The argument `clickname` corresponds to the click name , for example `rtc6` `wea
 The rmclick utility/command can be used to remove/free the Greybus Interface and Unload the Click, the rmclick usage is:
 
 ```
-sudo rmclick oledc (clickname)
+sudo rmclick oledc (clickname) p1 (portname :p1 ,p2 ,p3 ,p4)
 ```
 ## Adding Support for new Click Boards
  
