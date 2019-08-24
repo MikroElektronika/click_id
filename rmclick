@@ -20,7 +20,17 @@ def removeclick():
     parser.add_argument('click', type=str, nargs=1,
                         help='Click name : rtc6 , weather, microSD, oledc, oledb '
                         )
+    parser.add_argument('port', type=str, nargs=1,
+                        help='Mikrobus Slot number : p1 , p2 ..')
     args = parser.parse_args()
+    if args.port[0].lower() == 'p1':
+        gbsim = 0
+    elif args.port[0].lower() == 'p2':
+        gbsim = 1
+    elif args.port[0].lower() == 'p3':
+        gbsim = 2
+    elif args.port[0].lower() == 'p4':
+        gbsim = 3
     with open(pathprefix + 'clicks.json') as f:
         clickdatajson = json.load(f)
     clickdata = clickdatajson[args.click[0]]
@@ -31,31 +41,18 @@ def removeclick():
                     )        
         elif clickdata['class'] == 'platform':
             os.system('sudo rmmod -f mikrobus_i2c_device')
-        if os.path.isfile('/tmp/gbsim/hotplug-module/' + args.click[0]
-                    + '.mnfb'):
-            os.remove('/tmp/gbsim/hotplug-module/' + args.click[0]
-                        + '.mnfb')
     elif clickdata['type'] == 'spi':
-        if clickdata['class'] == 'ordinary':
-            if os.path.isfile('/tmp/gbsim/hotplug-module/'
-                              + args.click[0] + '.mnfb'):
-                os.remove('/tmp/gbsim/hotplug-module/' + args.click[0]
-                          + '.mnfb')
-        elif clickdata['class'] == 'display':
+        if clickdata['class'] == 'display':
             os.system('sudo rmmod -f ' + clickdata['driver'])
             os.system('sudo rmmod -f fbtft_device')
             os.system('sudo rmmod -f fbtft')
-            if os.path.isfile('/tmp/gbsim/hotplug-module/'
-                              + args.click[0] + '.mnfb'):
-                os.remove('/tmp/gbsim/hotplug-module/' + args.click[0]
-                          + '.mnfb')
         elif clickdata['class'] == 'platform':
             os.system('sudo rmmod -f mikrobus_spi_device')
-            if os.path.isfile('/tmp/gbsim/hotplug-module/'
-                              + args.click[0] + '.mnfb'):
-                os.remove('/tmp/gbsim/hotplug-module/' + args.click[0]
-                          + '.mnfb')
-
+    
+    if os.path.isfile('/tmp/gbsim' + str(gbsim) + '/hotplug-module/' + args.click[0]
+                     + '.mnfb'):
+        os.remove('/tmp/gbsim' + str(gbsim) + '/hotplug-module/' + args.click[0]
+                        + '.mnfb')
 
 if __name__ == '__main__':
     removeclick()
