@@ -6,3 +6,4 @@ done
 
 cp ./insclick /usr/bin/
 cp ./rmclick /usr/bin/
+cp ./manifesto /usr/bin/
