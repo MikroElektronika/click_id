@@ -7,3 +7,6 @@ done
 cp ./insclick /usr/bin/
 cp ./rmclick /usr/bin/
 cp ./manifesto /usr/bin/
+mkdir -p "/opt/manifesto/manifests"
+cp ./*.json /opt/manifesto/
+cp  ./manifests/*.mnfb /opt/manifesto/manifests

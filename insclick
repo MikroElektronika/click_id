@@ -10,8 +10,8 @@ from shutil import copyfile
 
 pathprefix = ''
 
-if os.path.exists('/home/debian/manifesto/'):
-    pathprefix = '/home/debian/manifesto/'
+if os.path.exists('/opt/manifesto/'):
+    pathprefix = '/opt/manifesto/'
 
 
 def loadclick():
