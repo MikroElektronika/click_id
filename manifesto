@@ -75,22 +75,15 @@ class Manifest(object):
         self.header = None
         self.descriptors = []
 
-        self.interface_desc = None
         self.string_descs = {}
-        self.bundle_descs = {}
-        self.cport_descs = {}
+        self.device_descs = {}
+        self.property_descs = {}
 
     def add_header(self, hdr):
         self.header = hdr
 
     def __add_desc(self, desc):
         self.descriptors.append(desc)
-
-    def add_interface_desc(self, desc):
-        assert self.interface_desc is None, \
-                "multiple instances of '{}'".format(self.instances.title)
-        self.interface_desc = desc
-        self.__add_desc(desc)
 
     def __add_desc_dict(self, dict_, desc):
         if desc.id_ in dict_:
@@ -101,124 +94,50 @@ class Manifest(object):
     def add_string_desc(self, desc):
         self.__add_desc_dict(self.string_descs, desc)
         self.__add_desc(desc)
-
-    def add_bundle_desc(self, desc):
-        self.__add_desc_dict(self.bundle_descs, desc)
+    
+    def add_property_desc(self, desc):
+        self.__add_desc_dict(self.property_descs, desc)
         self.__add_desc(desc)
 
-    def add_cport_desc(self, desc):
-        self.__add_desc_dict(self.cport_descs, desc)
+    def add_device_desc(self, desc):
+        self.__add_desc_dict(self.device_descs, desc)
         self.__add_desc(desc)
-
-    def auto_check(self):
-        # check interface
-        for id_ in [self.interface_desc.vsid, self.interface_desc.psid]:
-            # check that it refers to existing strings
-            try:
-                str_desc = self.string_descs[id_]
-                str_desc.parent = self.interface_desc
-            except KeyError as e:
-                raise Error("invalid reference to id '{}' by '[{}]'"
-                        .format(id_, self.interface_desc.section))
-
-        # check cports
-        cport_control = False
-        for k in self.cport_descs:
-            # check that it refers to an existing bundle
-            try:
-                cport_desc = self.cport_descs[k]
-                bundle_desc = self.bundle_descs[cport_desc.bundle]
-                bundle_desc.add_cport(cport_desc)
-            except KeyError as e:
-                raise Error("invalid reference to bundle '{}' by '[{}]'"
-                        .format(cport_desc.bundle, cport_desc.section))
-
-            # check that the protocol is not reserved
-            if cport_desc.protocol_name == 'Reserved':
-                warnings.warn("reserved protocol for '[{}]'"
-                        .format(cport_desc.section))
-
-            # check that the protocol corresponds to the bundle's class
-            if cport_desc.protocol_class != bundle_desc.class_num:
-                warnings.warn("incompatible cport protocol '{}' of '[{}]' "
-                        "with class '{}' of '[{}]'"
-                        .format(cport_desc.protocol_name, cport_desc.section,
-                            bundle_desc.class_name, bundle_desc.section))
-
-            # check that a control cport exists
-            if cport_desc.id_ == 0 and cport_desc.protocol_name == 'Control':
-                cport_control = True
-        if cport_control is False:
-            warnings.warn("missing 'Control' cport")
-
-        # check bundles
-        bundle_control = False
-        for k in self.bundle_descs:
-            # check that the class is not reserved
-            bundle_desc = self.bundle_descs[k]
-            if bundle_desc.class_name ==  'Reserved':
-                warnings.warn("reserved class for '[{}]'"
-                        .format(bundle_desc.section))
-            # check that a control bundle exists
-            if bundle_desc.id_ == 0 and bundle_desc.class_name == 'Control':
-                bundle_control = True
-        if bundle_control is False:
-            warnings.warn("missing 'Control' bundle")
-
-        # check that all descriptors are being used
-        for desc in self.descriptors:
-            if not desc.used:
-                warnings.warn("unused descriptor '[{}]'"
-                        .format(desc.section))
-
-    def __str__(self):
-        r = "{}".format(self.header)
-        r += "\n{}".format(self.interface_desc)
-        for k in sorted(self.string_descs):
-            r += "\n{}".format(self.string_descs[k])
-        for k in sorted(self.bundle_descs):
-            r += "\n{}".format(self.bundle_descs[k])
-        for k in sorted(self.cport_descs):
-            r += "\n{}".format(self.cport_descs[k])
-        return r
 
 class ManifestHeader(object):
-    GB_VERSION_MAJOR = 0
-    GB_VERSION_MINOR = 1
+    MB_VERSION_MAJOR = 0
+    MB_VERSION_MINOR = 1
 
-    def __init__(self, major, minor):
-        if (major != ManifestHeader.GB_VERSION_MAJOR or
-                minor != ManifestHeader.GB_VERSION_MINOR):
+    def __init__(self, major, minor, props):
+        if (major != ManifestHeader.MB_VERSION_MAJOR or
+                minor != ManifestHeader.MB_VERSION_MINOR):
             raise Error("invalid '[{}]' format version '{}.{}'"
                     "(only supports '{}.{}')".format(
                         MnfsParser.MNFS_HEADER, major, minor,
-                        ManifestHeader.GB_VERSION_MAJOR,
-                        ManifestHeader.GB_VERSION_MINOR))
+                        ManifestHeader.MB_VERSION_MAJOR,
+                        ManifestHeader.MB_VERSION_MINOR))
         self.major = major
         self.minor = minor
+        self.click_string_id = props[0]
+        self.num_devices = props[1]
+        self.rst_gpio = props[2]
+        self.pwm_gpio = props[3]
+        self.int_gpio = props[4]
 
     def __str__(self):
         r = "[{}]\n".format(MnfsParser.MNFS_HEADER)
         r += "version-major = {}\n".format(self.major)
         r += "version-minor = {}\n".format(self.minor)
+        r += "click-string-id = {}\n".format(self.minor)
+        r += "num-devices = {}\n".format(self.minor)
+        r += "reset-gpio-state = {}\n".format(self.minor)
+        r += "pwm-gpio-state = {}\n".format(self.minor)
+        r += "int-gpio-state = {}\n".format(self.minor)
         return r
 
 class Descriptor(object):
     def __init__(self, section, used = False):
         self.section = section
         self.used = used
-
-class InterfaceDescriptor(Descriptor):
-    def __init__(self, vendor_string_id, product_string_id, section):
-        super(InterfaceDescriptor, self).__init__(section, True)
-        self.vsid = vendor_string_id
-        self.psid = product_string_id
-
-    def __str__(self):
-        r = "[{}]\n".format(MnfsParser.INTERFACE_DESC)
-        r += "vendor-string-id = {:#x}\n".format(self.vsid)
-        r += "vendor-product-id = {:#x}\n".format(self.psid)
-        return r
 
 class StringDescriptor(Descriptor):
     def __init__(self, id_, string, section):
@@ -242,134 +161,87 @@ class StringDescriptor(Descriptor):
 
     def __str__(self):
         r = ""
-        if self.id_ == self.parent.vsid:
-            r += "; Interface vendor string\n"
-        elif self.id_ == self.parent.psid:
-            r += "; Interface product string\n"
         r += "[{} {:#x}]\n".format(MnfsParser.STRING_DESC, self.id_)
         r += "string = {}\n".format(self.string)
         return r
 
-class BundleDescriptor(Descriptor):
-
-    bundle_id = 1
-
-    bundle_class = {
-            0x00: 'Control',
-            0x01: 'AP',
-            0x05: 'HID',
-            0x08: 'Power Supply',
-            0x0a: 'Bridged PHY',
-            0x0c: 'Display',
-            0x0d: 'Camera',
-            0x0e: 'Sensor',
-            0x0f: 'Lights',
-            0x10: 'Vibrator',
-            0x11: 'Loopback',
-            0x12: 'Audio',
-            0x14: 'SVC',
-            0x15: 'Firmware',
-            0xfe: 'Raw',
-            0xff: 'Vendor Specific',
-            }
-
-    def __init__(self, id_, class_, section):
-        super(BundleDescriptor, self).__init__(section)
-        if id_ == 0 and class_ != 0:
-            raise Error("invalid class for '[{}]' (should be a 'Control' bundle)".
-                    format(section))
-        elif id_ != 0:
-            if id_ != BundleDescriptor.bundle_id:
-                warnings.warn("non-incremental id for '[{}]'".format(section))
-            BundleDescriptor.bundle_id += 1
+class PropertyDescriptor(Descriptor):
+    def __init__(self, id_, name_stringid, typ, value, section):
+        super(PropertyDescriptor, self).__init__(section)
+        if id_ == 0:
+            raise Error("invalid id for '[{}]' (cannot be 0)".format(section))
         self.id_ = id_
-        self._class = class_
-        self.cports = []
+        self.name_stringid = name_stringid
+        self.typ = typ
+        self.value = value
+        self._parent = None
 
     @property
-    def class_num(self):
-        return self._class
+    def parent(self):
+        return self._parent
 
-    @property
-    def class_name(self):
-        try:
-            return self.bundle_class[self._class]
-        except KeyError:
-            return "Reserved"
-
-    def add_cport(self, desc):
+    @parent.setter
+    def parent(self, desc):
+        if self._parent is not None:
+            raise Error("multiple references to [{}]".format(self.section))
         self.used = True
-        self.cports.append(desc)
+        self._parent = desc
 
     def __str__(self):
-        r = "; '{}' class on Bundle {}\n".format(self.class_name, self.id_)
-        r += "[{} {:#x}]\n".format(MnfsParser.BUNDLE_DESC, self.id_)
-        r += "class = {:#x}\n".format(self.class_num)
+        r = ""
+        r += "[{} {:#x}]\n".format(MnfsParser.PROPERTY_DESC, self.id_)
+        r += "name-string-id = {}\n".format(self.name_stringid)
+        r += "type = {}\n".format(self.typ)
+        r += "value = {}\n".format(self.value)
         return r
 
-class CPortDescriptor(Descriptor):
-
-    cport_protocol = {
-            0x00: ('Control'            , 0x00),
-            0x01: ('AP'                 , 0x01),
-            0x02: ('GPIO'               , 0x0a),
-            0x03: ('I2C'                , 0x0a),
-            0x04: ('UART'               , 0x0a),
-            0x05: ('HID'                , 0x05),
-            0x06: ('USB'                , 0x0a),
-            0x07: ('SDIO'               , 0x0a),
-            0x08: ('Power Supply'       , 0x08),
-            0x09: ('PWM'                , 0x0a),
-            0x0b: ('SPI'                , 0x0a),
-            0x0c: ('Display'            , 0x0c),
-            0x0d: ('Camera Management'  , 0x0d),
-            0x0e: ('Sensor'             , 0x0e),
-            0x0f: ('Lights'             , 0x0f),
-            0x10: ('Vibrator'           , 0x10),
-            0x11: ('Loopback'           , 0x11),
-            0x12: ('Audio Management'   , 0x12),
-            0x13: ('Audio Data'         , 0x12),
-            0x14: ('SVC'                , 0x14),
-            0x15: ('Firmware'           , 0x15),
-            0x16: ('Camera Data'        , 0x0d),
-            0xfe: ('Raw'                , 0xfe),
-            0xff: ('Vendor Specific'    , 0xff),
+class DeviceDescriptor(Descriptor):
+    device_protocol = {
+            0x01: 'SPI',
+            0x02: 'I2C',
+            0x03: 'UART',
+            0x04: 'SPI_GPIO_CS',
+            0x05: 'I2C_MUX'
             }
 
-    def __init__(self, id_, bundle, protocol, section):
-        super(CPortDescriptor, self).__init__(section, True)
-        if id_ == 0 and protocol != 0:
-            raise Error("invalid protocol for '[{}]' (should be a 'Control' CPort)"
-                    .format(section))
-        self.id_ = id_
-        self.bundle = bundle
-        self._protocol = protocol
-
-    @property
-    def protocol_data(self):
-        try:
-            return self.cport_protocol[self._protocol]
-        except KeyError:
-            return ("Reserved", None)
-
-    @property
-    def protocol_num(self):
-        return self._protocol
+    def __init__(self, id_, props, section):
+        super(DeviceDescriptor, self).__init__(section)
+        self.id_ = id_        
+        self.driver_string_id = props[0]
+        self.num_properties = props[1]
+        self.protocol = props[2]
+        self.reg = props[3]
+        self.cs_gpio = props[4]
+        self.irq = props[5]
+        self.irq_type = props[6]
+        self.max_speed_hz = props[7]
+        self.mode = props[8]
+        self.num_gpio_res = props[9]
+        self.prop_link = props[10]
+        self.gpio_link = props[11]
 
     @property
     def protocol_name(self):
-        return self.protocol_data[0]
-
-    @property
-    def protocol_class(self):
-        return self.protocol_data[1]
+        try:
+            return self.device_protocol[self.protocol]
+        except KeyError:
+            return "Reserved"
 
     def __str__(self):
-        r = "; '{}' protocol on CPort {}\n".format(self.protocol_name,
-                self.id_)
-        r += "[{} {:#x}]\n".format(MnfsParser.CPORT_DESC, self.id_)
-        r += "bundle = {:#x}\n".format(self.bundle)
-        r += "protocol = {:#x}\n".format(self.protocol_num)
+        r = "; '{}' Protocol on Device {}\n".format(self.protocol_name, self.id_)
+        r += "[{} {:#x}]\n".format(MnfsParser.DEVICE_DESC, self.id_)
+        r += "driver-string-id = {:#x}\n".format(self.driver_string_id)
+        r += "num-properties = {:#x}\n".format(self.num_properties)
+        r += "protocol = {:#x}\n".format(self.protocol)
+        r += "reg = {:#x}\n".format(self.reg)
+        r += "cs-gpio = {:#x}\n".format(self.cs_gpio)
+        r += "irq = {:#x}\n".format(self.irq)
+        r += "irq-type = {:#x}\n".format(self.irq_type)
+        r += "max-speed-hz = {:#x}\n".format(self.max_speed_hz)
+        r += "mode = {:#x}\n".format(self.mode)
+        r += "num-gpio-res = {:#x}\n".format(self.num_gpio_res)
+        r += "prop-link = {:#x}\n".format(self.prop_link)
+        r += "gpio-link = {:#x}\n".format(self.gpio_link)
         return r
 
 ### File parsers
@@ -379,24 +251,37 @@ class MnfsParser(object):
     MNFS_HEADER         = 'manifest-header'
     MNFS_HEADER_VMAJ    = 'version-major'
     MNFS_HEADER_VMIN    = 'version-minor'
-    INTERFACE_DESC      = 'interface-descriptor'
-    INTERFACE_DESC_VSID = 'vendor-string-id'
-    INTERFACE_DESC_PSID = 'product-string-id'
+    MNFS_HEADER_CLICK_STRING_ID = 'click-string-id'
+    MNFS_HEADER_NUM_DEVICES = 'num-devices'
+    MNFS_HEADER_RESET_GPIO_STATE = 'reset-gpio-state'
+    MNFS_HEADER_PWM_GPIO_STATE = 'pwm-gpio-state'
+    MNFS_HEADER_INT_GPIO_STATE = 'int-gpio-state'
     STRING_DESC         = 'string-descriptor'
     STRING_DESC_STRING  = 'string'
-    BUNDLE_DESC         = 'bundle-descriptor'
-    BUNDLE_DESC_CLASS   = 'class'
-    CPORT_DESC          = 'cport-descriptor'
-    CPORT_DESC_BUNDLE   = 'bundle'
-    CPORT_DESC_PROTOCOL = 'protocol'
+    DEVICE_DESC         = 'device-descriptor'
+    DEVICE_DESC_DRIVER_STRING_ID   = 'driver-string-id'
+    DEVICE_DESC_NUM_PROPERTIES   = 'num-properties'
+    DEVICE_DESC_MAX_SPEED_HZ   = 'max-speed-hz'
+    DEVICE_DESC_MODE   = 'mode'
+    DEVICE_DESC_NUM_GPIO_RESOURCES   = 'num-gpio-resources'
+    DEVICE_DESC_PROTOCOL   = 'protocol'
+    DEVICE_DESC_REG   = 'reg'
+    DEVICE_DESC_CS_GPIO   = 'cs-gpio'
+    DEVICE_DESC_IRQ   = 'irq'
+    DEVICE_DESC_IRQ_TYPE   = 'irq-type'
+    DEVICE_DESC_PROP_LINK   = 'prop-link'
+    DEVICE_DESC_GPIO_LINK   = 'gpio-link'
+    PROPERTY_DESC         = 'property-descriptor'
+    PROPERTY_DESC_NAME_STRING_ID  = 'name-string-id'
+    PROPERTY_DESC_TYPE  = 'type'
+    PROPERTY_DESC_VALUE  = 'value'
 
     # sizes
     MNFS_HEADER_VERSION_SIZE    = 1
     ID_DESC_SIZE                = 1
+    MAX_SPEED_DESC_SIZE         = 4
     STRING_DESC_STRING_SIZE     = 255
-    BUNDLE_DESC_CLASS_SIZE      = 1
-    CPORT_ID_DESC_SIZE          = 2
-    CPORT_DESC_PROTOCOL_SIZE    = 1
+    PROP_DESC_VALUE_SIZE     = 255
 
     def __init__(self):
         pass
@@ -466,20 +351,24 @@ class MnfsParser(object):
                 vmin = self.__get_int_option(cfg_parser, section,
                         MnfsParser.MNFS_HEADER_VMIN,
                         MnfsParser.MNFS_HEADER_VERSION_SIZE)
-
-                header = ManifestHeader(vmaj, vmin)
+                clickstr = self.__get_int_option(cfg_parser, section,
+                        MnfsParser.MNFS_HEADER_CLICK_STRING_ID,
+                        MnfsParser.ID_DESC_SIZE)
+                numdev = self.__get_int_option(cfg_parser, section,
+                        MnfsParser.MNFS_HEADER_NUM_DEVICES,
+                        MnfsParser.ID_DESC_SIZE)
+                rstgpio = self.__get_int_option(cfg_parser, section,
+                        MnfsParser.MNFS_HEADER_RESET_GPIO_STATE,
+                        MnfsParser.ID_DESC_SIZE)
+                pwmgpio = self.__get_int_option(cfg_parser, section,
+                        MnfsParser.MNFS_HEADER_PWM_GPIO_STATE,
+                        MnfsParser.ID_DESC_SIZE)
+                intgpio = self.__get_int_option(cfg_parser, section,
+                        MnfsParser.MNFS_HEADER_INT_GPIO_STATE,
+                        MnfsParser.ID_DESC_SIZE)
+                props = [clickstr, numdev, rstgpio, pwmgpio, intgpio]
+                header = ManifestHeader(vmaj, vmin, props)
                 manifest.add_header(header)
-
-            elif section == MnfsParser.INTERFACE_DESC:
-                vsid = self.__get_int_option(cfg_parser, section,
-                        MnfsParser.INTERFACE_DESC_VSID,
-                        MnfsParser.ID_DESC_SIZE)
-                psid = self.__get_int_option(cfg_parser, section,
-                        MnfsParser.INTERFACE_DESC_PSID,
-                        MnfsParser.ID_DESC_SIZE)
-
-                interface = InterfaceDescriptor(vsid, psid, section)
-                manifest.add_interface_desc(interface)
 
             elif section.split()[0] == MnfsParser.STRING_DESC:
                 id_ = self.__parse_id(section, MnfsParser.ID_DESC_SIZE)
@@ -489,65 +378,124 @@ class MnfsParser(object):
 
                 string = StringDescriptor(id_, str_, section)
                 manifest.add_string_desc(string)
-
-            elif section.split()[0] == MnfsParser.BUNDLE_DESC:
+            
+            elif section.split()[0] == MnfsParser.PROPERTY_DESC:
                 id_ = self.__parse_id(section, MnfsParser.ID_DESC_SIZE)
-                class_ = self.__get_int_option(cfg_parser, section,
-                        MnfsParser.BUNDLE_DESC_CLASS,
-                        MnfsParser.BUNDLE_DESC_CLASS_SIZE)
+                name_stringid = self.__get_int_option(cfg_parser, section,
+                        MnfsParser.PROPERTY_DESC_NAME_STRING_ID,
+                        MnfsParser.ID_DESC_SIZE)
+                typ = self.__get_int_option(cfg_parser, section,
+                        MnfsParser.PROPERTY_DESC_TYPE,
+                        MnfsParser.ID_DESC_SIZE)
+                value = self.__get_str_option(cfg_parser, section,
+                        MnfsParser.PROPERTY_DESC_VALUE,
+                        MnfsParser.PROP_DESC_VALUE_SIZE)
+                value = list(map(int,value.split(" ")))
+                prop = PropertyDescriptor(id_, name_stringid, typ, value, section)
+                manifest.add_property_desc(prop)
 
-                bundle = BundleDescriptor(id_, class_, section)
-                manifest.add_bundle_desc(bundle)
-
-            elif section.split()[0] == MnfsParser.CPORT_DESC:
-                id_ = self.__parse_id(section, MnfsParser.CPORT_ID_DESC_SIZE)
-                bundle = self.__get_int_option(cfg_parser, section,
-                        MnfsParser.CPORT_DESC_BUNDLE,
+            elif section.split()[0] == MnfsParser.DEVICE_DESC:
+                id_ = self.__parse_id(section, MnfsParser.ID_DESC_SIZE)
+                driverstr = self.__get_int_option(cfg_parser, section,
+                        MnfsParser.DEVICE_DESC_DRIVER_STRING_ID,
+                        MnfsParser.ID_DESC_SIZE)
+                numprop = self.__get_int_option(cfg_parser, section,
+                        MnfsParser.DEVICE_DESC_NUM_PROPERTIES,
                         MnfsParser.ID_DESC_SIZE)
                 protocol = self.__get_int_option(cfg_parser, section,
-                        MnfsParser.CPORT_DESC_PROTOCOL,
-                        MnfsParser.CPORT_DESC_PROTOCOL_SIZE)
-
-                cport = CPortDescriptor(id_, bundle, protocol, section)
-                manifest.add_cport_desc(cport)
-
+                        MnfsParser.DEVICE_DESC_PROTOCOL,
+                        MnfsParser.ID_DESC_SIZE)
+                if(protocol == 1 or protocol == 4):
+                    maxspeedhz = self.__get_int_option(cfg_parser, section,
+                            MnfsParser.DEVICE_DESC_MAX_SPEED_HZ,
+                            MnfsParser.MAX_SPEED_DESC_SIZE)
+                    mode = self.__get_int_option(cfg_parser, section,
+                            MnfsParser.DEVICE_DESC_MODE,
+                            MnfsParser.ID_DESC_SIZE)                    
+                    csgpio = self.__get_int_option(cfg_parser, section,
+                            MnfsParser.DEVICE_DESC_CS_GPIO,
+                            MnfsParser.ID_DESC_SIZE)
+                else:
+                    maxspeedhz=0
+                    csgpio=0
+                    mode=0
+                numgpio = self.__get_int_option(cfg_parser, section,
+                        MnfsParser.DEVICE_DESC_NUM_GPIO_RESOURCES,
+                        MnfsParser.ID_DESC_SIZE)
+                reg = self.__get_int_option(cfg_parser, section,
+                        MnfsParser.DEVICE_DESC_REG,
+                        MnfsParser.ID_DESC_SIZE)
+                irq = self.__get_int_option(cfg_parser, section,
+                        MnfsParser.DEVICE_DESC_IRQ,
+                        MnfsParser.ID_DESC_SIZE)
+                irq_type = self.__get_int_option(cfg_parser, section,
+                        MnfsParser.DEVICE_DESC_IRQ_TYPE,
+                        MnfsParser.ID_DESC_SIZE)
+                if (numprop > 0):      
+                    prop_link = self.__get_int_option(cfg_parser, section,
+                            MnfsParser.DEVICE_DESC_PROP_LINK,
+                            MnfsParser.ID_DESC_SIZE)
+                else:
+                    prop_link = 0
+                if (numgpio > 0):
+                    gpio_link = self.__get_int_option(cfg_parser, section,
+                            MnfsParser.DEVICE_DESC_GPIO_LINK,
+                            MnfsParser.ID_DESC_SIZE)
+                else:
+                    gpio_link = 0          
+                props = [driverstr, numprop, protocol, reg, csgpio, irq, irq_type, \
+                     maxspeedhz, mode, numgpio, prop_link, gpio_link]
+                device = DeviceDescriptor(id_, props, section)
+                manifest.add_device_desc(device)
             else:
                 raise Error("invalid descriptor '[{}]'".format(section))
 
         return manifest
-
-class MnfbParser(object):
-    pass
 
 ### Generators
 
 class MnfbGenerator(object):
 
     # types
-    INTERFACE_DESC_TYPE = 0x01
-    STRING_DESC_TYPE    = 0x02
-    BUNDLE_DESC_TYPE    = 0x03
-    CPORT_DESC_TYPE     = 0x04
+    STRING_DESC_TYPE = 0x01
+    PROP_DESC_TYPE = 0x02
+    DEVICE_DESC_TYPE    = 0x03
 
     # sizes
     MNFS_MAX_SIZE           = 0xffff
-    MNFS_HEADER_SIZE        = 0x4
+    MNFS_HEADER_SIZE        = 0xc
     BASE_DESC_SIZE          = 0x4
-    INTERFACE_DESC_SIZE     = BASE_DESC_SIZE + 0x4
+    DEVICE_DESC_SIZE     = BASE_DESC_SIZE + 0x10
     STRING_DESC_BASE_SIZE   = BASE_DESC_SIZE + 0x2
-    BUNDLE_DESC_SIZE        = BASE_DESC_SIZE + 0x4
-    CPORT_DESC_SIZE         = BASE_DESC_SIZE + 0x4
+    PROP_DESC_BASE_SIZE   = BASE_DESC_SIZE + 0x4
 
     STRING_MAX_SIZE         = 0xff
-    STRING_DESC_MAX_SIZE    = STRING_DESC_BASE_SIZE + STRING_MAX_SIZE
+    STRING_DESC_MAX_SIZE    = STRING_DESC_BASE_SIZE + STRING_MAX_SIZE 
+
+    PROP_VALUE_SIZE = {
+            0x00: 1,
+            0x01: 1,
+            0x02: 1,
+            0x03: 2,
+            0x04: 4,
+            0x05: 8
+            }
 
     # formatting
-    MNFS_HEADER_FMT         = '<HBB'
+    MNFS_HEADER_FMT         = '<HBBBBBBBxxx'
     BASE_DESC_FMT           = '<HBx'
-    INTERFACE_DESC_FMT      = BASE_DESC_FMT + 'BB'
+    DEVICE_DESC_FMT      = BASE_DESC_FMT + 'BBBBLBBBBBBBB'
     STRING_DESC_BASE_FMT    = BASE_DESC_FMT + 'BB'
-    BUNDLE_DESC_FMT         = BASE_DESC_FMT + 'BB'
-    CPORT_DESC_FMT          = BASE_DESC_FMT + 'HBB'
+    PROP_DESC_BASE_FMT    = BASE_DESC_FMT + 'BBBB'
+    
+    PROP_VALUE_DESC_FMT = {
+            0x00: 'B',
+            0x01: 'B',
+            0x02: 'B',
+            0x03: 'H',
+            0x04: 'L',
+            0x05: 'Q'
+            }
 
     def __init__(self):
         self.mnfb = bytearray(MnfbGenerator.MNFS_MAX_SIZE)
@@ -562,18 +510,19 @@ class MnfbGenerator(object):
 
     def __pack_header(self, hdr):
         struct.pack_into(MnfbGenerator.MNFS_HEADER_FMT,
-                self.mnfb, 0, self.offset, hdr.major, hdr.minor)
+                self.mnfb, 0, self.offset, hdr.major, hdr.minor, hdr.click_string_id, \
+                    hdr.num_devices, hdr.rst_gpio, hdr.pwm_gpio, hdr.int_gpio)
 
     def __pack_desc(self, desc_fmt, desc_size, desc_type, *args):
         struct.pack_into(desc_fmt, self.mnfb, self.offset, desc_size, desc_type,
                 *args)
         self.__inc_offset(desc_size)
 
-    def __pack_interface_desc(self, desc):
-        self.__pack_desc(MnfbGenerator.INTERFACE_DESC_FMT,
-                MnfbGenerator.INTERFACE_DESC_SIZE,
-                MnfbGenerator.INTERFACE_DESC_TYPE,
-                desc.vsid, desc.psid)
+    def __pack_device_desc(self, desc):
+        self.__pack_desc(MnfbGenerator.DEVICE_DESC_FMT, MnfbGenerator.DEVICE_DESC_SIZE, \
+                MnfbGenerator.DEVICE_DESC_TYPE, desc.id_, desc.driver_string_id, \
+                desc.num_properties, desc.protocol, desc.max_speed_hz, desc.reg, desc.mode, \
+                 desc.num_gpio_res, desc.cs_gpio, desc.irq, desc.irq_type, desc.prop_link, desc.gpio_link)
 
     def __string_desc_size(self, string):
         base_size = MnfbGenerator.STRING_DESC_BASE_SIZE + len(string)
@@ -582,7 +531,7 @@ class MnfbGenerator(object):
         return base_size + pad_bytes
 
     def __string_desc_fmt(self, string):
-        return "{}{}s".format(MnfbGenerator. STRING_DESC_BASE_FMT, len(string))
+        return "{}{}s".format(MnfbGenerator.STRING_DESC_BASE_FMT, len(string))
 
     def __pack_string_desc(self, desc):
         string_desc_size = self.__string_desc_size(desc.string)
@@ -594,29 +543,33 @@ class MnfbGenerator(object):
                 MnfbGenerator.STRING_DESC_TYPE,
                 len(desc.string), desc.id_, desc.string.encode("utf-8"))
 
-    def __pack_bundle_desc(self, desc):
-        self.__pack_desc(MnfbGenerator.BUNDLE_DESC_FMT,
-                MnfbGenerator.BUNDLE_DESC_SIZE,
-                MnfbGenerator.BUNDLE_DESC_TYPE,
-                desc.id_, desc.class_num)
+    def __property_desc_size(self, typ, value):
+        base_size = MnfbGenerator.PROP_DESC_BASE_SIZE + len(value)*MnfbGenerator.PROP_VALUE_SIZE[typ]
+        mod = base_size % 4
+        pad_bytes = 4 - mod if mod else 0
+        return base_size + pad_bytes
 
-    def __pack_cport_desc(self, desc):
-        self.__pack_desc(MnfbGenerator.CPORT_DESC_FMT,
-                MnfbGenerator.CPORT_DESC_SIZE,
-                MnfbGenerator.CPORT_DESC_TYPE,
-                desc.id_, desc.bundle, desc.protocol_num)
+    def __property_desc_fmt(self, typ, value):
+        print("{}{}".format(MnfbGenerator.PROP_DESC_BASE_FMT, len(value)*(MnfbGenerator.PROP_VALUE_DESC_FMT[typ])))
+        return "{}{}".format(MnfbGenerator.PROP_DESC_BASE_FMT, MnfbGenerator.PROP_VALUE_DESC_FMT[typ]*len(value))
+
+    def __pack_property_desc(self, desc):
+        prop_desc_size = self.__property_desc_size(desc.typ, desc.value)
+        prop_desc_fmt = self.__property_desc_fmt(desc.typ, desc.value)
+        vals = desc.value
+        self.__pack_desc(prop_desc_fmt, prop_desc_size,
+                MnfbGenerator.PROP_DESC_TYPE,
+                len(desc.value), desc.id_, desc.name_stringid, desc.typ, *vals)
 
     def generate(self, manifest):
         # pack all the descriptors in order of their definition in the mnfs
         for desc in manifest.descriptors:
-            if isinstance(desc, InterfaceDescriptor):
-                self.__pack_interface_desc(desc)
+            if isinstance(desc, DeviceDescriptor):
+                self.__pack_device_desc(desc)
             elif isinstance(desc, StringDescriptor):
                 self.__pack_string_desc(desc)
-            elif isinstance(desc, BundleDescriptor):
-                self.__pack_bundle_desc(desc)
-            elif isinstance(desc, CPortDescriptor):
-                self.__pack_cport_desc(desc)
+            elif isinstance(desc, PropertyDescriptor):
+                self.__pack_property_desc(desc)
             else:
                 assert isinstance(desc, Descriptor), desc
 
@@ -635,7 +588,7 @@ class MnfbGenerator(object):
                     f.write(self.__get_mnfb())
         except IOError as e:
             raise Error("can't write manifest binary '{}': {}"
-                    .format(mnfb, str(e)))
+                    .format(self.mnfb, str(e)))
 
 ### Command line arguments
 def get_args():
@@ -644,47 +597,16 @@ def get_args():
     parser.add_argument('infile',
             help='specify an input manifest file')
 
-    parser.add_argument('-I', '--in-format', default='mnfs',
-            choices=['mnfs', 'mnfb'],
-            help='input formats (default is mnfs)')
-
-    parser.add_argument('-o', '--out', default='stdout',
-            help='output file (default is stdout)')
-
-    parser.add_argument('-O', '--out-format', default='mnfb',
-            choices=['mnfs', 'mnfb'],
-            help='output formats (default is mnfb)')
-
-    parser.add_argument('-s', '--silent', action='store_true',
-            help='silence the (potentially relevant) warnings')
-
     return parser.parse_args()
 
-### Main
 def main():
-    # parse command line arguments
     args = get_args()
-    warnings.silent = args.silent
-
-    # get input parser
-    if args.in_format == "mnfs":
-        parser = MnfsParser()
-    else:
-        parser = MnfbParser()
-
-    # get a manifest from the file
+    warnings.silent = False   
+    parser = MnfsParser()
     manifest = parser.parse_file(args.infile)
-
-    # check the manifest
-    manifest.auto_check()
-
-    # generate output
-    if args.out_format == "mnfs":
-        print(manifest, end='')
-    else:
-        mnfb_gen = MnfbGenerator()
-        mnfb_gen.generate(manifest)
-        mnfb_gen.write_file(args.out)
+    mnfb_gen = MnfbGenerator()
+    mnfb_gen.generate(manifest)
+    mnfb_gen.write_file((args.infile).replace(".mnfs", ".mnfb"))
 
 if __name__ == "__main__":
     try:
