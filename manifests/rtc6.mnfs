@@ -1,0 +1,35 @@
+;
+; Click Board Manifest Source for
+; RTC 6 Click
+; https://www.mikroe.com/rtc6-click
+;
+
+[manifest-header]
+version-major = 0
+version-minor = 1
+click-string-id = 1
+num-devices = 1
+reset-gpio-state = 0
+pwm-gpio-state = 0
+int-gpio-state = 1
+
+; click string (id can't be 0)
+[string-descriptor 1]
+string = rtc6
+
+; driver string
+[string-descriptor 2]
+string = mcp7941x
+
+; device descriptor
+[device-descriptor 1]
+driver-string-id = 2
+num-properties = 0
+num-gpio-resources = 0
+mode=0
+max-speed-hz=0
+protocol = 2
+reg = 0x6f
+cs-gpio = 0
+irq = 0
+irq-type = 0

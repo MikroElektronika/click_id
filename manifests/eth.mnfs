@@ -1,0 +1,35 @@
+;
+; Click Board Manifest Source for
+; ETH Click
+; https://www.mikroe.com/eth-click
+;
+
+[manifest-header]
+version-major = 0
+version-minor = 1
+click-string-id = 1
+num-devices = 1
+reset-gpio-state = 2
+pwm-gpio-state = 0
+int-gpio-state = 1
+
+; click string (id can't be 0)
+[string-descriptor 1]
+string = eth
+
+; driver string
+[string-descriptor 2]
+string = enc28j60
+
+; device descriptor
+[device-descriptor 1]
+driver-string-id = 2
+num-properties = 0
+num-gpio-resources = 0
+mode=0
+max-speed-hz=16000000
+protocol = 1
+reg = 0
+cs-gpio = 0
+irq = 1
+irq-type = 2
