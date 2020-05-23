@@ -21,7 +21,7 @@ sh install.sh
 ## Loading Clicks (Debug Interface run as root)
 
 ```
-cat manifesto/mpu9dof.mnfb >  /sys/class/mikrobus-port/mikrobus-0/new_device
+cat manifests/mpu9dof.mnfb >  /sys/class/mikrobus-port/mikrobus-0/new_device
 ```
 ## Unloading the Clicks (Debug Interface run as root)
 
