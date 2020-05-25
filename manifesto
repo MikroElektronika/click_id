@@ -281,7 +281,7 @@ class MnfsParser(object):
     ID_DESC_SIZE                = 1
     MAX_SPEED_DESC_SIZE         = 4
     STRING_DESC_STRING_SIZE     = 255
-    PROP_DESC_VALUE_SIZE     = 255
+    PROP_DESC_VALUE_SIZE     = 511
 
     def __init__(self):
         pass
@@ -311,6 +311,13 @@ class MnfsParser(object):
         except configparser.NoOptionError as e:
             raise Error("missing field '{}' in '[{}]'".format(option_name,
                 section))
+    
+    def __check_option(self, cfg_parser, section, option_name):
+        try:
+            return cfg_parser.has_option(section, option_name)
+        except configparser.NoOptionError as e:
+            raise Error("failed to check field '{}' in '[{}]'".format(option_name,
+                section))
 
     def __get_int_option(self, cfg_parser, section, option_name, num_bytes):
         try:
@@ -328,6 +335,20 @@ class MnfsParser(object):
             "is too long (maximum is {})".format(str_opt, option_name, section,
                 max_))
         return str_opt
+    
+    def __get_arr_option(self, cfg_parser, section, option_name, max_, typ):
+        arr_opt = self.__get_option(cfg_parser, section, option_name)
+        if len(arr_opt) > max_:
+            raise Error("arr '{}' for field '{}' in '[{}]' "
+            "is too long (maximum is {})".format(arr_opt, option_name, section,
+                max_)) 
+        if not (arr_opt[0] == '<' and arr_opt[-1] == '>'):
+            raise Error("arr '{}' for field '{}' in '[{}]' "
+            "does not start with < or end with >".format(arr_opt, option_name, section))
+        val = list(map(int, (arr_opt[1:(len(arr_opt)-1)]).split()))
+        for values in val:
+            self.__check_int(values, MnfbGenerator.PROP_VALUE_SIZE[typ])
+        return val
 
     def parse_file(self, mnfs_file):
         # force an OrderedDict to get deterministic output even on Python 2.6.
@@ -354,18 +375,34 @@ class MnfsParser(object):
                 clickstr = self.__get_int_option(cfg_parser, section,
                         MnfsParser.MNFS_HEADER_CLICK_STRING_ID,
                         MnfsParser.ID_DESC_SIZE)
-                numdev = self.__get_int_option(cfg_parser, section,
-                        MnfsParser.MNFS_HEADER_NUM_DEVICES,
-                        MnfsParser.ID_DESC_SIZE)
-                rstgpio = self.__get_int_option(cfg_parser, section,
-                        MnfsParser.MNFS_HEADER_RESET_GPIO_STATE,
-                        MnfsParser.ID_DESC_SIZE)
-                pwmgpio = self.__get_int_option(cfg_parser, section,
-                        MnfsParser.MNFS_HEADER_PWM_GPIO_STATE,
-                        MnfsParser.ID_DESC_SIZE)
-                intgpio = self.__get_int_option(cfg_parser, section,
-                        MnfsParser.MNFS_HEADER_INT_GPIO_STATE,
-                        MnfsParser.ID_DESC_SIZE)
+                if (self.__check_option(cfg_parser, section,
+                        MnfsParser.MNFS_HEADER_NUM_DEVICES)):
+                    numdev = self.__get_int_option(cfg_parser, section,
+                            MnfsParser.MNFS_HEADER_NUM_DEVICES,
+                            MnfsParser.ID_DESC_SIZE)
+                else:
+                    numdev = 1
+                if (self.__check_option(cfg_parser, section,
+                        MnfsParser.MNFS_HEADER_RESET_GPIO_STATE)):
+                    rstgpio = self.__get_int_option(cfg_parser, section,
+                            MnfsParser.MNFS_HEADER_RESET_GPIO_STATE,
+                            MnfsParser.ID_DESC_SIZE)
+                else:
+                    rstgpio = 0
+                if (self.__check_option(cfg_parser, section,
+                        MnfsParser.MNFS_HEADER_PWM_GPIO_STATE)):
+                    pwmgpio = self.__get_int_option(cfg_parser, section,
+                            MnfsParser.MNFS_HEADER_PWM_GPIO_STATE,
+                            MnfsParser.ID_DESC_SIZE)
+                else:
+                    pwmgpio = 0
+                if (self.__check_option(cfg_parser, section,
+                        MnfsParser.MNFS_HEADER_INT_GPIO_STATE)):
+                    intgpio = self.__get_int_option(cfg_parser, section,
+                            MnfsParser.MNFS_HEADER_INT_GPIO_STATE,
+                            MnfsParser.ID_DESC_SIZE)
+                else:
+                    intgpio = 0
                 props = [clickstr, numdev, rstgpio, pwmgpio, intgpio]
                 header = ManifestHeader(vmaj, vmin, props)
                 manifest.add_header(header)
@@ -387,10 +424,9 @@ class MnfsParser(object):
                 typ = self.__get_int_option(cfg_parser, section,
                         MnfsParser.PROPERTY_DESC_TYPE,
                         MnfsParser.ID_DESC_SIZE)
-                value = self.__get_str_option(cfg_parser, section,
+                value = self.__get_arr_option(cfg_parser, section,
                         MnfsParser.PROPERTY_DESC_VALUE,
-                        MnfsParser.PROP_DESC_VALUE_SIZE)
-                value = list(map(int,value.split(" ")))
+                        MnfsParser.PROP_DESC_VALUE_SIZE, typ)
                 prop = PropertyDescriptor(id_, name_stringid, typ, value, section)
                 manifest.add_property_desc(prop)
 
@@ -399,9 +435,13 @@ class MnfsParser(object):
                 driverstr = self.__get_int_option(cfg_parser, section,
                         MnfsParser.DEVICE_DESC_DRIVER_STRING_ID,
                         MnfsParser.ID_DESC_SIZE)
-                numprop = self.__get_int_option(cfg_parser, section,
-                        MnfsParser.DEVICE_DESC_NUM_PROPERTIES,
-                        MnfsParser.ID_DESC_SIZE)
+                if (self.__check_option(cfg_parser, section,
+                        MnfsParser.DEVICE_DESC_NUM_PROPERTIES)):
+                    numprop = self.__get_int_option(cfg_parser, section,
+                            MnfsParser.DEVICE_DESC_NUM_PROPERTIES,
+                            MnfsParser.ID_DESC_SIZE)
+                else:
+                    numprop = 0
                 protocol = self.__get_int_option(cfg_parser, section,
                         MnfsParser.DEVICE_DESC_PROTOCOL,
                         MnfsParser.ID_DESC_SIZE)
@@ -411,33 +451,51 @@ class MnfsParser(object):
                             MnfsParser.MAX_SPEED_DESC_SIZE)
                     mode = self.__get_int_option(cfg_parser, section,
                             MnfsParser.DEVICE_DESC_MODE,
-                            MnfsParser.ID_DESC_SIZE)                    
-                    csgpio = self.__get_int_option(cfg_parser, section,
-                            MnfsParser.DEVICE_DESC_CS_GPIO,
                             MnfsParser.ID_DESC_SIZE)
+                    if (self.__check_option(cfg_parser, section,
+                        MnfsParser.DEVICE_DESC_CS_GPIO)):                    
+                        csgpio = self.__get_int_option(cfg_parser, section,
+                                MnfsParser.DEVICE_DESC_CS_GPIO,
+                                MnfsParser.ID_DESC_SIZE)
+                    else:
+                        csgpio = 0
                 else:
                     maxspeedhz=0
                     csgpio=0
                     mode=0
-                numgpio = self.__get_int_option(cfg_parser, section,
-                        MnfsParser.DEVICE_DESC_NUM_GPIO_RESOURCES,
-                        MnfsParser.ID_DESC_SIZE)
-                reg = self.__get_int_option(cfg_parser, section,
-                        MnfsParser.DEVICE_DESC_REG,
-                        MnfsParser.ID_DESC_SIZE)
-                irq = self.__get_int_option(cfg_parser, section,
-                        MnfsParser.DEVICE_DESC_IRQ,
-                        MnfsParser.ID_DESC_SIZE)
-                irq_type = self.__get_int_option(cfg_parser, section,
-                        MnfsParser.DEVICE_DESC_IRQ_TYPE,
-                        MnfsParser.ID_DESC_SIZE)
-                if (numprop > 0):      
+                if (self.__check_option(cfg_parser, section,
+                        MnfsParser.DEVICE_DESC_NUM_GPIO_RESOURCES)):
+                    numgpio = self.__get_int_option(cfg_parser, section,
+                            MnfsParser.DEVICE_DESC_NUM_GPIO_RESOURCES,
+                            MnfsParser.ID_DESC_SIZE)
+                else:
+                    numgpio = 0
+                if(protocol == 2 or protocol == 5):
+                    reg = self.__get_int_option(cfg_parser, section,
+                            MnfsParser.DEVICE_DESC_REG,
+                            MnfsParser.ID_DESC_SIZE)
+                else:
+                    reg = 0
+                if (self.__check_option(cfg_parser, section,
+                        MnfsParser.DEVICE_DESC_IRQ)):
+                    irq = self.__get_int_option(cfg_parser, section,
+                            MnfsParser.DEVICE_DESC_IRQ,
+                            MnfsParser.ID_DESC_SIZE)
+                    irq_type = self.__get_int_option(cfg_parser, section,
+                            MnfsParser.DEVICE_DESC_IRQ_TYPE,
+                            MnfsParser.ID_DESC_SIZE)
+                else:
+                    irq= 0
+                    irq_type= 0
+                if (self.__check_option(cfg_parser, section,
+                        MnfsParser.DEVICE_DESC_PROP_LINK)):      
                     prop_link = self.__get_int_option(cfg_parser, section,
                             MnfsParser.DEVICE_DESC_PROP_LINK,
                             MnfsParser.ID_DESC_SIZE)
                 else:
                     prop_link = 0
-                if (numgpio > 0):
+                if (self.__check_option(cfg_parser, section,
+                        MnfsParser.DEVICE_DESC_PROP_LINK)):   
                     gpio_link = self.__get_int_option(cfg_parser, section,
                             MnfsParser.DEVICE_DESC_GPIO_LINK,
                             MnfsParser.ID_DESC_SIZE)
@@ -550,8 +608,11 @@ class MnfbGenerator(object):
         return base_size + pad_bytes
 
     def __property_desc_fmt(self, typ, value):
-        print("{}{}".format(MnfbGenerator.PROP_DESC_BASE_FMT, len(value)*(MnfbGenerator.PROP_VALUE_DESC_FMT[typ])))
-        return "{}{}".format(MnfbGenerator.PROP_DESC_BASE_FMT, MnfbGenerator.PROP_VALUE_DESC_FMT[typ]*len(value))
+        val_size = len(value)*MnfbGenerator.PROP_VALUE_SIZE[typ]
+        mod = val_size % 4
+        pad_bytes = 4 - mod if mod else 0
+        return "{}{}{}".format(MnfbGenerator.PROP_DESC_BASE_FMT, MnfbGenerator.PROP_VALUE_DESC_FMT[typ]*len(value),\
+            'x'*pad_bytes)
 
     def __pack_property_desc(self, desc):
         prop_desc_size = self.__property_desc_size(desc.typ, desc.value)
@@ -594,8 +655,10 @@ class MnfbGenerator(object):
 def get_args():
     parser = argparse.ArgumentParser()
 
-    parser.add_argument('infile',
-            help='specify an input manifest file')
+    parser.add_argument('-i','--infile',
+            help='specify an input manifest file', required=True)
+    parser.add_argument('-o', '--outfile',
+            help='specify an output file path', required=False)
 
     return parser.parse_args()
 
@@ -606,7 +669,10 @@ def main():
     manifest = parser.parse_file(args.infile)
     mnfb_gen = MnfbGenerator()
     mnfb_gen.generate(manifest)
-    mnfb_gen.write_file((args.infile).replace(".mnfs", ".mnfb"))
+    if(args.outfile):
+        mnfb_gen.write_file(args.outfile)
+    else:
+        mnfb_gen.write_file((args.infile).replace(".mnfs", ".mnfb"))
 
 if __name__ == "__main__":
     try:

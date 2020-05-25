@@ -4,15 +4,19 @@
 ; https://www.mikroe.com/mpu-9dof-click
 ;
 
+# -----------------------------------------------------------
+#            Manifest Header
+# -----------------------------------------------------------
 [manifest-header]
 version-major = 0
 version-minor = 1
 click-string-id = 1
 num-devices = 1
-reset-gpio-state = 0
-pwm-gpio-state = 0
 int-gpio-state = 1
 
+# -----------------------------------------------------------
+#            Manifest String Descriptors
+# -----------------------------------------------------------
 ; click string (id can't be 0)
 [string-descriptor 1]
 string = mpu9dof
@@ -21,15 +25,13 @@ string = mpu9dof
 [string-descriptor 2]
 string = mpu9150
 
+# -----------------------------------------------------------
+#            Manifest Device Descriptors
+# -----------------------------------------------------------
 ; device descriptor
 [device-descriptor 1]
 driver-string-id = 2
-num-properties = 0
-num-gpio-resources = 0
-mode=0
-max-speed-hz=0
 protocol = 2
 reg = 0x68
-cs-gpio = 0
 irq = 1
 irq-type = 1

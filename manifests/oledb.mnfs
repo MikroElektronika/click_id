@@ -1,0 +1,145 @@
+;
+; Click Board Manifest Source for
+; OLEDB Click
+; https://www.mikroe.com/oled-b-click
+;
+
+# -----------------------------------------------------------
+#            Manifest Header Section
+# -----------------------------------------------------------
+
+[manifest-header]
+version-major = 0
+version-minor = 1
+click-string-id = 1
+num-devices = 1
+int-gpio-state = 2
+
+# -----------------------------------------------------------
+#            Manifest String Descriptors
+# -----------------------------------------------------------
+
+; click string (id can't be 0)
+[string-descriptor 1]
+string = oledc
+
+; driver string
+[string-descriptor 2]
+string = fb_ssd1306
+
+; property link name string
+[string-descriptor 3]
+string = prop-link
+
+; gpio link name string
+[string-descriptor 4]
+string = gpio-link
+
+; dc gpio name string
+[string-descriptor 5]
+string = dc
+
+; reset gpio name string
+[string-descriptor 6]
+string = reset
+
+; width property name string
+[string-descriptor 7]
+string = width
+
+; height property name string
+[string-descriptor 8]
+string = height
+
+; rotate property name string
+[string-descriptor 9]
+string = rotate
+
+; buswidth property name string
+[string-descriptor 10]
+string = buswidth
+
+; debug property name string
+[string-descriptor 11]
+string = debug
+
+# -----------------------------------------------------------
+#            Manifest Property Descriptor Section
+# -----------------------------------------------------------
+
+; property link descriptor
+; this property descriptor contains an array
+; of property ids which are assosciated with a
+; single device (used to pass named properties
+; to the device driver)
+[property-descriptor 1]
+name-string-id = 3
+type = 0x00
+value = <5 6 7 8 9>
+
+; gpio link descriptor
+; this property descriptor contains an array
+; of property ids which are assosciated with a
+; single device (used to pass named gpios
+; to the device driver)
+[property-descriptor 2]
+name-string-id = 4
+type = 0x01
+value = <3 4>
+
+; dc gpio descriptor
+[property-descriptor 3]
+name-string-id = 5
+type = 0x02
+value = <3>
+
+; reset gpio descriptor
+[property-descriptor 4]
+name-string-id = 6
+type = 0x02
+value = <2>
+
+; width property descriptor
+[property-descriptor 5]
+name-string-id = 7
+type = 0x04
+value = <96>
+
+; height property descriptor
+[property-descriptor 6]
+name-string-id = 8
+type = 0x04
+value = <39>
+
+; rotate property descriptor
+[property-descriptor 7]
+name-string-id = 9
+type = 0x04
+value = <180>
+
+; buswidth property descriptor
+[property-descriptor 8]
+name-string-id = 10
+type = 0x04
+value = <8>
+
+; debug property descriptor
+[property-descriptor 9]
+name-string-id = 11
+type = 0x04
+value = <3>
+
+# -----------------------------------------------------------
+#            Manifest Device Descriptors
+# -----------------------------------------------------------
+
+; device descriptor
+[device-descriptor 1]
+driver-string-id = 2
+num-properties = 5
+num-gpio-resources = 2
+protocol = 1
+mode=0
+max-speed-hz=6000000
+prop-link = 1
+gpio-link = 2
