@@ -9,11 +9,21 @@ Provided under BSD license. See *LICENSE* for details.
 
 For creating a manifest blob(.mnfb) from a manifest file(.mnfs) :
 ```
- manifesto /path/to/input.mnfs
+ manifesto -i /path/to/input.mnfs -o /path/to/output.mnfb
 ```
+
+### Writing a Manifest Blob to EEPROM
+
+For writing a manifest blob(.mnfb) created from a manifest file(.mnfs) to an EEPROM (the EEPROM probe is specific to the type of EEPROM) :
+```
+echo 24c32 0x57 > /sys/bus/i2c/devices/i2c-1/new_device
+./manifesto -i manifests/mpu9dof.mnfs -o /sys/bus/nvmem/devices/1-00570/nvmem
+echo 0x57 > /sys/bus/i2c/devices/i2c-1/delete_device
+```
+
 ## Install
 
-For igenerating the manifest blobs from all the manifest sources in the manifest/ directory , run the installation script:
+For generating the manifest blobs from all the manifest sources in the manifest/ directory , run the installation script:
 
 ```
 sh install.sh
@@ -28,24 +38,30 @@ cat manifests/mpu9dof.mnfb >  /sys/class/mikrobus-port/mikrobus-0/new_device
 ```
 echo 0 >  /sys/class/mikrobus-port/mikrobus-0/delete_device
 ```
+
 ## Adding Support for new Click Boards
  
 Adding support for new click board normally just requires the addition of the new manifest source, the fields in a mikrobus manifest are explained as below:
 ```
+;
 ; Click Board Manifest Source for
 ; ETH Click
 ; https://www.mikroe.com/eth-click
 ;
 
+# -----------------------------------------------------------
+#            Manifest Header
+# -----------------------------------------------------------
 [manifest-header]
 version-major = 0
 version-minor = 1
 click-string-id = 1
-num-devices = 1
 reset-gpio-state = 2
-pwm-gpio-state = 0
 int-gpio-state = 1
 
+# -----------------------------------------------------------
+#            Manifest String Descriptors
+# -----------------------------------------------------------
 ; click string (id can't be 0)
 [string-descriptor 1]
 string = eth
@@ -54,16 +70,15 @@ string = eth
 [string-descriptor 2]
 string = enc28j60
 
+# -----------------------------------------------------------
+#            Manifest Device Descriptor Section
+# -----------------------------------------------------------
 ; device descriptor
 [device-descriptor 1]
 driver-string-id = 2
-num-properties = 0
-num-gpio-resources = 0
+protocol = 1
 mode=0
 max-speed-hz=16000000
-protocol = 1
-reg = 0
-cs-gpio = 0
 irq = 1
 irq-type = 2
 ```
