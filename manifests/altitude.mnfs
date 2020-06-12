@@ -1,0 +1,33 @@
+;
+; Click Board Manifest Source for
+; Altitude Click
+; https://www.mikroe.com/altitude-click
+;
+
+# -----------------------------------------------------------
+#            Manifest Header
+# -----------------------------------------------------------
+[manifest-header]
+version-major = 0
+version-minor = 1
+click-string-id = 1
+
+# -----------------------------------------------------------
+#            Manifest String Descriptors
+# -----------------------------------------------------------
+; click string (id can't be 0)
+[string-descriptor 1]
+string = altitude
+
+; driver string
+[string-descriptor 2]
+string = mpl3115
+
+# -----------------------------------------------------------
+#            Manifest Device Descriptors
+# -----------------------------------------------------------
+; device descriptor
+[device-descriptor 1]
+driver-string-id = 2
+protocol = 2
+reg = 0x60
