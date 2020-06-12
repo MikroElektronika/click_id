@@ -1,0 +1,33 @@
+;
+; Click Board Manifest Source for
+; Light Ranger 3 Click
+; https://www.mikroe.com/lightranger-3-click
+;
+
+# -----------------------------------------------------------
+#            Manifest Header
+# -----------------------------------------------------------
+[manifest-header]
+version-major = 0
+version-minor = 1
+click-string-id = 1
+
+# -----------------------------------------------------------
+#            Manifest String Descriptors
+# -----------------------------------------------------------
+; click string (id can't be 0)
+[string-descriptor 1]
+string = lightranger3
+
+; driver string
+[string-descriptor 2]
+string = rfd77402
+
+# -----------------------------------------------------------
+#            Manifest Device Descriptors
+# -----------------------------------------------------------
+; device descriptor
+[device-descriptor 1]
+driver-string-id = 2
+protocol = 2
+reg = 0x4c
