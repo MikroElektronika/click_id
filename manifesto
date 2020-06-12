@@ -281,7 +281,7 @@ class MnfsParser(object):
     ID_DESC_SIZE                = 1
     MAX_SPEED_DESC_SIZE         = 4
     STRING_DESC_STRING_SIZE     = 255
-    PROP_DESC_VALUE_SIZE     = 511
+    PROP_DESC_VALUE_SIZE     = 255
 
     def __init__(self):
         pass
