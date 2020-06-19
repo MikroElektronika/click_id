@@ -1,8 +1,8 @@
 ;
 ; Click Board Manifest Source for
-; Light Ranger 3 Click
-; https://www.mikroe.com/lightranger-3-click
-;
+; Thermo 3 Click
+; https://www.mikroe.com/thermo-3-click
+; CONFIG_SENSORS_TMP102
 
 # -----------------------------------------------------------
 #            Manifest Header
@@ -17,11 +17,11 @@ click-string-id = 1
 # -----------------------------------------------------------
 ; click string (id can't be 0)
 [string-descriptor 1]
-string = lightranger3
+string = thermo3
 
 ; driver string
 [string-descriptor 2]
-string = rfd77402
+string = tmp102
 
 # -----------------------------------------------------------
 #            Manifest Device Descriptors
@@ -30,4 +30,4 @@ string = rfd77402
 [device-descriptor 1]
 driver-string-id = 2
 protocol = 2
-reg = 0x4c
+reg = 0x48

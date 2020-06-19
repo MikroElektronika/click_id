@@ -1,8 +1,8 @@
 ;
 ; Click Board Manifest Source for
-; Temp Hum 7 Click
-; https://www.mikroe.com/temp-hum-7-click
-;
+; VOLTMETER Click
+; https://www.mikroe.com/voltmeter-click
+; CONFIG_MCP320X
 
 # -----------------------------------------------------------
 #            Manifest Header
@@ -17,11 +17,11 @@ click-string-id = 1
 # -----------------------------------------------------------
 ; click string (id can't be 0)
 [string-descriptor 1]
-string = temphum7
+string = voltmeter
 
 ; driver string
 [string-descriptor 2]
-string = si7020
+string = mcp3201
 
 # -----------------------------------------------------------
 #            Manifest Device Descriptors
@@ -29,5 +29,6 @@ string = si7020
 ; device descriptor
 [device-descriptor 1]
 driver-string-id = 2
-protocol = 2
-reg = 0x40
+mode=0
+max-speed-hz= 1000000
+protocol = 1

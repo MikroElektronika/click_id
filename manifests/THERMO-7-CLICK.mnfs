@@ -1,8 +1,8 @@
 ;
 ; Click Board Manifest Source for
-; ETH WIZ Click
-; https://www.mikroe.com/eth-wiz-click
-;
+; Thermo 7 Click
+; https://www.mikroe.com/thermo-7-click
+; CONFIG_SENSORS_LM75
 
 # -----------------------------------------------------------
 #            Manifest Header
@@ -11,28 +11,23 @@
 version-major = 0
 version-minor = 1
 click-string-id = 1
-reset-gpio-state = 2
-int-gpio-state = 1
 
 # -----------------------------------------------------------
 #            Manifest String Descriptors
 # -----------------------------------------------------------
 ; click string (id can't be 0)
 [string-descriptor 1]
-string = eth_wiz
+string = thermo7
 
 ; driver string
 [string-descriptor 2]
-string = w5500
+string = mcp980x
 
 # -----------------------------------------------------------
-#            Manifest Device Descriptor Section
+#            Manifest Device Descriptors
 # -----------------------------------------------------------
 ; device descriptor
 [device-descriptor 1]
 driver-string-id = 2
-protocol = 1
-mode=0
-max-speed-hz=24000000
-irq = 1
-irq-type = 2
+protocol = 2
+reg = 0x48

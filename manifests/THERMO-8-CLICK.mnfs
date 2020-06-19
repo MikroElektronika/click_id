@@ -1,8 +1,8 @@
 ;
 ; Click Board Manifest Source for
-; MPU 9DOF Click
-; https://www.mikroe.com/mpu-9dof-click
-;
+; Thermo 8 Click
+; https://www.mikroe.com/thermo-8-click
+; CONFIG_SENSORS_LM75
 
 # -----------------------------------------------------------
 #            Manifest Header
@@ -11,19 +11,17 @@
 version-major = 0
 version-minor = 1
 click-string-id = 1
-num-devices = 1
-int-gpio-state = 1
 
 # -----------------------------------------------------------
 #            Manifest String Descriptors
 # -----------------------------------------------------------
 ; click string (id can't be 0)
 [string-descriptor 1]
-string = mpu9dof
+string = thermo7
 
 ; driver string
 [string-descriptor 2]
-string = mpu9150
+string = mcp980x
 
 # -----------------------------------------------------------
 #            Manifest Device Descriptors
@@ -32,6 +30,4 @@ string = mpu9150
 [device-descriptor 1]
 driver-string-id = 2
 protocol = 2
-reg = 0x68
-irq = 1
-irq-type = 1
+reg = 0x18

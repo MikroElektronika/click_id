@@ -1,8 +1,8 @@
 ;
 ; Click Board Manifest Source for
-; Voltmeter Click
-; https://www.mikroe.com/voltmeter-click
-;
+; Thermo 17 Click
+; https://www.mikroe.com/thermo-17-click
+; CONFIG_SENSORS_LM90
 
 # -----------------------------------------------------------
 #            Manifest Header
@@ -11,17 +11,18 @@
 version-major = 0
 version-minor = 1
 click-string-id = 1
+int-gpio-state = 1
 
 # -----------------------------------------------------------
 #            Manifest String Descriptors
 # -----------------------------------------------------------
 ; click string (id can't be 0)
 [string-descriptor 1]
-string = voltmeter
+string = thermo7
 
 ; driver string
 [string-descriptor 2]
-string = mcp3201
+string = tmp451
 
 # -----------------------------------------------------------
 #            Manifest Device Descriptors
@@ -29,6 +30,7 @@ string = mcp3201
 ; device descriptor
 [device-descriptor 1]
 driver-string-id = 2
-mode=0
-max-speed-hz=1000000
-protocol = 1
+protocol = 2
+reg = 0x4c
+irq = 1
+irq-type = 8

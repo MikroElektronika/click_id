@@ -1,8 +1,8 @@
-;
+
 ; Click Board Manifest Source for
-; Smoke Click
-; https://www.mikroe.com/smoke-click
-;
+; WEATHER Click
+; https://www.mikroe.com/weather-click
+; CONFIG_BMP280_I2C
 
 # -----------------------------------------------------------
 #            Manifest Header
@@ -11,19 +11,17 @@
 version-major = 0
 version-minor = 1
 click-string-id = 1
-num-devices = 1
-int-gpio-state = 1
 
 # -----------------------------------------------------------
 #            Manifest String Descriptors
 # -----------------------------------------------------------
 ; click string (id can't be 0)
 [string-descriptor 1]
-string = smoke
+string = weather
 
 ; driver string
 [string-descriptor 2]
-string = max30105
+string = bme280
 
 # -----------------------------------------------------------
 #            Manifest Device Descriptors
@@ -32,6 +30,4 @@ string = max30105
 [device-descriptor 1]
 driver-string-id = 2
 protocol = 2
-reg = 0x57
-irq = 1
-irq-type = 2
+reg = 0x76
