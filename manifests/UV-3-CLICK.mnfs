@@ -1,37 +1,49 @@
 ;
-; Click Board Manifest Source for
 ; UV 3 Click
 ; https://www.mikroe.com/uv-3-click
 ; CONFIG_VEML6070
+;
+; Copyright 2020 BeagleBoard.org Foundation
+; Copyright 2020 Texas Instruments
+;
 
-# -----------------------------------------------------------
-#            Manifest Header
-# -----------------------------------------------------------
 [manifest-header]
 version-major = 0
 version-minor = 1
-click-string-id = 1
-num-devices = 1
-int-gpio-state = 1
 
-# -----------------------------------------------------------
-#            Manifest String Descriptors
-# -----------------------------------------------------------
-; click string (id can't be 0)
+[interface-descriptor]
+vendor-string-id = 1
+product-string-id = 2
+
 [string-descriptor 1]
-string = UV3
+string = Mikroelektronika
 
-; driver string
 [string-descriptor 2]
-string = veml6070
+string = UV 3 Click
 
-# -----------------------------------------------------------
-#            Manifest Device Descriptors
-# -----------------------------------------------------------
-; device descriptor
+[mikrobus-descriptor]
+num-devices = 1
+int-gpio = 1
+rst-gpio = 0
+pwm-gpio = 0
+
+[bundle-descriptor 1]
+class = 0x0a
+
+[cport-descriptor 1]
+bundle = 1
+protocol = 0x02
+
+[cport-descriptor 2]
+bundle = 1
+protocol = 0x03
+
 [device-descriptor 1]
-driver-string-id = 2
-protocol = 2
+driver-string-id = 3
+protocol = 0x02
 reg = 0x38
 irq = 1
-irq-type = 8
+irq-type = 0x08
+
+[string-descriptor 3]
+string = veml6070
