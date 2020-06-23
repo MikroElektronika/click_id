@@ -123,9 +123,7 @@ def main():
             if (row[2] != "OKAY"):
                 mnfsname += "-NOT-TESTED"
             with open(mnfsname + ".mnfs", 'w') as manifest_source:
-                manifest_source.write(mnfs)
-
-    
+                manifest_source.write(mnfs)  
 
 if __name__ == "__main__":
     main()
