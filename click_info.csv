@@ -81,7 +81,7 @@ Temp Log 4 Click,https://www.mikroe.com/temp-log-4-click,TESTING,CONFIG_SENSORS_
 Thermo 17 Click,https://www.mikroe.com/thermo-17-click,TESTING,CONFIG_SENSORS_LM90,I2C_IRQ,UNUSED,UNUSED,INPUT,tmp451,0x4c,,,MIKROBUS_GPIO_INT,IRQ_TYPE_LEVEL_LOW
 Thermo 3 Click,https://www.mikroe.com/thermo-3-click,OKAY,CONFIG_SENSORS_TMP102,SIMPLE_I2C,UNUSED,UNUSED,UNUSED,tmp102,0x48,,,,
 Thermo 7 Click,https://www.mikroe.com/thermo-7-click,OKAY,CONFIG_SENSORS_LM75,SIMPLE_I2C,UNUSED,UNUSED,UNUSED,mcp980x,0x48,,,,
-Thermo 8 Click,https://www.mikroe.com/thermo-8-click,OKAY,CONFIG_SENSORS_LM75,SIMPLE_I2C,UNUSED,UNUSED,UNUSED,mcp980x,0x48,,,,
+Thermo 8 Click,https://www.mikroe.com/thermo-8-click,OKAY,CONFIG_SENSORS_LM75,SIMPLE_I2C,UNUSED,UNUSED,UNUSED,mcp980x,0x18,,,,
 THERMO CLICK,https://www.mikroe.com/thermo-click,OKAY,CONFIG_MAXIM_THERMOCOUPLE,SIMPLE_SPI,UNUSED,UNUSED,UNUSED,max31855k,,SPI_MODE_0,1000000,,
 Thunder Click,https://www.mikroe.com/thunder-click,OKAY,CONFIG_AS3935,SPI_IRQ,UNUSED,UNUSED,UNUSED,as3935,,SPI_MODE_1,400000,MIKROBUS_GPIO_INT,IRQ_TYPE_EDGE_RISING
 UV 3 Click,https://www.mikroe.com/uv-3-click,OKAY,CONFIG_VEML6070 ,I2C_IRQ,UNUSED,UNUSED,INPUT,veml6070,0x38,,,MIKROBUS_GPIO_INT,IRQ_TYPE_LEVEL_LOW
