@@ -66,12 +66,12 @@ def generate_string_descriptor(id,string):
 
 def generate_bundle_descriptor(id,cls):
     r = "[bundle-descriptor {}]\n".format(id)
-    r += "class = {}\n\n".format(cls)
+    r += "class = {:#x}\n\n".format(cls)
     return r
 def generate_cport_descriptor(id, bundle, protocol):
     r = "[cport-descriptor {}]\n".format(id)
-    r += "bundle = {:#x}\n".format(bundle)
-    r += "protocol = {}\n\n".format(protocol)
+    r += "bundle = {}\n".format(bundle)
+    r += "protocol = {:#x}\n\n".format(protocol)
     return r
 
 def generate_device_descriptor(id, driverstr, protocol, reg, irq, irq_type, mode, speed):

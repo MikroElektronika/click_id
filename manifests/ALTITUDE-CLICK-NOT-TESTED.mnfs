@@ -22,11 +22,11 @@ string = MikroElektronika
 string = Altitude Click
 
 [bundle-descriptor 1]
-class = 10
+class = 0xa
 
 [cport-descriptor 1]
-bundle = 0x1
-protocol = 3
+bundle = 1
+protocol = 0x3
 
 [device-descriptor 1]
 driver-string-id = 3
