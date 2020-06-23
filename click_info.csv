@@ -70,7 +70,7 @@ Proximity Click,https://www.mikroe.com/proximity-click,TESTING,CONFIG_VCNL4000,S
 RF Meter Click,https://www.mikroe.com/rf-meter-click-click,TESTING,CONFIG_MCP320X,SIMPLE_SPI,UNUSED,UNUSED,UNUSED,mcp3201,,SPI_MODE_0,1000000,,
 RMS to DC Click,https://www.mikroe.com/rms-to-dc-click,TESTING,CONFIG_MCP320X,SIMPLE_I2C,UNUSED,UNUSED,UNUSED,mcp3221,0x4d,,,,
 RTC 6 Click,https://www.mikroe.com/rtc6-click,OKAY,CONFIG_RTC_DRV_DS1307,SIMPLE_I2C,UNUSED,UNUSED,UNUSED,mcp7941x,0x6f,,,,
-SHT Click,https://www.mikroe.com/sht-click,TESTING,CONFIG_SENSORS_SHT3x,SIMPLE_I2C,UNUSED,UNUSED,UNUSED,sht3x,0x4a,,,,
+SHT Click,https://www.mikroe.com/sht-click,TESTING,CONFIG_SENSORS_SHT3x,SIMPLE_I2C,UNUSED,UNUSED,UNUSED,sht3x,0x44,,,,
 Smoke Click,https://www.mikroe.com/smoke-click,TESTING,CONFIG_MAX30102,I2C_IRQ,UNUSED,UNUSED,INPUT,max30105,0x57,,,MIKROBUS_GPIO_INT,IRQ_TYPE_EDGE_FALLING
 Temp Hum 11 Click,https://www.mikroe.com/temp-hum-11-click,TESTING,CONFIG_HDC100X,SIMPLE_I2C,UNUSED,UNUSED,UNUSED,hdc1080,0x40,,,,
 TEMP HUM 4 Click,https://www.mikroe.com/temp-hum-4-click,TESTING,CONFIG_HDC100X,SIMPLE_I2C,UNUSED,UNUSED,INPUT,hdc1010,0x43,,,MIKROBUS_GPIO_INT,IRQ_TYPE_EDGE_FALLING
