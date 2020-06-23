@@ -31,7 +31,7 @@ protocol = 0x3
 [device-descriptor 1]
 driver-string-id = 3
 protocol = 0x2
-reg = 0x42
+reg = 0x40
 
 [string-descriptor 3]
 string = hdc1080

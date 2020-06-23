@@ -72,7 +72,7 @@ RMS to DC Click,https://www.mikroe.com/rms-to-dc-click,TESTING,CONFIG_MCP320X,SI
 RTC 6 Click,https://www.mikroe.com/rtc6-click,OKAY,CONFIG_RTC_DRV_DS1307,SIMPLE_I2C,UNUSED,UNUSED,UNUSED,mcp7941x,0x6f,,,,
 SHT Click,https://www.mikroe.com/sht-click,TESTING,CONFIG_SENSORS_SHT3x,SIMPLE_I2C,UNUSED,UNUSED,UNUSED,sht3x,0x4a,,,,
 Smoke Click,https://www.mikroe.com/smoke-click,TESTING,CONFIG_MAX30102,I2C_IRQ,UNUSED,UNUSED,INPUT,max30105,0x57,,,MIKROBUS_GPIO_INT,IRQ_TYPE_EDGE_FALLING
-Temp Hum 11 Click,https://www.mikroe.com/temp-hum-11-click,TESTING,CONFIG_HDC100X,SIMPLE_I2C,UNUSED,UNUSED,UNUSED,hdc1080,0x42,,,,
+Temp Hum 11 Click,https://www.mikroe.com/temp-hum-11-click,TESTING,CONFIG_HDC100X,SIMPLE_I2C,UNUSED,UNUSED,UNUSED,hdc1080,0x40,,,,
 TEMP HUM 4 Click,https://www.mikroe.com/temp-hum-4-click,TESTING,CONFIG_HDC100X,SIMPLE_I2C,UNUSED,UNUSED,INPUT,hdc1010,0x43,,,MIKROBUS_GPIO_INT,IRQ_TYPE_EDGE_FALLING
 Temp Hum 7 Click,https://www.mikroe.com/temp-hum-7-click,TESTING,CONFIG_SI7020,SIMPLE_I2C,UNUSED,UNUSED,UNUSED,si7020,0x40,,,,
 Temp Hum 9 Click,https://www.mikroe.com/temphum-9-click,TESTING,CONFIG_SENSORS_SHTC1,SIMPLE_I2C,UNUSED,UNUSED,UNUSED,shtc3,0x70,,,,
