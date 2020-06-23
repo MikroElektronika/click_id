@@ -1,7 +1,7 @@
 ;
-; THUNDER CLICK
-; https://www.mikroe.com/thunder-click
-; CONFIG_AS3935
+; PRESSURE 11 CLICK
+; https://www.mikroe.com/pressure-11-click
+; CONFIG_IIO_ST_PRESS_I2C
 ;
 ; Copyright 2020 BeagleBoard.org Foundation 
 ; Copyright 2020 Texas Instruments 
@@ -19,7 +19,13 @@ product-string-id = 2
 string = MikroElektronika
 
 [string-descriptor 2]
-string = Thunder Click
+string = Pressure 11 Click
+
+[mikrobus-descriptor]
+num-devices = 1
+int-gpio = 1
+rst-gpio = 0
+pwm-gpio = 0
 
 [bundle-descriptor 1]
 class = 10
@@ -30,16 +36,15 @@ protocol = 2
 
 [cport-descriptor 2]
 bundle = 0x1
-protocol = 11
+protocol = 3
 
 [device-descriptor 1]
 driver-string-id = 3
-protocol = 0x1
-mode = 0x1
-max-speed-hz = 400000
+protocol = 0x2
+reg = 0x5d
 irq = 1
 irq-type = 0x1
 
 [string-descriptor 3]
-string = as3935
+string = lps33hw
 

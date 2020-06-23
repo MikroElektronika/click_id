@@ -1,7 +1,7 @@
 ;
-; THUNDER CLICK
-; https://www.mikroe.com/thunder-click
-; CONFIG_AS3935
+; AMMETER CLICK
+; https://www.mikroe.com/ammeter-click
+; CONFIG_MCP320X
 ;
 ; Copyright 2020 BeagleBoard.org Foundation 
 ; Copyright 2020 Texas Instruments 
@@ -19,27 +19,21 @@ product-string-id = 2
 string = MikroElektronika
 
 [string-descriptor 2]
-string = Thunder Click
+string = Ammeter Click
 
 [bundle-descriptor 1]
 class = 10
 
 [cport-descriptor 1]
 bundle = 0x1
-protocol = 2
-
-[cport-descriptor 2]
-bundle = 0x1
 protocol = 11
 
 [device-descriptor 1]
 driver-string-id = 3
 protocol = 0x1
-mode = 0x1
-max-speed-hz = 400000
-irq = 1
-irq-type = 0x1
+mode = 0x0
+max-speed-hz = 1000000
 
 [string-descriptor 3]
-string = as3935
+string = mcp3201
 

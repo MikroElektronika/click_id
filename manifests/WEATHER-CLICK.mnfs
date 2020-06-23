@@ -1,10 +1,10 @@
 ;
-; WEATHER Click
+; WEATHER CLICK
 ; https://www.mikroe.com/weather-click
 ; CONFIG_BMP280_I2C
 ;
-; Copyright 2020 BeagleBoard.org Foundation
-; Copyright 2020 Texas Instruments
+; Copyright 2020 BeagleBoard.org Foundation 
+; Copyright 2020 Texas Instruments 
 ;
 
 [manifest-header]
@@ -16,21 +16,21 @@ vendor-string-id = 1
 product-string-id = 2
 
 [string-descriptor 1]
-string = Mikroelektronika
+string = MikroElektronika
 
 [string-descriptor 2]
 string = Weather Click
 
 [bundle-descriptor 1]
-class = 0x0a
+class = 10
 
 [cport-descriptor 1]
-bundle = 1
-protocol = 0x03
+bundle = 0x1
+protocol = 3
 
 [device-descriptor 1]
 driver-string-id = 3
-protocol = 0x02
+protocol = 0x2
 reg = 0x76
 
 [string-descriptor 3]
