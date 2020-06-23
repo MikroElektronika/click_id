@@ -39,7 +39,7 @@ GeoMagnetic Click,https://www.mikroe.com/geomagnetic-click,TESTING,CONFIG_BMC150
 GSR Click,https://www.mikroe.com/gsr-click,TESTING,CONFIG_MCP320X,SIMPLE_SPI,UNUSED,UNUSED,UNUSED,mcp3201,,SPI_MODE_0,1000000,,
 GYRO 2 Click,https://www.mikroe.com/gyro-2-click,TESTING,CONFIG_FXAS21002C_I2C,I2C_IRQ,UNUSED,UNUSED,INPUT,fxas21002c,0x20,,,MIKROBUS_GPIO_INT,IRQ_TYPE_EDGE_RISING
 Hall Current 2 Click,https://www.mikroe.com/hall-current-2-click,TESTING,CONFIG_SENSORS_MCP3021,SIMPLE_I2C,UNUSED,UNUSED,UNUSED,mcp3221,0x4d,,,,
-Hall Current 3 Click,https://www.mikroe.com/hall-current-3-click,TESTING,CONFIG_MCP320X,SIMPLE_SPI,UNUSED,UNUSED,UNUSED,mcp3201,,SPI_MODE_0,1000000,,
+Hall Current 3 Click,https://www.mikroe.com/hall-current-3-click,TESTING,CONFIG_SENSORS_MCP3021,SIMPLE_I2C,UNUSED,UNUSED,UNUSED,mcp3221,0x4d,,,,
 Hall Current 4 Click,https://www.mikroe.com/hall-current-4-click,TESTING,CONFIG_SENSORS_MCP3021,SIMPLE_I2C,UNUSED,UNUSED,UNUSED,mcp3221,0x4d,,,,
 HDC1000 Click,https://www.mikroe.com/hdc1000-click,TESTING,CONFIG_HDC100X,SIMPLE_I2C,UNUSED,UNUSED,UNUSED,hdc1000,0x42,,,,
 Heart Rate 3 Click,https://www.mikroe.com/heart-rate-3-click,TESTING,CONFIG_AFE4404,I2C_IRQ,UNUSED,UNUSED,INPUT,afe4404,0x58,,,MIKROBUS_GPIO_INT,IRQ_TYPE_EDGE_RISING

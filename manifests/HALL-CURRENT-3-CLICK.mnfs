@@ -1,7 +1,7 @@
 ;
 ; HALL CURRENT 3 CLICK
 ; https://www.mikroe.com/hall-current-3-click
-; CONFIG_MCP320X
+; CONFIG_SENSORS_MCP3021
 ;
 ; Copyright 2020 BeagleBoard.org Foundation 
 ; Copyright 2020 Texas Instruments 
@@ -26,14 +26,13 @@ class = 0xa
 
 [cport-descriptor 1]
 bundle = 1
-protocol = 0xb
+protocol = 0x3
 
 [device-descriptor 1]
 driver-string-id = 3
-protocol = 0x1
-mode = 0x0
-max-speed-hz = 1000000
+protocol = 0x2
+reg = 0x4d
 
 [string-descriptor 3]
-string = mcp3201
+string = mcp3221
 
