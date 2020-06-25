@@ -31,7 +31,7 @@ protocol = 0x3
 [device-descriptor 1]
 driver-string-id = 3
 protocol = 0x2
-reg = 0x49
+reg = 0x48
 
 [string-descriptor 3]
 string = ads1115
