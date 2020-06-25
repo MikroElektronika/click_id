@@ -24,7 +24,7 @@ Ambient 5 Click,https://www.mikroe.com/ambient-5-click,TESTING,CONFIG_VEML6030,I
 Ammeter Click,https://www.mikroe.com/ammeter-click,TESTING,CONFIG_MCP320X,SIMPLE_SPI,UNUSED,UNUSED,UNUSED,mcp3201,,SPI_MODE_0,1000000,,
 Color 2 Click,https://www.mikroe.com/color-2-click,TESTING,CONFIG_ISL29125,SIMPLE_I2C,UNUSED,UNUSED,UNUSED,isl29125,0x88,,,,
 Color 7 Click,https://www.mikroe.com/color-7-click,TESTING,CONFIG_TCS3472,SIMPLE_I2C,UNUSED,UNUSED,UNUSED,tcs3472,0x29,,,,
-Compass Click,https://www.mikroe.com/compass-click,TESTING,CONFIG_IIO_ST_MAGN_I2C_3AXIS,I2C_IRQ,UNUSED,UNUSED,UNUSED,lsm303dlhc_magn,0x19,,,MIKROBUS_GPIO_INT,IRQ_TYPE_EDGE_RISING
+Compass Click,https://www.mikroe.com/compass-click,TESTING,CONFIG_IIO_ST_MAGN_I2C_3AXIS,I2C_IRQ,UNUSED,UNUSED,INPUT,lsm303dlhc_magn,0x1e,,,MIKROBUS_GPIO_INT,IRQ_TYPE_EDGE_RISING
 Current Click,https://www.mikroe.com/current-click,TESTING,CONFIG_MCP320X,SIMPLE_SPI,UNUSED,UNUSED,UNUSED,mcp3201,,SPI_MODE_0,1000000,,
 DAC 3 Click,https://www.mikroe.com/dac3-click,TESTING,CONFIG_MCP4725,SIMPLE_I2C,UNUSED,UNUSED,UNUSED,mcp4726,0x60,,,,
 DAC Click,https://www.mikroe.com/dac-click,TESTING,CONFIG_MCP4922,SIMPLE_SPI,UNUSED,UNUSED,UNUSED,mcp4922,,SPI_MODE_0,1000000,,
