@@ -59,7 +59,7 @@ OLEDB Click,https://www.mikroe.com/oled-b-click,FAIL,CONFIG_FB_TFT_SSD1306,SIMPL
 OLEDC Click,https://www.mikroe.com/oled-c-click,FAIL,CONFIG_FB_TFT_SSD1351,SIMPLE_SPI,UNUSED,UNUSED,HIGH,fb_ssd1351,,SPI_MODE_0,6000000,,
 OLEDW Click,https://www.mikroe.com/oled-w-click,FAIL,CONFIG_FB_TFT_SSD1306,SIMPLE_SPI,UNUSED,UNUSED,HIGH,fb_ssd1306,,SPI_MODE_0,6000000,,
 Ozone 2 Click,https://www.mikroe.com/ozone-2-click,TESTING,CONFIG_MCP320X,SIMPLE_SPI,UNUSED,UNUSED,UNUSED,mcp3551,,SPI_MODE_0,1000000,,
-Pressure 11 Click,https://www.mikroe.com/pressure-11-click,TESTING,CONFIG_IIO_ST_PRESS_I2C,I2C_IRQ,UNUSED,UNUSED,INPUT,lps33hw,0x5d,,,MIKROBUS_GPIO_INT,IRQ_TYPE_EDGE_RISING
+Pressure 11 Click,https://www.mikroe.com/pressure-11-click,TESTING,CONFIG_IIO_ST_PRESS_I2C,I2C_IRQ,UNUSED,UNUSED,INPUT,lps33hw,0x5c,,,MIKROBUS_GPIO_INT,IRQ_TYPE_EDGE_RISING
 Pressure 3 Click,https://www.mikroe.com/pressure-3-click,TESTING,CONFIG_DPS310,SIMPLE_I2C,UNUSED,UNUSED,UNUSED,dps310,0x76,,,,
 Pressure 7 Click,https://www.mikroe.com/pressure-7-click,TESTING,CONFIG_MS5637,SIMPLE_I2C,UNUSED,UNUSED,UNUSED,ms5837,0x76,,,,
 Pressure Click,https://www.mikroe.com/pressure-click,TESTING,CONFIG_IIO_ST_PRESS,SIMPLE_I2C,UNUSED,UNUSED,UNUSED,lps331ap,0x5d,,,,
