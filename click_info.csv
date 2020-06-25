@@ -22,7 +22,7 @@ Ambient 2 Click,https://www.mikroe.com/ambient-2-click,TESTING,CONFIG_OPT3001,I2
 Ambient 4 Click,https://www.mikroe.com/ambient-4-click,TESTING,CONFIG_BH1750,SIMPLE_I2C,UNUSED,UNUSED,UNUSED,bh1721,0x23,,,,
 Ambient 5 Click,https://www.mikroe.com/ambient-5-click,TESTING,CONFIG_VEML6030,I2C_IRQ,UNUSED,UNUSED,UNUSED,veml6030,0x10,,,MIKROBUS_GPIO_INT,IRQ_TYPE_LEVEL_LOW
 Ammeter Click,https://www.mikroe.com/ammeter-click,TESTING,CONFIG_MCP320X,SIMPLE_SPI,UNUSED,UNUSED,UNUSED,mcp3201,,SPI_MODE_0,1000000,,
-Color 2 Click,https://www.mikroe.com/color-2-click,TESTING,CONFIG_ISL29125,SIMPLE_I2C,UNUSED,UNUSED,UNUSED,isl29125,0x88,,,,
+Color 2 Click,https://www.mikroe.com/color-2-click,TESTING,CONFIG_ISL29125,SIMPLE_I2C,UNUSED,UNUSED,UNUSED,isl29125,0x44,,,,
 Color 7 Click,https://www.mikroe.com/color-7-click,TESTING,CONFIG_TCS3472,SIMPLE_I2C,UNUSED,UNUSED,UNUSED,tcs3472,0x29,,,,
 Compass Click,https://www.mikroe.com/compass-click,TESTING,CONFIG_IIO_ST_MAGN_I2C_3AXIS,I2C_IRQ,UNUSED,UNUSED,INPUT,lsm303dlhc_magn,0x1e,,,MIKROBUS_GPIO_INT,IRQ_TYPE_EDGE_RISING
 Current Click,https://www.mikroe.com/current-click,TESTING,CONFIG_MCP320X,SIMPLE_SPI,UNUSED,UNUSED,UNUSED,mcp3201,,SPI_MODE_0,1000000,,
