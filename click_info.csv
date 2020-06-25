@@ -41,7 +41,7 @@ GYRO 2 Click,https://www.mikroe.com/gyro-2-click,TESTING,CONFIG_FXAS21002C_I2C,I
 Hall Current 2 Click,https://www.mikroe.com/hall-current-2-click,TESTING,CONFIG_SENSORS_MCP3021,SIMPLE_I2C,UNUSED,UNUSED,UNUSED,mcp3221,0x4d,,,,
 Hall Current 3 Click,https://www.mikroe.com/hall-current-3-click,TESTING,CONFIG_SENSORS_MCP3021,SIMPLE_I2C,UNUSED,UNUSED,UNUSED,mcp3221,0x4d,,,,
 Hall Current 4 Click,https://www.mikroe.com/hall-current-4-click,TESTING,CONFIG_SENSORS_MCP3021,SIMPLE_I2C,UNUSED,UNUSED,UNUSED,mcp3221,0x4d,,,,
-HDC1000 Click,https://www.mikroe.com/hdc1000-click,TESTING,CONFIG_HDC100X,SIMPLE_I2C,UNUSED,UNUSED,UNUSED,hdc1000,0x42,,,,
+HDC1000 Click,https://www.mikroe.com/hdc1000-click,TESTING,CONFIG_HDC100X,SIMPLE_I2C,UNUSED,UNUSED,UNUSED,hdc1000,0x40,,,,
 Heart Rate 3 Click,https://www.mikroe.com/heart-rate-3-click,TESTING,CONFIG_AFE4404,I2C_IRQ,UNUSED,UNUSED,INPUT,afe4404,0x58,,,MIKROBUS_GPIO_INT,IRQ_TYPE_EDGE_RISING
 Heart Rate 4 Click,https://www.mikroe.com/heart-rate-4-click,TESTING,CONFIG_MAX30102,I2C_IRQ,UNUSED,UNUSED,UNUSED,max30102,0x57,,,MIKROBUS_GPIO_INT,IRQ_TYPE_EDGE_FALLING
 Heart Rate 5 Click,https://www.mikroe.com/heart-rate-5-click,TESTING,CONFIG_AFE4404,I2C_IRQ,UNUSED,UNUSED,INPUT,afe4404,0x58,,,MIKROBUS_GPIO_INT,IRQ_TYPE_EDGE_RISING
