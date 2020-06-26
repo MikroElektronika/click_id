@@ -21,6 +21,12 @@ string = MikroElektronika
 [string-descriptor 2]
 string = Proximity 10 Click
 
+[mikrobus-descriptor]
+num-devices = 1
+rst-gpio = 0
+int-gpio = 1
+pwm-gpio = 0
+
 [bundle-descriptor 1]
 class = 0xa
 
@@ -32,6 +38,8 @@ protocol = 0x3
 driver-string-id = 3
 protocol = 0x2
 reg = 0x5a
+irq = 1
+irq-type = 2
 
 [string-descriptor 3]
 string = si1143

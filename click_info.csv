@@ -63,7 +63,7 @@ Pressure 11 Click,https://www.mikroe.com/pressure-11-click,TESTING,CONFIG_IIO_ST
 Pressure 3 Click,https://www.mikroe.com/pressure-3-click,TESTING,CONFIG_DPS310,SIMPLE_I2C,UNUSED,UNUSED,UNUSED,dps310,0x76,,,,
 Pressure 7 Click,https://www.mikroe.com/pressure-7-click,TESTING,CONFIG_MS5637,SIMPLE_I2C,UNUSED,UNUSED,UNUSED,ms5837,0x76,,,,
 Pressure Click,https://www.mikroe.com/pressure-click,TESTING,CONFIG_IIO_ST_PRESS,SIMPLE_I2C,UNUSED,UNUSED,UNUSED,lps331ap,0x5d,,,,
-Proximity 10 Click,https://www.mikroe.com/proximity-10-click,TESTING,CONFIG_SI1145,SIMPLE_I2C,UNUSED,UNUSED,UNUSED,si1143,0x5a,,,,
+Proximity 10 Click,https://www.mikroe.com/proximity-10-click,TESTING,CONFIG_SI1145,I2C_IRQ,UNUSED,UNUSED,INPUT,si1143,0x5a,,,MIKROBUS_GPIO_INT,IRQ_TYPE_EDGE_FALLING
 Proximity 5 Click,https://www.mikroe.com/proximity-5-click,TESTING,CONFIG_VCNL4035,I2C_IRQ,UNUSED,UNUSED,INPUT,vcnl4035,0x60,,,MIKROBUS_GPIO_INT,IRQ_TYPE_LEVEL_LOW
 Proximity 9 Click,https://www.mikroe.com/proximity-9-click,TESTING,CONFIG_VCNL4000,SIMPLE_I2C,UNUSED,UNUSED,UNUSED,vcnl4040,0x60,,,,
 Proximity Click,https://www.mikroe.com/proximity-click,TESTING,CONFIG_VCNL4000,SIMPLE_I2C,UNUSED,UNUSED,UNUSED,vcnl4010,0x13,,,,
