@@ -36,12 +36,13 @@ protocol = 0x2
 
 [cport-descriptor 2]
 bundle = 1
-protocol = 0x3
+protocol = 0xa
 
 [device-descriptor 1]
 driver-string-id = 3
-protocol = 0x2
-reg = 0x6b
+protocol = 0x1
+mode = 0
+max-speed-hz = 1000000
 irq = 1
 irq-type = 0x1
 
