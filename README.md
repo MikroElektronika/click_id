@@ -12,6 +12,67 @@ For creating a manifest blob(.mnfb) from a manifest file(.mnfs) :
  manifesto -i /path/to/input.mnfs -o /path/to/output.mnfb
 ```
 
+## Install
+
+For generating the manifest blobs from all the manifest sources in the manifest/ directory , run the installation script:
+
+```
+sh install.sh
+```
+
+## Reproducing the Results using PocketBeagle 
+
+Flash the testing image with the mikrobus driver available at [https://rcn-ee.net/rootfs/bb.org/testing/2020-06-24/buster-iot-mikrobus/bone-debian-10.4-iot-mikrobus-armhf-2020-06-24-4gb.img.xz](https://rcn-ee.net/rootfs/bb.org/testing/2020-06-24/buster-iot-mikrobus/bone-debian-10.4-iot-mikrobus-armhf-2020-06-24-4gb.img.xz) using [Etcher](https://www.balena.io/etcher/), then to load the mikrobus driver: 
+```
+sudo modprobe mikrobus
+```
+Then pass the configuration array to attach the mikrobus port(s) with the mikrobus driver(need to be done as root), if trying out on a PocketBeagle with Techlab Cape then only the mikroBUS port 1 need to be attached, if not using a Techlab Cape see [PocketBeagle Wiki](https://github.com/beagleboard/pocketbeagle/wiki/System-Reference-Manual#72-mikrobus-socket-connections) to find out the mikroBUS ports position:
+```
+sudo su
+printf "%b" '\x01\x00\x00\x59\x32\x17' > /sys/bus/mikrobus/add_port	(mikrobus port 1) --> Techlab Cape mikrobus Port
+printf "%b" '\x02\x01\x00\x2d\x6e\x1a' > /sys/bus/mikrobus/add_port 	(mikrobus port 2)
+```
+Then clone the manifesto repository and checkout the mikrobusv2 branch and create all the manifest binaries:
+```
+git clone https://github.com/vaishnav98/manifesto.git
+cd manifesto
+git checkout mikrobusv2
+./install.sh (will take about a minute)
+```
+The click can now be plugged in to the mikrobus port and the manifest binary can be passed to the mikrobus driver to load the click device driver(s), the manifests under manifests/ directory is marked as NOT-TESTED for clicks that are yet to be tested,rest of the manifests will have their latest commit message  == the testing logs and click usage, for exampe see the [RTC 6 Click Manifest Source](https://github.com/vaishnav98/manifesto/blob/mikrobusv2/manifests/RTC-6-CLICK.mnfs) :
+```
+root@beaglebone:/home/debian/manifesto# cat manifests/RTC-6-CLICK-NOT-TESTED.mnfb >  /sys/class/mikrobus-port/mikrobus-0/new_device
+root@beaglebone:/home/debian/manifesto# dmesg
+[ 5074.789367] mikrobus_manifest: Device 1 , number of properties=0 , number of gpio resources=0
+[ 5074.789384] mikrobus_manifest:  RTC 6 Click manifest parsed with 1 device(s)
+[ 5074.789394] mikrobus:  registering device : mcp7941x
+[ 5074.800576] rtc-ds1307 1-006f: registered as rtc1
+root@beaglebone:/home/debian/manifesto# cat /sys/class/rtc/rtc1/
+date           dev            device/        hctosys        max_user_freq  name           power/         since_epoch    subsystem/     time           uevent
+root@beaglebone:/home/debian/manifesto# cat /sys/class/rtc/rtc1/time
+12:03:19
+root@beaglebone:/home/debian/manifesto# cat /sys/class/rtc/rtc1/date
+2020-06-23
+root@beaglebone:/home/debian/manifesto# echo 0 >  /sys/class/mikrobus-port/mikrobus-0/delete_device
+root@beaglebone:/home/debian/manifesto# dmesg
+[ 5074.789367] mikrobus_manifest: Device 1 , number of properties=0 , number of gpio resources=0
+[ 5074.789384] mikrobus_manifest:  RTC 6 Click manifest parsed with 1 device(s)
+[ 5074.789394] mikrobus:  registering device : mcp7941x
+[ 5074.800576] rtc-ds1307 1-006f: registered as rtc1
+[ 5106.657836] mikrobus:  removing device : mcp7941x
+```
+### Loading Clicks (Debug Interface run as root)
+
+```
+cat manifests/CLICK_NAME.mnfb >  /sys/class/mikrobus-port/mikrobus-0/new_device
+cat manifests/WEATHER-CLICK.mnfb >  /sys/class/mikrobus-port/mikrobus-0/new_device
+```
+### Unloading the Clicks (Debug Interface run as root)
+
+```
+echo 0 >  /sys/class/mikrobus-port/mikrobus-0/delete_device
+```
+
 ### Writing a Manifest Blob to EEPROM
 
 For writing a manifest blob(.mnfb) created from a manifest file(.mnfs) to an EEPROM (the EEPROM probe is specific to the type of EEPROM) :
@@ -20,97 +81,3 @@ echo 24c32 0x57 > /sys/bus/i2c/devices/i2c-1/new_device
 ./manifesto -i manifests/mpu9dof.mnfs -o /sys/bus/nvmem/devices/1-00570/nvmem
 echo 0x57 > /sys/bus/i2c/devices/i2c-1/delete_device
 ```
-
-## Install
-
-For generating the manifest blobs from all the manifest sources in the manifest/ directory , run the installation script:
-
-```
-sh install.sh
-```
-## Loading Clicks (Debug Interface run as root)
-
-```
-cat manifests/mpu9dof.mnfb >  /sys/class/mikrobus-port/mikrobus-0/new_device
-```
-## Unloading the Clicks (Debug Interface run as root)
-
-```
-echo 0 >  /sys/class/mikrobus-port/mikrobus-0/delete_device
-```
-
-## Adding Support for new Click Boards
- 
-Adding support for new click board normally just requires the addition of the new manifest source, the fields in a mikrobus manifest are explained as below:
-```
-;
-; Click Board Manifest Source for
-; ETH Click
-; https://www.mikroe.com/eth-click
-;
-
-# -----------------------------------------------------------
-#            Manifest Header
-# -----------------------------------------------------------
-[manifest-header]
-version-major = 0
-version-minor = 1
-click-string-id = 1
-reset-gpio-state = 2
-int-gpio-state = 1
-
-# -----------------------------------------------------------
-#            Manifest String Descriptors
-# -----------------------------------------------------------
-; click string (id can't be 0)
-[string-descriptor 1]
-string = eth
-
-; driver string
-[string-descriptor 2]
-string = enc28j60
-
-# -----------------------------------------------------------
-#            Manifest Device Descriptor Section
-# -----------------------------------------------------------
-; device descriptor
-[device-descriptor 1]
-driver-string-id = 2
-protocol = 1
-mode=0
-max-speed-hz=16000000
-irq = 1
-irq-type = 2
-```
-* lines starting with ```;``` or ```#``` are considered as comments
-* ```manifest-header``` : contains the details about the number of devices in the click , the click name string and the mikrobus gpio states required for the click board to work properly, the gpios whose state will be handled by the device driver , these are the possible states under the gpio state(Here in this example the reset line of the device is pulled low):
-```
-	MIKROBUS_GPIO_UNUSED = 0x00,
-	MIKROBUS_GPIO_INPUT = 0x01,
-	MIKROBUS_GPIO_OUTPUT_HIGH = 0x02,
-	MIKROBUS_GPIO_OUTPUT_LOW = 0x03,
- ```
-* ```device-descriptor``` : There can be multiple devices(sensors/actuators/display ..etc) inside a click device, this descriptor describe the device properties and the details required to instantiate the device on the corresponding bus(SPI/I2C/UART).
-* ```driver-string-id``` : the device driver name for the device
-* ```num-properties``` : number of custom properties required by the driver (provided to driver through Unified Property API)
-* ```num-gpio-resource``` : number of named gpios required by the driver (provided to driver through GPIO Lookup Tables)
-* ```mode``` : SPI Device Mode
-* ```protocol``` : type of bus the device works on , can have the following values :
-```
-	MIKROBUS_PROTOCOL_SPI = 0x01,
-	MIKROBUS_PROTOCOL_I2C = 0x02,
-	MIKROBUS_PROTOCOL_UART = 0x03,
-	MIKROBUS_PROTOCOL_SPI_GPIOCS = 0x04,
-	MIKROBUS_PROTOCOL_I2C_MUX = 0x05
-```
-* ```reg``` : address / Chip select number for the device
-* ```cs-gpio``` : CS GPIO used by the device, can have the values under the mikrobus GPIOs
-* ```irq``` : IRQ GPIO used by the device, can have the values under the mikrobus GPIOs :
-```
-	MIKROBUS_GPIO_INVALID = 0x00, (feature unused)
-	MIKROBUS_GPIO_INT = 0x01,
-	MIKROBUS_GPIO_RST = 0x02,
-	MIKROBUS_GPIO_PWM = 0x03,
-```
-* ```irq_type``` : Type of IRQ used by the device, same values as described in [linux/irq.h](https://elixir.bootlin.com/linux/v4.4/source/include/linux/irq.h#L80)
-
