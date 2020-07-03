@@ -88,7 +88,7 @@ UV 3 Click,https://www.mikroe.com/uv-3-click,OKAY,CONFIG_VEML6070 ,I2C_IRQ,UNUSE
 Vacuum Click,https://www.mikroe.com/vacuum-click,OKAY,CONFIG_SENSORS_MCP3021,SIMPLE_I2C,UNUSED,UNUSED,UNUSED,mcp3221,0x4d,,,,
 Voltmeter Click,https://www.mikroe.com/voltmeter-click,OKAY,CONFIG_MCP320X,SIMPLE_SPI,UNUSED,UNUSED,UNUSED,mcp3201,,SPI_MODE_0,1000000,,
 Weather Click,https://www.mikroe.com/weather-click,OKAY,CONFIG_BMP280_I2C,SIMPLE_I2C,UNUSED,UNUSED,UNUSED,bme280,0x76,,,,
-Pressure 4 Click,https://www.mikroe.com/pressure-4-click,TESTING,CONFIG_BMP280_SPI,SIMPLE_SPI,UNUSED,UNUSED,UNUSED,bmp280,,SPI_MODE_0,500000,,
+Pressure 4 Click,https://www.mikroe.com/pressure-4-click,OKAY,CONFIG_BMP280_SPI,SIMPLE_SPI,UNUSED,UNUSED,UNUSED,bmp280,,SPI_MODE_0,500000,,
 3D Hall 3 Click,https://www.mikroe.com/3d-hall-3-click,OKAY,CONFIG_IIO_ST_MAGN_I2C_3AXIS,I2C_IRQ,UNUSED,UNUSED,INPUT,lis2mdl,0x1e,,,MIKROBUS_GPIO_INT,IRQ_TYPE_EDGE_RISING
 Temp Log 6 Click,https://www.mikroe.com/temp-log-6-click,TESTING,CONFIG_SENSORS_MAX6642,I2C_IRQ,UNUSED,UNUSED,INPUT,max6642,0x94,,,MIKROBUS_GPIO_INT,IRQ_TYPE_EDGE_RISING
 Proximity 2 Click,https://www.mikroe.com/proximity-2-click,TESTING,CONFIG_MAX44000,I2C_IRQ,UNUSED,UNUSED,INPUT,max44000,0x95,,,MIKROBUS_GPIO_INT,IRQ_TYPE_LEVEL_LOW
