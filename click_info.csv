@@ -23,7 +23,7 @@ Ambient 4 Click,https://www.mikroe.com/ambient-4-click,TESTING,CONFIG_BH1750,SIM
 Ambient 5 Click,https://www.mikroe.com/ambient-5-click,OKAY,CONFIG_VEML6030,I2C_IRQ,UNUSED,UNUSED,INPUT,veml6030,0x10,,,MIKROBUS_GPIO_INT,IRQ_TYPE_LEVEL_LOW
 Ammeter Click,https://www.mikroe.com/ammeter-click,OKAY,CONFIG_MCP320X,SIMPLE_SPI,UNUSED,UNUSED,UNUSED,mcp3201,,SPI_MODE_0,1000000,,
 Color 2 Click,https://www.mikroe.com/color-2-click,OKAY,CONFIG_ISL29125,SIMPLE_I2C,UNUSED,UNUSED,UNUSED,isl29125,0x44,,,,
-Color 7 Click,https://www.mikroe.com/color-7-click,LIMITED_FEAT,CONFIG_TCS3472,SIMPLE_I2C,UNUSED,UNUSED,UNUSED,tcs3472,0x29,,,,
+Color 7 Click,https://www.mikroe.com/color-7-click,OKAY,CONFIG_TCS3472,SIMPLE_I2C,UNUSED,UNUSED,UNUSED,tcs3472,0x29,,,,
 Compass Click,https://www.mikroe.com/compass-click,OKAY,CONFIG_IIO_ST_MAGN_I2C_3AXIS,I2C_IRQ,UNUSED,UNUSED,INPUT,lsm303dlhc_magn,0x1e,,,MIKROBUS_GPIO_INT,IRQ_TYPE_EDGE_RISING
 Current Click,https://www.mikroe.com/current-click,OKAY,CONFIG_MCP320X,SIMPLE_SPI,UNUSED,UNUSED,UNUSED,mcp3201,,SPI_MODE_0,1000000,,
 DAC 3 Click,https://www.mikroe.com/dac3-click,TESTING,CONFIG_MCP4725,SIMPLE_I2C,UNUSED,UNUSED,UNUSED,mcp4726,0x60,,,,
@@ -53,7 +53,7 @@ LSM6DSL Click,https://www.mikroe.com/lsm6dsl-click,OKAY,CONFIG_IIO_ST_LSM6DSX_I2
 Magnetic Linear Click,https://www.mikroe.com/magnetic-linear-click,OKAY,CONFIG_SENSORS_MCP3021,SIMPLE_I2C,UNUSED,UNUSED,UNUSED,mcp3221,0x4d,,,,
 Magnetic Rotary Click,https://www.mikroe.com/magnetic-rotary-click,OKAY,CONFIG_MCP320X,SIMPLE_SPI,UNUSED,UNUSED,UNUSED,mcp3202,,SPI_MODE_0,1000000,,
 MICROSD Click,https://www.mikroe.com/microsd-click,OKAY,CONFIG_MMC_SPI,SIMPLE_SPI,UNUSED,UNUSED,UNUSED,mmc_spi,,SPI_MODE_0,50000000,,
-MPU 9DOF Click,https://www.mikroe.com/mpu-9dof-click,LIMITED_FEAT,CONFIG_INV_MPU6050_I2C,I2C_IRQ,UNUSED,UNUSED,INPUT,mpu9150,0x68,,,MIKROBUS_GPIO_INT,IRQ_TYPE_EDGE_RISING
+MPU 9DOF Click,https://www.mikroe.com/mpu-9dof-click,OKAY,CONFIG_INV_MPU6050_I2C,I2C_IRQ,UNUSED,UNUSED,INPUT,mpu9150,0x68,,,MIKROBUS_GPIO_INT,IRQ_TYPE_EDGE_RISING
 NO2 2 Click,https://www.mikroe.com/no2-2-click,OKAY,CONFIG_MCP320X,SIMPLE_SPI,UNUSED,UNUSED,UNUSED,mcp3201,,SPI_MODE_0,1000000,,
 OLEDB Click,https://www.mikroe.com/oled-b-click,FAIL,CONFIG_FB_TFT_SSD1306,SIMPLE_SPI,UNUSED,UNUSED,HIGH,fb_ssd1306,,SPI_MODE_0,6000000,,
 OLEDC Click,https://www.mikroe.com/oled-c-click,FAIL,CONFIG_FB_TFT_SSD1351,SIMPLE_SPI,UNUSED,UNUSED,HIGH,fb_ssd1351,,SPI_MODE_0,6000000,,
