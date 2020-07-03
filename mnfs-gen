@@ -101,8 +101,7 @@ def main():
             mnfs += generate_interface_descriptor(1,2)
             mnfs += generate_string_descriptor(1, "MikroElektronika")
             mnfs += generate_string_descriptor(2, row[0])
-            if(row[5] != "UNUSED" or row[6] != "UNUSED" or row[7] != "UNUSED"):
-                mnfs+=generate_mikrobus_descriptor(1, MIKROBUS_GPIO_STATE[row[5]], MIKROBUS_GPIO_STATE[row[6]], MIKROBUS_GPIO_STATE[row[7]])
+            mnfs+=generate_mikrobus_descriptor(1, MIKROBUS_GPIO_STATE[row[5]], MIKROBUS_GPIO_STATE[row[6]], MIKROBUS_GPIO_STATE[row[7]])
             mnfs += generate_bundle_descriptor(1, 0x0a)
             if(row[4] == "SIMPLE_SPI"):
                 mnfs += generate_cport_descriptor(1, 1, 0x0b)

@@ -23,9 +23,9 @@ string = Compass Click
 
 [mikrobus-descriptor]
 num-devices = 1
+int-gpio = 1
 rst-gpio = 0
 pwm-gpio = 0
-int-gpio = 1
 
 [bundle-descriptor 1]
 class = 0xa
@@ -43,7 +43,7 @@ driver-string-id = 3
 protocol = 0x2
 reg = 0x1e
 irq = 1
-irq-type = 1
+irq-type = 0x1
 
 [string-descriptor 3]
 string = lsm303dlhc_magn

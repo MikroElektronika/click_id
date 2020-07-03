@@ -21,6 +21,12 @@ string = MikroElektronika
 [string-descriptor 2]
 string = Proximity Click
 
+[mikrobus-descriptor]
+num-devices = 1
+int-gpio = 0
+rst-gpio = 0
+pwm-gpio = 0
+
 [bundle-descriptor 1]
 class = 0xa
 
