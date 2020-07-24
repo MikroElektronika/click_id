@@ -93,7 +93,7 @@ Pressure 4 Click,https://www.mikroe.com/pressure-4-click,OKAY,CONFIG_BMP280_SPI,
 Temp Log 6 Click,https://www.mikroe.com/temp-log-6-click,TESTING,CONFIG_SENSORS_MAX6642,I2C_IRQ,UNUSED,UNUSED,INPUT,max6642,0x4a,,,MIKROBUS_GPIO_INT,IRQ_TYPE_EDGE_RISING
 Proximity 2 Click,https://www.mikroe.com/proximity-2-click,TESTING,CONFIG_MAX44000,I2C_IRQ,UNUSED,UNUSED,INPUT,max44000,0x95,,,MIKROBUS_GPIO_INT,IRQ_TYPE_LEVEL_LOW
 Accel 8 Click,https://www.mikroe.com/accel-8-click,OKAY,CONFIG_INV_MPU6050_I2C,I2C_IRQ,UNUSED,UNUSED,INPUT,mpu6050,0x69,,,MIKROBUS_GPIO_INT,IRQ_TYPE_EDGE_RISING
-Thermo 4 Click,https://www.mikroe.com/thermo-4-click,TESTING,CONFIG_SENSORS_LM75,SIMPLE_I2C,UNUSED,UNUSED,UNUSED,lm75a,0x18,,,,
+Thermo 4 Click,https://www.mikroe.com/thermo-4-click,TESTING,CONFIG_SENSORS_LM75,SIMPLE_I2C,UNUSED,UNUSED,UNUSED,lm75a,0x48,,,,
 Thermo 15 Click,https://www.mikroe.com/thermo-15-click,TESTING,CONFIG_SENSORS_LM75,SIMPLE_I2C,UNUSED,UNUSED,UNUSED,lm75a,0x4d,,,,
 Illuminance Click,https://www.mikroe.com/illuminance-click,TESTING,CONFIG_TSL2561,SIMPLE_I2C,UNUSED,UNUSED,UNUSED,tsl2561,0x72,,,,
 Temp Hum Click,https://www.mikroe.com/temp-hum-click,TESTING,CONFIG_HTS221_I2C,I2C_IRQ,UNUSED,UNUSED,INPUT,hts221,0x5f,,,MIKROBUS_GPIO_INT,IRQ_TYPE_EDGE_RISING
