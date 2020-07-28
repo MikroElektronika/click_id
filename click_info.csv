@@ -105,7 +105,7 @@ Heart Rate 7 Click,https://www.mikroe.com/heart-rate-7-click,TESTING,CONFIG_AFE4
 Heart Rate Click,https://www.mikroe.com/heart-rate-click,TESTING,CONFIG_MAX30100,I2C_IRQ,UNUSED,UNUSED,INPUT,max30100,0x57,,,MIKROBUS_GPIO_INT,IRQ_TYPE_EDGE_FALLING
 Accel Click,https://www.mikroe.com/accel-click,TESTING,CONFIG_ADXL345_I2C,I2C_IRQ,UNUSED,UNUSED,INPUT,adxl345,0x1d,,,MIKROBUS_GPIO_INT,IRQ_TYPE_EDGE_RISING
 Air Quality 2 Click,https://www.mikroe.com/air-quality-2-click,TESTING,CONFIG_IAQCORE,SIMPLE_I2C,UNUSED,UNUSED,UNUSED,ams-iaq-core,0x68,,,,
-LED Driver 7 Click,https://www.mikroe.com/led-driver-7-click,TESTING,CONFIG_AD525X_DPOT,SIMPLE_I2C,UNUSED,UNUSED,UNUSED,ad5171,0x50,,,,
+LED Driver 7 Click,https://www.mikroe.com/led-driver-7-click,TESTING,CONFIG_AD525X_DPOT,SIMPLE_I2C,UNUSED,UNUSED,UNUSED,ad5171,0x2c,,,,
 Air Quality 5 Click,https://www.mikroe.com/air-quality-5-click,TESTING,CONFIG_TI_ADS1015,SIMPLE_I2C,UNUSED,UNUSED,UNUSED,ads1015,0x48,,,,
 DAC 7 Click,https://www.mikroe.com/dac-7-click,TESTING,CONFIG_AD5624R_SPI,SIMPLE_SPI,UNUSED,UNUSED,UNUSED,ad5624r5,,SPI_MODE_0,1000000,,
 LPS22HB,https://www.mikroe.com/lps22hb-click,TESTING,CONFIG_IIO_ST_PRESS_I2C,I2C_IRQ,UNUSED,UNUSED,INPUT,lps22hb,0x5c,,,MIKROBUS_GPIO_INT,IRQ_TYPE_EDGE_RISING
