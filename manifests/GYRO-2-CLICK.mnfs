@@ -41,7 +41,7 @@ protocol = 0x3
 [device-descriptor 1]
 driver-string-id = 3
 protocol = 0x2
-reg = 0x20
+reg = 0x21
 irq = 1
 irq-type = 0x1
 
