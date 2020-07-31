@@ -163,16 +163,16 @@ class InterfaceDescriptor(Descriptor):
         return r
 
 class MikrobusDescriptor(Descriptor):
-    def __init__(self, num_devices, rst_gpio, pwm_gpio, int_gpio, section):
+    def __init__(self, cs_gpio, rst_gpio, pwm_gpio, int_gpio, section):
         super(MikrobusDescriptor, self).__init__(section, True)
-        self.num_devices = num_devices
+        self.cs_gpio = cs_gpio
         self.rst_gpio = rst_gpio
         self.pwm_gpio = pwm_gpio
         self.int_gpio = int_gpio
 
     def __str__(self):
         r = "[{}]\n".format(MnfsParser.MIKROBUS_DESC)
-        r += "num-devices = {:#x}\n".format(self.num_devices)
+        r += "cs-gpio = {:#x}\n".format(self.cs_gpio)
         r += "rst-gpio = {:#x}\n".format(self.rst_gpio)
         r += "pwm-gpio = {:#x}\n".format(self.pwm_gpio)
         r += "int-gpio = {:#x}\n".format(self.int_gpio)
@@ -413,7 +413,7 @@ class MnfsParser(object):
     MNFS_HEADER_VMAJ    = 'version-major'
     MNFS_HEADER_VMIN    = 'version-minor'
     MIKROBUS_DESC      = 'mikrobus-descriptor'
-    MNFS_MIKROBUS_NUM_DEVICES = 'num-devices'
+    MNFS_MIKROBUS_CS_GPIO_STATE = 'cs-gpio'
     MNFS_MIKROBUS_RST_GPIO_STATE = 'rst-gpio'
     MNFS_MIKROBUS_PWM_GPIO_STATE = 'pwm-gpio'
     MNFS_MIKROBUS_INT_GPIO_STATE = 'int-gpio'
@@ -559,8 +559,8 @@ class MnfsParser(object):
                 manifest.add_interface_desc(interface)
             
             elif section == MnfsParser.MIKROBUS_DESC:
-                numdevices = self.__get_int_option(cfg_parser, section,
-                        MnfsParser.MNFS_MIKROBUS_NUM_DEVICES,
+                csgpio = self.__get_int_option(cfg_parser, section,
+                        MnfsParser.MNFS_MIKROBUS_CS_GPIO_STATE,
                         MnfsParser.ID_DESC_SIZE)
                 rstgpio = self.__get_int_option(cfg_parser, section,
                         MnfsParser.MNFS_MIKROBUS_RST_GPIO_STATE,
@@ -571,7 +571,7 @@ class MnfsParser(object):
                 intgpio = self.__get_int_option(cfg_parser, section,
                         MnfsParser.MNFS_MIKROBUS_INT_GPIO_STATE,
                         MnfsParser.ID_DESC_SIZE)
-                mikrobus = MikrobusDescriptor(numdevices, rstgpio, pwmgpio, intgpio, section)
+                mikrobus = MikrobusDescriptor(csgpio, rstgpio, pwmgpio, intgpio, section)
                 manifest.add_mikrobus_desc(mikrobus)
 
             elif section.split()[0] == MnfsParser.STRING_DESC:
@@ -683,7 +683,7 @@ class MnfsParser(object):
                 else:
                     prop_link = 0
                 if (self.__check_option(cfg_parser, section,
-                        MnfsParser.DEVICE_DESC_PROP_LINK)):   
+                        MnfsParser.DEVICE_DESC_GPIO_LINK)):   
                     gpio_link = self.__get_int_option(cfg_parser, section,
                             MnfsParser.DEVICE_DESC_GPIO_LINK,
                             MnfsParser.ID_DESC_SIZE)
@@ -785,7 +785,7 @@ class MnfbGenerator(object):
         self.__pack_desc(MnfbGenerator.MIKROBUS_DESC_FMT,
                 MnfbGenerator.MIKROBUS_DESC_SIZE,
                 MnfbGenerator.MIKROBUS_DESC_TYPE,
-                desc.num_devices, desc.rst_gpio, desc.pwm_gpio,
+                desc.cs_gpio, desc.rst_gpio, desc.pwm_gpio,
                 desc.int_gpio)
 
     def __pack_device_desc(self, desc):
