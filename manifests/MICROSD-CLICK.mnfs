@@ -22,10 +22,18 @@ string = MikroElektronika
 string = MICROSD Click
 
 [mikrobus-descriptor]
-num-devices = 1
-int-gpio = 0
-rst-gpio = 0
-pwm-gpio = 0
+pwm-state = 4
+int-state = 1
+rx-state = 7
+tx-state = 7
+scl-state = 6
+sda-state = 6
+mosi-state = 5
+miso-state = 5
+sck-state = 5
+cs-state = 5
+rst-state = 2
+an-state = 1
 
 [bundle-descriptor 1]
 class = 0xa
@@ -36,10 +44,10 @@ protocol = 0xb
 
 [device-descriptor 1]
 driver-string-id = 3
-protocol = 0x1
+protocol = 0x0b
+reg = 1
 mode = 0x0
 max-speed-hz = 50000000
 
 [string-descriptor 3]
 string = mmc_spi
-

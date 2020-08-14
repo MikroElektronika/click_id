@@ -22,13 +22,18 @@ string = MikroElektronika
 string = RTC 6 Click
 
 [mikrobus-descriptor]
-num-devices = 1
-int-gpio = 0
-rst-gpio = 0
-pwm-gpio = 0
-
-[bundle-descriptor 1]
-class = 0xa
+pwm-state = 4
+int-state = 1
+rx-state = 7
+tx-state = 7
+scl-state = 6
+sda-state = 6
+mosi-state = 5
+miso-state = 5
+sck-state = 5
+cs-state = 5
+rst-state = 2
+an-state = 1
 
 [cport-descriptor 1]
 bundle = 1
@@ -36,7 +41,7 @@ protocol = 0x3
 
 [device-descriptor 1]
 driver-string-id = 3
-protocol = 0x2
+protocol = 0x3
 reg = 0x6f
 
 [string-descriptor 3]
