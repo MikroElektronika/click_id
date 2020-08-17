@@ -1,0 +1,404 @@
+{
+	"RTC-6-CLICK": {
+		"class": "rtc",
+		"name": "rtc-ds1307",
+		"fields": [
+			[
+				"date",
+				1
+			],
+			[
+				"time",
+				1
+			],
+			[
+				"since_epoch",
+				1
+			]
+		]
+	},
+	"MPU-9DOF-CLICK": {
+		"class": "iio",
+		"name": "mpu9150",
+		"fields": []
+	},
+	"GEOMAGNETIC-CLICK": {
+		"class": "iio",
+		"name": "bmm150_magn",
+		"fields": []
+	},
+	"GSR-CLICK": {
+		"class": "iio",
+		"name": "mcp3201",
+		"fields": [
+			[
+				"in_voltage0-voltage1_raw",
+				1
+			]
+		]
+	},
+	"9DOF-CLICK": {
+		"class": "iio",
+		"name": "lsm9ds1-imu_gyro",
+		"fields": []
+	},
+	"6DOF-IMU-2-CLICK": {
+		"class": "iio",
+		"name": "bmi160",
+		"fields": []
+	},
+	"6DOF-IMU-4-CLICK": {
+		"class": "iio",
+		"name": "icm20602",
+		"fields": []
+	},
+	"6DOF-IMU-8-CLICK": {
+		"class": "iio",
+		"name": "ism330dlc",
+		"fields": []
+	},
+	"3D-HALL-3-CLICK": {
+		"class": "iio",
+		"name": "lis2mdl",
+		"fields": []
+	},
+	"GYRO-CLICK": {
+		"class": "iio",
+		"name": "l3gd20",
+		"fields": []
+	},
+	"GYRO-2-CLICK": {
+		"class": "iio",
+		"name": "fxas21002c",
+		"fields": []
+	},
+	"COLOR-2-CLICK": {
+		"class": "iio",
+		"name": "isl29125",
+		"fields": []
+	},
+	"COLOR-7-CLICK": {
+		"class": "iio",
+		"name": "tcs3472",
+		"fields": []
+	},
+	"COMPASS-CLICK": {
+		"class": "iio",
+		"name": "lsm303dlhc_magn",
+		"fields": []
+	},
+	"COMPASS-2-CLICK": {
+		"class": "iio",
+		"name": "ak8963",
+		"fields": []
+	},
+	"ACCEL-3-CLICK": {
+		"class": "iio",
+		"name": "h3lis331dl_accel",
+		"fields": []
+	},
+	"ACCEL-5-CLICK": {
+		"class": "iio",
+		"name": "bma400",
+		"fields": []
+	},
+	"ACCEL-6-CLICK": {
+		"class": "iio",
+		"name": "bma280",
+		"fields": []
+	},
+	"ACCEL-CLICK": {
+		"class": "iio",
+		"name": "adxl345",
+		"fields": []
+	},
+	"ACCEL-8-CLICK": {
+		"class": "iio",
+		"name": "mpu6050",
+		"fields": []
+	},
+	"AIR-QUALITY-2-CLICK": {
+		"class": "iio",
+		"name": "005a",
+		"fields": []
+	},
+	"AIR-QUALITY-3-CLICK": {
+		"class": "iio",
+		"name": "ccs811",
+		"fields": []
+	},
+	"AMBIENT-2-CLICK": {
+		"class": "iio",
+		"name": "opt3001",
+		"fields": []
+	},
+	"AMBIENT-4-CLICK": {
+		"class": "iio",
+		"name": "bh1721",
+		"fields": []
+	},
+	"AMBIENT-5-CLICK": {
+		"class": "iio",
+		"name": "veml6030",
+		"fields": []
+	},
+	"ALTITUDE-CLICK": {
+		"class": "iio",
+		"name": "mpl3115",
+		"fields": []
+	},
+	"ALTITUDE-3-CLICK": {
+		"class": "iio",
+		"name": "icp10100",
+		"fields": []
+	},
+	"WEATHER-CLICK": {
+		"class": "iio",
+		"name": "bme280",
+		"fields": []
+	},
+	"UV-3-CLICK": {
+		"class": "iio",
+		"name": "veml6070",
+		"fields": []
+	},
+	"SHT-CLICK": {
+		"class": "hwmon",
+		"name": "sht3x",
+		"fields": [
+			[
+				"temp1_input",
+				0.001
+			]
+		]
+	},
+	"TEMP-LOG-3-CLICK": {
+		"class": "hwmon",
+		"name": "jc42",
+		"fields": [
+			[
+				"temp1_input",
+				0.001
+			]
+		]
+	},
+	"TEMP-LOG-4-CLICK": {
+		"class": "hwmon",
+		"name": "jc42",
+		"fields": [
+			[
+				"temp1_input",
+				0.001
+			]
+		]
+	},
+	"TEMP-LOG-6-CLICK": {
+		"class": "hwmon",
+		"name": "max6642",
+		"fields": [
+			[
+				"temp1_input",
+				0.001
+			]
+		]
+	},
+	"TEMP-HUM-11-CLICK": {
+		"class": "iio",
+		"name": "0040",
+		"fields": []
+	},
+	"TEMP-HUM-4-CLICK": {
+		"class": "iio",
+		"name": "0043",
+		"fields": []
+	},
+	"TEMP-HUM-CLICK": {
+		"class": "iio",
+		"name": "hts221",
+		"fields": []
+	},
+	"TEMP-HUM-7-CLICK": {
+		"class": "iio",
+		"name": "0040",
+		"fields": []
+	},
+	"TEMP-HUM-9-CLICK": {
+		"class": "hwmon",
+		"name": "shtc3",
+		"fields": [
+			[
+				"temp1_input",
+				0.001
+			],
+			[
+				"humidity1_input",
+				0.001
+			]
+		]
+	},
+	"THERMO-17-CLICK": {
+		"class": "hwmon",
+		"name": "tmp451",
+		"fields": [
+			[
+				"temp1_input",
+				0.001
+			]
+		]
+	},
+	"THERMO-3-CLICK": {
+		"class": "hwmon",
+		"name": "tmp102",
+		"fields": [
+			[
+				"temp1_input",
+				0.001
+			]
+		]
+	},
+	"THERMO-4-CLICK": {
+		"class": "hwmon",
+		"name": "lm75",
+		"fields": [
+			[
+				"temp1_input",
+				0.001
+			]
+		]
+	},
+	"THERMO-15-CLICK": {
+		"class": "hwmon",
+		"name": "lm75",
+		"fields": [
+			[
+				"temp1_input",
+				0.001
+			]
+		]
+	},
+	"THERMO-7-CLICK": {
+		"class": "hwmon",
+		"name": "mcp980x",
+		"fields": [
+			[
+				"temp1_input",
+				0.001
+			]
+		]
+	},
+	"THERMO-8-CLICK": {
+		"class": "hwmon",
+		"name": "mcp980x",
+		"fields": [
+			[
+				"temp1_input",
+				0.001
+			]
+		]
+	},
+	"PRESSURE-CLICK": {
+		"class": "iio",
+		"name": "lps331ap",
+		"fields": []
+	},
+	"PRESSURE-3-CLICK": {
+		"class": "iio",
+		"name": "dps310",
+		"fields": []
+	},
+	"PRESSURE-11-CLICK": {
+		"class": "iio",
+		"name": "lps33hw",
+		"fields": []
+	},
+	"PRESSURE-4-CLICK": {
+		"class": "iio",
+		"name": "bmp280",
+		"fields": []
+	},
+	"PROXIMITY-CLICK": {
+		"class": "iio",
+		"name": "vcnl4000",
+		"fields": []
+	},
+	"PROXIMITY-2-CLICK": {
+		"class": "iio",
+		"name": "max44000",
+		"fields": []
+	},
+	"PROXIMITY-9-CLICK": {
+		"class": "iio",
+		"name": "vcnl4000",
+		"fields": []
+	},
+	"PROXIMITY-10-CLICK": {
+		"class": "iio",
+		"name": "si1143",
+		"fields": []
+	},
+	"IR-GESTURE-CLICK": {
+		"class": "iio",
+		"name": "apds9960",
+		"fields": []
+	},
+	"IR-THERMO-2-CLICK": {
+		"class": "iio",
+		"name": "tmp007",
+		"fields": []
+	},
+	"LIGHTRANGER-3-CLICK": {
+		"class": "iio",
+		"name": "rfd77402",
+		"fields": []
+	},
+	"LIGHTRANGER-CLICK": {
+		"class": "iio",
+		"name": "vl6180",
+		"fields": []
+	},
+	"HDC1000-CLICK": {
+		"class": "iio",
+		"name": "0040",
+		"fields": []
+	},
+	"HEART-RATE-3-CLICK": {
+		"class": "iio",
+		"name": "afe4404",
+		"fields": []
+	},
+	"HEART-RATE-5-CLICK": {
+		"class": "iio",
+		"name": "afe4404",
+		"fields": []
+	},
+	"HEART-RATE-4-CLICK": {
+		"class": "iio",
+		"name": "max30102",
+		"fields": []
+	},
+	"HEART-RATE-7-CLICK": {
+		"class": "iio",
+		"name": "afe4404",
+		"fields": []
+	},
+	"MPU-IMU-CLICK": {
+		"class": "iio",
+		"name": "mpu6000",
+		"fields": []
+	},
+	"LSM6DSL-CLICK": {
+		"class": "iio",
+		"name": "lsm6dsl",
+		"fields": []
+	},
+	"LSM303AGR-CLICK": {
+		"class": "iio",
+		"name": "lsm303agr_accel",
+		"fields": []
+	},
+	"LPS22HB-CLICK": {
+		"class": "iio",
+		"name": "lps22hb",
+		"fields": []
+	}
+}

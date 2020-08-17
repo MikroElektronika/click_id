@@ -1,0 +1,49 @@
+;
+; RTC 6 CLICK
+; https://www.mikroe.com/pwm-click
+; CONFIG_PWM_PCA9685
+;
+; Copyright 2020 BeagleBoard.org Foundation 
+; Copyright 2020 Texas Instruments 
+;
+
+[manifest-header]
+version-major = 0
+version-minor = 1
+
+[interface-descriptor]
+vendor-string-id = 1
+product-string-id = 2
+
+[string-descriptor 1]
+string = MikroElektronika
+
+[string-descriptor 2]
+string = PWM Click
+
+[mikrobus-descriptor]
+pwm-state = 4
+int-state = 1
+rx-state = 7
+tx-state = 7
+scl-state = 6
+sda-state = 6
+mosi-state = 5
+miso-state = 5
+sck-state = 5
+cs-state = 5
+rst-state = 2
+an-state = 1
+
+[cport-descriptor 1]
+bundle = 1
+protocol = 0x3
+
+[device-descriptor 1]
+driver-string-id = 3
+protocol = 0x3
+reg = 0x40
+
+[string-descriptor 3]
+string = pca9685
+

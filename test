@@ -1,0 +1,82 @@
+#!/usr/bin/env python
+
+import os
+import glob
+import json
+import time
+import readline
+
+def completer(text, state):
+	options = [x for x in complete_list if x.startswith(text)]
+	try:
+		return options[state]
+	except IndexError:
+		return None
+
+def read_click_data(cls, name, fields):
+	if cls == "iio":
+		for (dirpath, dirnames, filenames) in os.walk('/sys/bus/iio/devices/'):
+			for dirs in dirnames:
+				devname = open('/sys/bus/iio/devices/{}/name'.format(dirs), 'r').read()
+				if name in devname:
+					if len(fields) > 0:
+						for field in fields:
+							with open('/sys/bus/iio/devices/{}/{}'.format(dirs, field[0]), 'rb') as f:
+								val = f.read()
+							scale = float(field[1])
+							if scale != 1:
+								val = float(val)*scale
+							print("{} {} : {}".format(field[0].upper(), os.path.join('/sys/bus/iio/devices/{}/'.format(dirs),field[0]), val.strip()))
+					else:
+						fields = [f for f in os.listdir('/sys/bus/iio/devices/{}/'.format(dirs)) if os.path.isfile(os.path.join('/sys/bus/iio/devices/{}/'.format(dirs),f)) and f.startswith("in_")]
+						for field in fields:
+							with open('/sys/bus/iio/devices/{}/{}'.format(dirs, field), 'r') as f:
+								val = f.read()
+							print("{} {} : {}".format(field.upper(), os.path.join('/sys/bus/iio/devices/{}/'.format(dirs),field), val.strip()))
+					break
+
+	else:
+		for (dirpath, dirnames, filenames) in os.walk('/sys/class/' + cls):
+			for dirs in dirnames:
+				devname = open('/sys/class/{}/{}/name'.format(cls,dirs), 'r').read()
+				if name in devname:
+					for field in fields:
+						with open('/sys/class/{}/{}/{}'.format(cls, dirs, field[0]), 'r') as f:
+							val = f.read()
+						scale = float(field[1])
+						if scale != 1:
+							val = float(val)*scale
+						print("{} : {}".format(field[0].upper(), val))
+
+def main():
+	click_test = raw_input("board name> ")
+	port = raw_input("port> ")
+	print("testing {} on {} \n".format(click_test, port))
+	with open("/sys/class/mikrobus-port/{}/new_device".format(port), 'wb') as outFile:
+		with open("manifests/{}.mnfb".format(click_test), 'rb') as mnfb:
+			outFile.write(mnfb.read())
+	time.sleep(1)
+	os.system("dmesg | tail")
+	with open('test.json') as f:
+		test_data = json.load(f)
+	if click_test in test_data:
+		click_data = test_data[click_test]
+		read_click_data(click_data["class"], click_data["name"], click_data["fields"])
+	choice = raw_input("remove board[y/n]> ")
+	if choice == 'y':
+		with open("/sys/class/mikrobus-port/{}/delete_device".format(port), 'wb') as outFile:
+			outFile.write("0")
+		time.sleep(0.5)
+		os.system("dmesg | tail -n5 | grep mikrobus | grep removing")
+
+if __name__ == "__main__":
+	if len(glob.glob('manifests/*.mnfb')) == 0:
+		os.system("./install.sh")
+	complete_list = [os.path.splitext(os.path.basename(x))[0] for x in glob.glob('manifests/*.mnfb')]
+	ports = [ports for ports in os.listdir("/sys/class/mikrobus-port/")]
+	for port in ports:
+		complete_list.append(port)
+	readline.set_completer(completer)
+	readline.parse_and_bind("tab: complete")
+	readline.set_completer_delims(' ')
+	main()
