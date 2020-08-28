@@ -176,7 +176,7 @@ class MikrobusDescriptor(Descriptor):
         self.sck = sck
         self.cs = cs
         self.rst = rst
-	self.an = an
+        self.an = an
 
     def __str__(self):
         r = "[{}]\n".format(MnfsParser.MIKROBUS_DESC)
@@ -651,7 +651,7 @@ class MnfsParser(object):
                 protocol = self.__get_int_option(cfg_parser, section,
                         MnfsParser.DEVICE_DESC_PROTOCOL,
                         MnfsParser.ID_DESC_SIZE)
-                if(protocol == 1 or protocol == 4):
+                if protocol == 11:
                     maxspeedhz = self.__get_int_option(cfg_parser, section,
                             MnfsParser.DEVICE_DESC_MAX_SPEED_HZ,
                             MnfsParser.MAX_SPEED_DESC_SIZE)
@@ -661,9 +661,9 @@ class MnfsParser(object):
                 else:
                     maxspeedhz=0
                     mode=0
-		reg = self.__get_int_option(cfg_parser, section,
-			MnfsParser.DEVICE_DESC_REG,
-			MnfsParser.ID_DESC_SIZE)
+                reg = self.__get_int_option(cfg_parser, section,
+                        MnfsParser.DEVICE_DESC_REG,
+                        MnfsParser.ID_DESC_SIZE)
                 if (self.__check_option(cfg_parser, section,
                         MnfsParser.DEVICE_DESC_IRQ)):
                     irq = self.__get_int_option(cfg_parser, section,
