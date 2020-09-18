@@ -121,3 +121,6 @@ echo 24c32 0x57 > /sys/bus/i2c/devices/i2c-1/new_device
 ./manifesto -i manifests/mpu9dof.mnfs -o /sys/bus/nvmem/devices/1-00570/nvmem
 echo 0x57 > /sys/bus/i2c/devices/i2c-1/delete_device
 ```
+### Writing Manifests for new Add-On Boards
+
+For writing manifests for new add-on boards using an interactive interface head over to https://vaishnav98.github.io/manifesto/
