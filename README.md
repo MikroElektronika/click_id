@@ -101,13 +101,13 @@ remove board[y/n]> y
 debian@beaglebone:~/manifesto$ 
 ```
 
-### Loading Clicks (Debug Interface run as root)
+### Loading Add-on Board (Debug Interface run as root)
 
 ```
-cat manifests/CLICK_NAME.mnfb >  /sys/class/mikrobus-port/mikrobus-0/new_device
+cat manifests/BOARD_NAME.mnfb >  /sys/class/mikrobus-port/mikrobus-0/new_device
 cat manifests/WEATHER-CLICK.mnfb >  /sys/class/mikrobus-port/mikrobus-0/new_device
 ```
-### Unloading the Clicks (Debug Interface run as root)
+### Unloading the Add-on Board (Debug Interface run as root)
 
 ```
 echo 0 >  /sys/class/mikrobus-port/mikrobus-0/delete_device
@@ -124,3 +124,7 @@ echo 0x57 > /sys/bus/i2c/devices/i2c-1/delete_device
 ### Writing Manifests for new Add-On Boards
 
 For writing manifests for new add-on boards using an interactive interface head over to https://vaishnav98.github.io/manifesto/
+
+### Status of Supported Add-on Boards
+
+To see the status of Supported add-on boards, view [this CSV sheet](click_info.csv)
