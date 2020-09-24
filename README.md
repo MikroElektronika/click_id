@@ -128,3 +128,29 @@ For writing manifests for new add-on boards using an interactive interface head 
 ### Status of Supported Add-on Boards
 
 To see the status of Supported add-on boards, view [this CSV sheet](click_info.csv)
+
+### Kconfig
+This list contains a few dependent Kconfig settings that needs to be applied(if you are testing all of the supported) apart from the Click Driver Kconfig.
+
+```
+CONFIG_MODULES=y
+CONFIG_SYSFS=y
+CONFIG_I2C=y
+CONFIG_SPI=y
+CONFIG_GPIOLIB=y
+CONFIG_PWM=y
+CONFIG_IIO=m
+CONFIG_MIKROBUS=m
+CONFIG_STAGING=y
+CONFIG_FB=y
+CONFIG_FB_TFT=m
+CONFIG_NET=y
+CONFIG_NETDEVICES=y
+CONFIG_ETHERNET=y
+CONFIG_NET_VENDOR_MICROCHIP=y
+CONFIG_MMC=m
+CONFIG_RTC_CLASS=y
+CONFIG_NFC=m
+CONFIG_NFC_DIGITAL=m
+```
+
