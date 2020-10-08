@@ -1,10 +1,9 @@
 ;
-; MICROSD CLICK
-; https://www.mikroe.com/microsd-click
-; CONFIG_MMC_SPI
+; FLASH CLICK
+; https://www.mikroe.com/flash-click
+; CONFIG_MTD_SPI_NOR
 ;
-; Copyright 2020 BeagleBoard.org Foundation 
-; Copyright 2020 Texas Instruments 
+; Copyright 2020 BeagleBoard.org Foundation
 ;
 
 [manifest-header]
@@ -19,7 +18,7 @@ product-string-id = 2
 string = MikroElektronika
 
 [string-descriptor 2]
-string = MICROSD Click
+string = Flash Click
 
 [mikrobus-descriptor]
 pwm-state = 4
@@ -50,4 +49,4 @@ mode = 0x0
 max-speed-hz = 50000000
 
 [string-descriptor 3]
-string = mmc_spi
+string = spi-nor
