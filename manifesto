@@ -386,6 +386,8 @@ class DeviceDescriptor(Descriptor):
         self.mode = props[6]
         self.prop_link = props[7]
         self.gpio_link = props[8]
+        self.reg_link = props[9]
+        self.clock_link = props[10]
 
     def __str__(self):
         r += "[{} {:#x}]\n".format(MnfsParser.DEVICE_DESC, self.id_)
@@ -398,6 +400,8 @@ class DeviceDescriptor(Descriptor):
         r += "mode = {:#x}\n".format(self.mode)
         r += "prop-link = {:#x}\n".format(self.prop_link)
         r += "gpio-link = {:#x}\n".format(self.gpio_link)
+        r += "reg-link = {:#x}\n".format(self.reg_link)
+        r += "clock-link = {:#x}\n".format(self.clock_link)
         return r
 
 ### File parsers
@@ -440,6 +444,8 @@ class MnfsParser(object):
     DEVICE_DESC_IRQ_TYPE   = 'irq-type'
     DEVICE_DESC_PROP_LINK   = 'prop-link'
     DEVICE_DESC_GPIO_LINK   = 'gpio-link'
+    DEVICE_DESC_REG_LINK   = 'reg-link'
+    DEVICE_DESC_CLOCK_LINK   = 'clock-link'
     PROPERTY_DESC         = 'property-descriptor'
     PROPERTY_DESC_NAME_STRING_ID  = 'name-string-id'
     PROPERTY_DESC_TYPE  = 'type'
@@ -688,9 +694,23 @@ class MnfsParser(object):
                             MnfsParser.DEVICE_DESC_GPIO_LINK,
                             MnfsParser.ID_DESC_SIZE)
                 else:
-                    gpio_link = 0          
+                    gpio_link = 0
+                if (self.__check_option(cfg_parser, section,
+                        MnfsParser.DEVICE_DESC_REG_LINK)):   
+                    reg_link = self.__get_int_option(cfg_parser, section,
+                            MnfsParser.DEVICE_DESC_REG_LINK,
+                            MnfsParser.ID_DESC_SIZE)
+                else:
+                    reg_link = 0
+                if (self.__check_option(cfg_parser, section,
+                        MnfsParser.DEVICE_DESC_CLOCK_LINK)):   
+                    clock_link = self.__get_int_option(cfg_parser, section,
+                            MnfsParser.DEVICE_DESC_CLOCK_LINK,
+                            MnfsParser.ID_DESC_SIZE)
+                else:
+                    clock_link = 0          
                 props = [driverstr, protocol, reg, irq, irq_type, \
-                     maxspeedhz, mode, prop_link, gpio_link]
+                     maxspeedhz, mode, prop_link, gpio_link, reg_link, clock_link]
                 device = DeviceDescriptor(id_, props, section)
                 manifest.add_device_desc(device)
             else:
@@ -733,13 +753,15 @@ class MnfbGenerator(object):
             0x03: 1,
             0x04: 2,
             0x05: 4,
-            0x06: 8
+            0x06: 8,
+            0x07: 1,
+            0x08: 1
             }
 
     # formatting
     MNFS_HEADER_FMT        = '<HBB'
     BASE_DESC_FMT          = '<HBx'
-    DEVICE_DESC_FMT        = BASE_DESC_FMT + 'BBBBLBBBBBxxx'
+    DEVICE_DESC_FMT        = BASE_DESC_FMT + 'BBBBLBBBBBBBx'
     PROP_DESC_BASE_FMT     = BASE_DESC_FMT + 'BBBB'
     INTERFACE_DESC_FMT     = BASE_DESC_FMT + 'BBxx'
     MIKROBUS_DESC_FMT      = BASE_DESC_FMT + 'BBBBBBBBBBBB'
@@ -755,6 +777,8 @@ class MnfbGenerator(object):
             0x04: 'H',
             0x05: 'L',
             0x06: 'Q',
+            0x07: 'B',
+            0x08: 'B',
             }
 
     def __init__(self):
@@ -794,7 +818,7 @@ class MnfbGenerator(object):
         self.__pack_desc(MnfbGenerator.DEVICE_DESC_FMT, MnfbGenerator.DEVICE_DESC_SIZE, \
                 MnfbGenerator.DEVICE_DESC_TYPE, desc.id_, desc.driver_string_id, \
                  desc.protocol, desc.reg, desc.max_speed_hz, desc.irq, \
-                 desc.irq_type, desc.mode, desc.prop_link, desc.gpio_link)
+                 desc.irq_type, desc.mode, desc.prop_link, desc.gpio_link, desc.reg_link, desc.clock_link)
 
     def __string_desc_size(self, string):
         base_size = MnfbGenerator.STRING_DESC_BASE_SIZE + len(string)
