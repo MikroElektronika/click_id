@@ -667,9 +667,12 @@ class MnfsParser(object):
                 else:
                     maxspeedhz=0
                     mode=0
-                reg = self.__get_int_option(cfg_parser, section,
-                        MnfsParser.DEVICE_DESC_REG,
-                        MnfsParser.ID_DESC_SIZE)
+                if protocol != 4:
+                    reg = self.__get_int_option(cfg_parser, section,
+                            MnfsParser.DEVICE_DESC_REG,
+                            MnfsParser.ID_DESC_SIZE)
+                else:
+                    reg = 0
                 if (self.__check_option(cfg_parser, section,
                         MnfsParser.DEVICE_DESC_IRQ)):
                     irq = self.__get_int_option(cfg_parser, section,
