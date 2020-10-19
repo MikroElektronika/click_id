@@ -1,0 +1,66 @@
+;
+; GPS CLICK
+; https://www.mikroe.com/gps-click
+; CONFIG_GNSS_UBX_SERIAL
+;
+; Copyright 2020 BeagleBoard.org Foundation
+;
+
+[manifest-header]
+version-major = 0
+version-minor = 1
+
+[interface-descriptor]
+vendor-string-id = 1
+product-string-id = 2
+
+[string-descriptor 1]
+string = MikroElektronika
+
+[string-descriptor 2]
+string = GPS Click
+
+[mikrobus-descriptor]
+pwm-state = 4
+int-state = 1
+rx-state = 7
+tx-state = 7
+scl-state = 6
+sda-state = 6
+mosi-state = 5
+miso-state = 5
+sck-state = 5
+cs-state = 5
+rst-state = 2
+an-state = 2
+
+[bundle-descriptor 1]
+class = 0xa
+
+[cport-descriptor 1]
+bundle = 1
+protocol = 0x4
+
+[device-descriptor 1]
+driver-string-id = 3
+prop-link = 1
+protocol = 0x4
+
+[string-descriptor 3]
+string = neo-8
+
+[property-descriptor 1]
+name-string-id = 4
+type = 0x01
+value = <2>
+
+[string-descriptor 4]
+string = prop-link
+
+[property-descriptor 2]
+name-string-id = 5
+type = 0x05
+value = <9600>
+
+[string-descriptor 5]
+string = current-speed
