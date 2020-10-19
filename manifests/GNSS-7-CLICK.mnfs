@@ -32,7 +32,7 @@ miso-state = 5
 sck-state = 5
 cs-state = 5
 rst-state = 2
-an-state = 1
+an-state = 2
 
 [bundle-descriptor 1]
 class = 0xa
@@ -60,7 +60,7 @@ string = prop-link
 [property-descriptor 2]
 name-string-id = 5
 type = 0x05
-value = <9600>
+value = <38400>
 
 [string-descriptor 5]
 string = current-speed
