@@ -1,0 +1,144 @@
+;
+; OLEDC CLICK
+; https://www.mikroe.com/oledc-click
+; CONFIG_FB_TFT|CONFIG_FB_TFT_SSD1351
+;
+; Copyright 2020 BeagleBoard.org Foundation
+;
+
+[manifest-header]
+version-major = 0
+version-minor = 1
+
+[interface-descriptor]
+vendor-string-id = 1
+product-string-id = 2
+
+[string-descriptor 1]
+string = MikroElektronika
+
+[string-descriptor 2]
+string = OLEDC Click
+
+[mikrobus-descriptor]
+pwm-state = 2
+int-state = 2
+rx-state = 7
+tx-state = 7
+scl-state = 6
+sda-state = 6
+mosi-state = 5
+miso-state = 5
+sck-state = 5
+cs-state = 5
+rst-state = 2
+an-state = 1
+
+[bundle-descriptor 1]
+class = 0xa
+
+[cport-descriptor 1]
+bundle = 1
+protocol = 0xb
+
+[device-descriptor 1]
+driver-string-id = 3
+prop-link = 1
+gpio-link = 2
+protocol = 0xb
+reg = 0
+mode = 0x0
+max-speed-hz = 6000000
+
+[string-descriptor 3]
+string = fb_ssd1351
+
+[property-descriptor 1]
+name-string-id = 4
+type = 0x01
+value = <3 4 5 6 7 8 9>
+
+[string-descriptor 4]
+string = prop-link
+
+[property-descriptor 2]
+name-string-id = 5
+type = 0x02
+value = <10 11>
+
+[string-descriptor 5]
+string = gpio-link
+
+
+[property-descriptor 3]
+name-string-id = 6
+type = 0x05
+value = <128>
+
+[string-descriptor 6]
+string = width
+
+[property-descriptor 4]
+name-string-id = 7
+type = 0x05
+value = <128>
+
+[string-descriptor 7]
+string = height
+
+[property-descriptor 5]
+name-string-id = 8
+type = 0x05
+value = <40>
+
+[string-descriptor 8]
+string = fps
+
+[property-descriptor 6]
+name-string-id = 9
+type = 0x05
+value = <8>
+
+[string-descriptor 9]
+string = regwidth
+ 
+[property-descriptor 7]
+name-string-id = 10
+type = 0x05
+value = <8>
+
+[string-descriptor 10]
+string = buswidth
+
+[property-descriptor 8]
+name-string-id = 11
+type = 0x05
+value = <2>
+
+[string-descriptor 11]
+string = backlight
+
+[property-descriptor 9]
+name-string-id = 12
+type = 0x05
+value = <3>
+
+[string-descriptor 12]
+string = debug
+
+[property-descriptor 10]
+name-string-id = 13
+type = 0x03
+value = <10 1>
+
+[string-descriptor 13]
+string = reset
+
+[property-descriptor 11]
+name-string-id = 14
+type = 0x03
+value = <0 0>
+
+[string-descriptor 14]
+string = dc
+
