@@ -129,6 +129,17 @@ For writing manifests for new add-on boards using an interactive interface head 
 
 To see the status of Supported add-on boards, view [this CSV sheet](click_info.csv)
 
+### Hardware Modifications
+
+Some of the Existing Clicks require minor hardware modifications to work with the kernel driver correctly. This section maintains the list of the clicks which require hardware modifications:
+
+* GNSS ZOE Click : Swap COMM SEL Jumpers Default Position to select UART.
+* GNSS Clicks: All GNSS Clicks are Supported through the gnss linux subsytems, so their COMM SEL Default position needs to be in the UART Position
+* 6 LoWPAN T Click : The driver requires fifo, fifop, sfd, cca, vreg and reset gpio of which vreg, reset and fifo gpios are routed to the mikroBUS headers correctly but the 
+other GPIOs are not accessible, GPIO 2,3,4 from CC2520 needs to be routed to the mikroBUS headers(GPIO reference 1MHZ Clock is not necessary).
+* 6 LoWPAN C Click : The driver requires fifo, fifop, sfd, cca, vreg and reset gpio of which vreg, reset and fifo gpios are routed to the mikroBUS headers correctly but the 
+other GPIOs are not accessible, GPIO 2,3,4 from CC2520 needs to be routed to the mikroBUS headers(GPIO reference 1MHZ Clock is not necessary).
+
 ### Kconfig
 This list contains a few dependent Kconfig settings that needs to be applied(if you are testing all of the supported) apart from the Click Driver Kconfig.
 
