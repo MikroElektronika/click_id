@@ -52,9 +52,6 @@ class Error(Exception):
 
 ### Error and warning management
 
-def bytes_to_c_arr(data, lowercase=True):
-    return [format(b, '#04x' if lowercase else '#04X') for b in data]
-
 def print_stderr(*objs):
     print(*objs, file=sys.stderr)
 
@@ -902,7 +899,7 @@ class MnfbGenerator(object):
         self.__pack_header(manifest.header)
 
     def __get_mnfb(self):
-        return self.mnfb[:512] #self.offset   
+        return self.mnfb[:self.offset]
 
     def write_file(self, mnfb_file):
         try:
@@ -911,7 +908,6 @@ class MnfbGenerator(object):
             else:
                 with open(mnfb_file, 'wb') as f:
                     f.write(self.__get_mnfb())
-                    print("uint8_t manifest_blob[] = {{{}}};".format(", ".join(bytes_to_c_arr(self.__get_mnfb()))))                    
         except IOError as e:
             raise Error("can't write manifest binary '{}': {}"
                     .format(self.mnfb, str(e)))
