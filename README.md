@@ -121,6 +121,25 @@ echo 24c32 0x57 > /sys/bus/i2c/devices/i2c-1/new_device
 ./manifesto -i manifests/mpu9dof.mnfs -o /sys/bus/nvmem/devices/1-00570/nvmem
 echo 0x57 > /sys/bus/i2c/devices/i2c-1/delete_device
 ```
+
+### Writing a Manifest Blob to  Click ID EEPROM
+
+If a valid manifest binary is not found in the Click ID EEPROM, the device is exposed as a NVMEM device and the manifest can be written to the EEPROM in the following manner.
+```
+$ ./manifesto -i manifests/RTC-6-CLICK.mnfs -o /sys/bus/nvmem/devices/mikrobus-port0/nvmem
+$ hexdump /sys/bus/nvmem/devices/mikrobus-port0/nvmem                             (reading back written manifest)
+0000000 0074 0100 0008 0001 0201 0000 0018 0002
+0000010 0110 694d 726b 456f 656c 746b 6f72 696e
+0000020 616b 0000 0014 0002 020b 5452 2043 2036
+0000030 6c43 6369 006b 0000 0010 0005 0104 0707
+0000040 0606 0505 0505 0102 0008 0004 0001 0301
+0000050 0014 0007 0301 6f03 0000 0000 0000 0000
+0000060 0000 0000 0010 0002 0308 636d 3770 3439
+0000070 7831 0000 0000 0000 0000 0000 0000 0000
+0000080 ffff ffff ffff ffff ffff ffff ffff ffff
+*
+```
+
 ### Writing Manifests for new Add-On Boards
 
 For writing manifests for new add-on boards using an interactive interface head over to https://vaishnav98.github.io/manifesto/
