@@ -530,7 +530,7 @@ class MnfsParser(object):
             return self.__check_int(int_opt, num_bytes)
         except ValueError as e:
             raise Error("invalid value '{}' for field '{}' in '[{}]': {}"
-                    .format(int_opt, option_name, section, str(e)))
+                    .format(str_opt, option_name, section, str(e)))
 
     def __get_str_option(self, cfg_parser, section, option_name, max_):
         str_opt = self.__get_option(cfg_parser, section, option_name)
