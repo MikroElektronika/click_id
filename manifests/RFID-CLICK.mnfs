@@ -11,57 +11,66 @@ version-major = 0
 version-minor = 1
 
 [interface-descriptor]
-vendor-string-id =  1
-product-string-id =  2
-
-[string-descriptor 1]
-string = RFID Click
-
-[string-descriptor 2]
-string = MikroE
+vendor-string-id = 0x1
+product-string-id = 0x2
 
 [mikrobus-descriptor]
-pwm-state = 3
-int-state = 1
-rx-state = 7
-tx-state = 7
-scl-state = 6
-sda-state = 6
-mosi-state = 5
-miso-state = 5
-sck-state = 5
-cs-state = 5
-rst-state = 3
-an-state = 2
+pwm-state = 0x3
+int-state = 0x1
+rx-state = 0x7
+tx-state = 0x7
+scl-state = 0x6
+sda-state = 0x6
+mosi-state = 0x5
+miso-state = 0x5
+sck-state = 0x5
+cs-state = 0x5
+rst-state = 0x3
+an-state = 0x2
 
-[bundle-descriptor 1]
+[device-descriptor 0x1]
+driver-string-id = 0x3
+protocol = 0xb
+reg = 0x0
+irq = 0x1
+irq-type = 0x2
+max-speed-hz = 0xf4240
+mode = 0x0
+prop-link = 0x0
+gpio-link = 0x1
+reg-link = 0x0
+clock-link = 0x0
+
+[property-descriptor 0x1]
+name-string-id = 4
+type = 2
+value = <2>
+
+[property-descriptor 0x2]
+name-string-id = 5
+type = 3
+value = <0 2>
+
+; 'Bridged PHY' class on Bundle 1
+[bundle-descriptor 0x1]
 class = 0xa
 
-[cport-descriptor  1]
-bundle = 1
+; 'SPI' protocol on CPort 1
+[cport-descriptor 0x1]
+bundle = 0x1
 protocol = 0xb
 
-[cport-descriptor  2]
-bundle = 1
-protocol = 0x2
+[string-descriptor 0x1]
+string = MikroE
 
-[device-descriptor  1]
-driver-string-id = 3
-protocol = 0xb
-reg = 0
-irq = 1
-irq-type = 2
-max-speed-hz = 1000000
-mode = 0
-gpio-link = 2
+[string-descriptor 0x2]
+string = RFID Click
 
-[string-descriptor  3]
+[string-descriptor 0x3]
 string = st95hf
 
-[property-descriptor  1]
-name-string-id = 4
-type = 0x03
-value =< 0 >
+[string-descriptor 0x4]
+string = gpio-link
 
-[string-descriptor  4]
-string = enable-gpio
+[string-descriptor 0x5]
+string = enable
