@@ -51,15 +51,6 @@ name-string-id = 5
 type = 3
 value = <0 2>
 
-; 'Bridged PHY' class on Bundle 1
-[bundle-descriptor 0x1]
-class = 0xa
-
-; 'SPI' protocol on CPort 1
-[cport-descriptor 0x1]
-bundle = 0x1
-protocol = 0xb
-
 [string-descriptor 0x1]
 string = MikroE
 
@@ -74,3 +65,12 @@ string = gpio-link
 
 [string-descriptor 0x5]
 string = enable
+
+; 'Bridged PHY' class on Bundle 1
+[bundle-descriptor 0x1]
+class = 0xa
+
+; 'SPI' protocol on CPort 1
+[cport-descriptor 0x1]
+bundle = 0x1
+protocol = 0xb
