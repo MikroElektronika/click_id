@@ -142,7 +142,7 @@ $ hexdump /sys/bus/nvmem/devices/mikrobus-port0/nvmem                           
 
 ### Writing Manifests for new Add-On Boards
 
-For writing manifests for new add-on boards using an interactive interface head over to https://vaishnav98.github.io/manifesto/
+For writing manifests for new add-on boards using an interactive interface head over to https://vaishnavachath.github.io/manifesto/
 
 ### Status of Supported Add-on Boards
 
