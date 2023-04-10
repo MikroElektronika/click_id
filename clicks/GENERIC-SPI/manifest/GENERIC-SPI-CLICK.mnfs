@@ -1,0 +1,45 @@
+;
+; GENERIC SPI CLICK
+;
+; Copyright 2021 BeagleBoard.org Foundation
+;
+
+[manifest-header]
+version-major = 0
+version-minor = 1
+
+[interface-descriptor]
+vendor-string-id = 1
+product-string-id = 2
+
+[string-descriptor 1]
+string = MIKROE
+
+[string-descriptor 2]
+string = Generic 
+
+[mikrobus-descriptor]
+pwm-state = 4
+int-state = 1
+rx-state = 7
+tx-state = 7
+scl-state = 6
+sda-state = 6
+mosi-state = 5
+miso-state = 5
+sck-state = 5
+cs-state = 5
+rst-state = 2
+an-state = 1
+
+;populate these parameters according to click specifications
+[device-descriptor 1]
+driver-string-id = 4
+protocol = 0x0b
+reg = 0
+mode = 0x0
+max-speed-hz = 5000000
+
+[string-descriptor 4]
+string = spidev
+
