@@ -62,7 +62,7 @@ Fig 2. The Click's permanent information is stored in the zero sector, and the m
 
 Permanent information such as name, version, and serial number will be stored in the first 32 bytes of the EEPROM zero sector. 
 
-![First sector format](first_sector.png)
+![First sector format](images/first_sector.png)
 
 Fig 3. The permanent information
 
