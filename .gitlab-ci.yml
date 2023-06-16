@@ -1,4 +1,4 @@
-image: robertcnelson/debian-bookworm-beagle-devscripts:latest
+image: robertcnelson/debian-bookworm-beagle-devscripts-manifesto:latest
 
 build:
   tags:
