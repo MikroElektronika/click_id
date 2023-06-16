@@ -1,0 +1,14 @@
+image: robertcnelson/debian-bookworm-beagle:latest
+
+build:
+  tags:
+    - docker-arm64
+  stage: build
+  script:
+    - debuild -us -uc
+    - mv ../*.deb ./
+  artifacts:
+    expire_in: 5 days
+    name: "$CI_PROJECT_NAME-$CI_JOB_ID"
+    paths:
+      - "*.deb"
