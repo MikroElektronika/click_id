@@ -1,0 +1,71 @@
+;
+; RFID CLICK
+; https://www.mikroe.com/rfid-click
+; CONFIG_NFC_ST95HF
+;
+; Copyright 2023 Jason Kridner, BeagleBoard.org Foundation 
+;
+
+[manifest-header]
+version-major = 0
+version-minor = 1
+
+[interface-descriptor]
+vendor-string-id = 0x1
+product-string-id = 0x2
+
+[mikrobus-descriptor]
+pwm-state = 0x2
+int-state = 0x1
+rx-state = 0x7
+tx-state = 0x7
+scl-state = 0x6
+sda-state = 0x6
+mosi-state = 0x5
+miso-state = 0x5
+sck-state = 0x5
+cs-state = 0x5
+rst-state = 0x2
+an-state = 0x3
+
+[device-descriptor 0x1]
+driver-string-id = 0x3
+protocol = 0xb
+reg = 0x0
+irq = 0x1
+irq-type = 0x2
+max-speed-hz = 0xf4240
+mode = 0x0
+prop-link = 0x0
+gpio-link = 0x1
+reg-link = 0x0
+clock-link = 0x0
+
+[property-descriptor 0x1]
+name-string-id = 4
+type = 2
+value = <2>
+
+[property-descriptor 0x2]
+name-string-id = 5
+type = 3
+value = <0>
+
+[string-descriptor 0x1]
+string = MikroE
+
+[string-descriptor 0x2]
+string = RFID 
+
+[string-descriptor 0x3]
+string = st95hf
+
+[string-descriptor 0x4]
+string = gpio-link
+
+[string-descriptor 0x5]
+string = enable
+
+; 'Bridged PHY' class on Bundle 1
+
+; 'SPI' protocol on CPort 1
