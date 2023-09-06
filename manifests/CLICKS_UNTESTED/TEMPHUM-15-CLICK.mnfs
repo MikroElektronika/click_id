@@ -1,6 +1,6 @@
 ;
-; TEMP HUM 15 CLICK
-; https://www.mikroe.com/temp-hum-15-click
+; TEMP&HUM 15 CLICK
+; https://www.mikroe.com/temphum-15-click
 ; CONFIG_SENSORS_SHT4x
 ;
 ; Copyright 2023 BeagleBoard.org Foundation 
@@ -18,7 +18,7 @@ product-string-id = 2
 string = MikroElektronika
 
 [string-descriptor 2]
-string = Temp Hum 15 Click
+string = Temp&Hum 15 Click
 
 [mikrobus-descriptor]
 pwm-state = 4
