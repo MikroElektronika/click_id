@@ -22,7 +22,6 @@ string = MikroElektronika
 string = Thunder Click
 
 [mikrobus-descriptor]
-[mikrobus-descriptor]
 pwm-state = 4
 int-state = 1
 rx-state = 7
