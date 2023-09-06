@@ -5,7 +5,7 @@ BINS = $(patsubst $(SRC_DIR)/%.mnfs,$(BUILD_DIR)/%.mnfb,$(SRCS))
 SRCS_UNTESTED = $(wildcard $(SRC_DIR)/CLICKS_UNTESTED/*.mnfs)
 BINS_UNTESTED = $(patsubst $(SRC_DIR)/CLICKS_UNTESTED/%.mnfs,$(BUILD_DIR)/untested/%.mnfb,$(SRCS))
 
-all: $(BINS) $(UNTESTED_BINS)
+all: $(BINS) $(BINS_UNTESTED)
 
 # usage: manifesto [-h] [-I {mnfs,mnfb}] [-o OUT] [-O {mnfs,mnfb}] [-s] infile
 $(BINS): $(BUILD_DIR)/%.mnfb : $(SRC_DIR)/%.mnfs
