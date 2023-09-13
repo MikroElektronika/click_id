@@ -1,14 +1,18 @@
 image: robertcnelson/debian-bookworm-beagle-devscripts-manifesto:latest
 
-build:
+pages:
   tags:
     - docker-arm64
   stage: build
   script:
     - debuild -us -uc
-    - mv ../*.deb ./
+    - mkdir -p ./public/pool/
+    - mkdir -p ./public/dists/stable/main/binary-arm64/
+    - cp -v ../*.deb ./public/pool/ || true
+    - cd ./public ; dpkg-scanpackages ./pool/ | gzip > ./dists/stable/main/binary-arm64/Packages.gz || true ; cd ../
+    - apindex public
   artifacts:
-    expire_in: 5 days
-    name: "$CI_PROJECT_NAME-$CI_JOB_ID"
     paths:
-      - "*.deb"
+      - public
+  only:
+  - mikroe
