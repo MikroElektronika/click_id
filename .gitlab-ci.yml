@@ -5,6 +5,7 @@ pages:
     - docker-arm64
   stage: build
   script:
+    - sed -i -e "s:20230616:$(LANG=C date +%Y%m%d):g" debian/changelog
     - debuild -us -uc
     - mkdir -p ./public/pool/
     - mkdir -p ./public/dists/stable/main/binary-arm64/
