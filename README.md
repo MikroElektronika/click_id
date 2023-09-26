@@ -1,4 +1,5 @@
-# Click ID - the self introducing add-on board
+# ClickID - the self introducing add-on board
+
 ![mikroID](images/click-id-page-banner.jpg)
 
 ## **What is it?**
@@ -29,7 +30,7 @@ As you can see, adding add-on boards to an embedded Linux system can be a comple
 
 # [Click Boards™](https://www.mikroe.com/click-boards) in Embedded Linux
 
-Click ID is a hardware & software solution based on a secure authenticator device that enables the hot-plugging of [Click Boards™](https://www.mikroe.com/click-boards) or any other [mikroBUS™](https://download.mikroe.com/documents/standards/mikrobus/mikrobus-standard-specification-v200.pdf) compatible add-ons to embedded Linux. Click ID communicates with the operating system kernel via the 1-Wire protocol, authorizing any sensor on the add-on board to be automatically recognized. ClickID will deliver the manifest file to the operating system, and the proper driver loads to use the following interfaces (SPI, I2C, UART, PWM, ADC, reset, interrupt) for communication with the target device located on the add-on board.
+ClickID is a hardware & software solution based on a secure authenticator device that enables the hot-plugging of [Click Boards™](https://www.mikroe.com/click-boards) or any other [mikroBUS™](https://download.mikroe.com/documents/standards/mikrobus/mikrobus-standard-specification-v200.pdf) compatible add-ons to embedded Linux. ClickID communicates with the operating system kernel via the 1-Wire protocol, authorizing any sensor on the add-on board to be automatically recognized. ClickID will deliver the manifest file to the operating system, and the proper driver loads to use the following interfaces (SPI, I2C, UART, PWM, ADC, reset, interrupt) for communication with the target device located on the add-on board.
 
 ## **How does it work?**
 
@@ -42,7 +43,7 @@ Click ID is a hardware & software solution based on a secure authenticator devic
     - To switch a [Click Board™](https://www.mikroe.com/click-boards) in the **ID MODE**, the host board must hold the reset line to the '0' logic state. This way, the CS line is connected to EEPROM memory on the [Click Board™](https://www.mikroe.com/click-boards) through a multiplexer. To handle the  [mikroBUS™](https://download.mikroe.com/documents/standards/mikrobus/mikrobus-standard-specification-v200.pdf) socket and read the corresponding ID, we use the CS line, because only one host line must be unique for each  [mikroBUS™](https://download.mikroe.com/documents/standards/mikrobus/mikrobus-standard-specification-v200.pdf). This way, the host can uniquely identify each  [mikroBUS™](https://download.mikroe.com/documents/standards/mikrobus/mikrobus-standard-specification-v200.pdf) socket on the host board and read the **ID** from the corresponding [Click Board™](https://www.mikroe.com/click-boards).
 
 ![clickIDDiagram](images/ClickID.png)
-Fig 1. - The block diagram of Click ID functionality
+Fig 1. - The block diagram of ClickID functionality
 
 ## Click information in EEPROM
 
@@ -79,7 +80,7 @@ Fig 3. The permanent information
 
 ## Variable data 
 
-This is a part of the EEPROM memory, where we store user-configurable information. By default, that is a manifest binary file that contains the necessary information for a specific Linux driver for the [Click Board™](https://www.mikroe.com/click-boards). Further, this section will describe the Click's manifest file format required for the Click ID driver in the Linux kernel. Click manifest is derived from the Greybus manifest. The detailed specification of the Greybus manifest can be read [here](https://raw.githubusercontent.com/cfriedt/greybus-for-zephyr/master/doc/GreybusSpecification.pdf).
+This is a part of the EEPROM memory, where we store user-configurable information. By default, that is a manifest binary file that contains the necessary information for a specific Linux driver for the [Click Board™](https://www.mikroe.com/click-boards). Further, this section will describe the Click's manifest file format required for the ClickID driver in the Linux kernel. Click manifest is derived from the Greybus manifest. The detailed specification of the Greybus manifest can be read [here](https://raw.githubusercontent.com/cfriedt/greybus-for-zephyr/master/doc/GreybusSpecification.pdf).
 Below are briefly described only fields of interest for the [Click Board™](https://www.mikroe.com/click-boards) manifest.
 
 The manifest contains a header and an array of descriptors. All descriptors are 32-bit aligned, and the size of each descriptor is a multiple of 4 bytes.
