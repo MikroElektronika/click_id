@@ -2,11 +2,17 @@ SRC_DIR := manifests
 BUILD_DIR := build
 SRCS = $(wildcard $(SRC_DIR)/*.mnfs)
 BINS = $(patsubst $(SRC_DIR)/%.mnfs,$(BUILD_DIR)/%.mnfb,$(SRCS))
+SRCS_UNTESTED = $(wildcard $(SRC_DIR)/CLICKS_UNTESTED/*.mnfs)
+BINS_UNTESTED = $(patsubst $(SRC_DIR)/CLICKS_UNTESTED/%.mnfs,$(BUILD_DIR)/untested/%.mnfb,$(SRCS_UNTESTED))
 
-all: $(BINS)
+all: $(BINS) $(BINS_UNTESTED)
 
 # usage: manifesto [-h] [-I {mnfs,mnfb}] [-o OUT] [-O {mnfs,mnfb}] [-s] infile
 $(BINS): $(BUILD_DIR)/%.mnfb : $(SRC_DIR)/%.mnfs
+	mkdir -p $(dir $@)
+	./manifesto/manifesto -I mnfs -O mnfb -o $@ $<
+
+$(BINS_UNTESTED): $(BUILD_DIR)/untested/%.mnfb : $(SRC_DIR)/CLICKS_UNTESTED/%.mnfs
 	mkdir -p $(dir $@)
 	./manifesto/manifesto -I mnfs -O mnfb -o $@ $<
 
@@ -15,6 +21,8 @@ install:
 	install -m 0755 ./manifesto/manifesto $(DESTDIR)/usr/bin/
 	mkdir -p $(DESTDIR)/lib/firmware/mikrobus
 	install -m 0644 $(BUILD_DIR)/*.mnfb $(DESTDIR)/lib/firmware/mikrobus
+	mkdir -p $(DESTDIR)/lib/firmware/mikrobus/untested
+	install -m 0644 $(BUILD_DIR)/untested/*.mnfb $(DESTDIR)/lib/firmware/mikrobus/untested
 
 PHONY: clean
 clean:

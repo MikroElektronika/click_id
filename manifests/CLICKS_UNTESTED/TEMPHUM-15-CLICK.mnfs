@@ -1,10 +1,9 @@
 ;
-; THUNDER CLICK
-; https://www.mikroe.com/thunder-click
-; CONFIG_AS3935
+; TEMP&HUM 15 CLICK
+; https://www.mikroe.com/temphum-15-click
+; CONFIG_SENSORS_SHT4x
 ;
-; Copyright 2020 BeagleBoard.org Foundation 
-; Copyright 2020 Texas Instruments 
+; Copyright 2023 BeagleBoard.org Foundation 
 ;
 
 [manifest-header]
@@ -19,7 +18,7 @@ product-string-id = 2
 string = MikroElektronika
 
 [string-descriptor 2]
-string = Thunder Click
+string = Temp&Hum 15 Click
 
 [mikrobus-descriptor]
 pwm-state = 4
@@ -35,26 +34,15 @@ cs-state = 5
 rst-state = 2
 an-state = 1
 
-[bundle-descriptor 1]
-class = 0xa
-
 [cport-descriptor 1]
 bundle = 1
-protocol = 0x2
-
-[cport-descriptor 2]
-bundle = 1
-protocol = 0xb
+protocol = 0x3
 
 [device-descriptor 1]
 driver-string-id = 3
-protocol = 0xb
-reg = 0
-mode = 0x1
-max-speed-hz = 400000
-irq = 1
-irq-type = 0x1
+protocol = 0x3
+reg = 0x44
 
 [string-descriptor 3]
-string = as3935
+string = sht4x
 
