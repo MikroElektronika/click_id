@@ -1,4 +1,4 @@
-from mnfs_parser import *
+from manifesto.mnfs_parser import *
 import argparse
 import csv
 import os
@@ -33,7 +33,7 @@ def load_csv(file):
     csv_rows = list(reader)
     return csv_rows
 
-def updtated_csv(file, data):
+def update_csv(file, data):
     writer = csv.writer(file)
     file.seek(0)
     writer.writerows(data)
@@ -99,10 +99,10 @@ def get_args():
     parser = argparse.ArgumentParser()
 
     parser.add_argument('-i', '--infile',
-            help='specify an input manifest file')
+            help='specify an input manifest file or directory')
 
-    parser.add_argument('-o', '--out', default='status.csv',
-            help='output file (default is status.csv)')
+    parser.add_argument('-o', '--out', default='clicks_status.csv',
+            help='output file (default is clicks_status.csv)')
 
     parser.add_argument('-s', '--silent', action='store_true',
             help='silence the (potentially relevant) warnings')
@@ -120,8 +120,8 @@ def main():
         try:
             rows = load_csv(output)
             # get a manifest from the file
-            update_click("d:/gitlab/click_id/click_id/clicks", rows)
-            updtated_csv(output, rows)
+            update_click(args.infile, rows)
+            update_csv(output, rows)
         except Exception as e:
             print(f"Error: {e}")
         finally:
