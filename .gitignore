@@ -1,0 +1,6 @@
+manifests/*.mnfb
+*.mnfb
+.*
+*.cmd
+.*.swp
+*.patch

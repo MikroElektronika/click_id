@@ -1,0 +1,52 @@
+;
+; AIR QUALITY 3 CLICK
+; https://www.mikroe.com/air-quality-3-click
+; CONFIG_CCS811 
+;
+; Copyright 2020 BeagleBoard.org Foundation 
+; Copyright 2020 Texas Instruments 
+;
+
+[manifest-header]
+version-major = 0
+version-minor = 1
+
+[interface-descriptor]
+vendor-string-id = 1
+product-string-id = 2
+
+[string-descriptor 1]
+string = MikroElektronika
+
+[string-descriptor 2]
+string = Air Quality 3 Click
+
+[mikrobus-descriptor]
+pwm-state = 4
+int-state = 1
+rx-state = 7
+tx-state = 7
+scl-state = 6
+sda-state = 6
+mosi-state = 3
+miso-state = 3
+sck-state = 3
+cs-state = 3
+rst-state = 2
+an-state = 1
+
+[bundle-descriptor 1]
+class = 0xa
+
+[cport-descriptor 1]
+bundle = 1
+protocol = 0x3
+
+[device-descriptor 1]
+driver-string-id = 3
+protocol = 0x3
+reg = 0x5a
+
+[string-descriptor 3]
+string = ccs811
+
