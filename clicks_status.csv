@@ -8,7 +8,7 @@ Click board,Manufacture,Status,Linux Driver,Protocol,URL
 6DOF IMU 6,MIKROE,TESTED,icm20689,SPI,https://www.mikroe.com/6dof-imu-6-click
 6DOF IMU 8,MIKROE,IN PRODUCTION,ism330dlc,I2C,https://www.mikroe.com/6dof-imu-8-click
 9DOF,MIKROE,TESTED,lsm9ds1-imu,I2C,https://www.mikroe.com/9dof-click
-Accel,MIKROE,TESTED,adxl345,I2C,https://www.mikroe.com/accel-click
+Accel,MIKROE,IN PRODUCTION,adxl345,I2C,https://www.mikroe.com/accel-click
 ACCEL 3,MIKROE,TESTED,h3lis331dl_accel,I2C,https://www.mikroe.com/accel-3-click
 ACCEL 5,MIKROE,TESTED,bma400,I2C,https://www.mikroe.com/accel-5-click
 ACCEL 6,MIKROE,TESTED,bma280,I2C,https://www.mikroe.com/accel-6-click
@@ -20,7 +20,7 @@ ADC 5,MIKROE,TESTED,adc121s,SPI,https://www.mikroe.com/adc-5-click
 ADC 8,MIKROE,TESTED,ads1115,I2C,https://www.mikroe.com/adc-8-click
 Air Quality 2,MIKROE,TESTED,ams-iaq-core,I2C,https://www.mikroe.com/air-quality-2-click
 Air Quality 3,MIKROE,TESTED,ccs811,I2C,https://www.mikroe.com/air-quality-3-click
-Air Quality 5,MIKROE,TESTED,ads1015,I2C,https://www.mikroe.com/air-quality-5-click
+Air Quality 5,MIKROE,IN PRODUCTION,ads1015,I2C,https://www.mikroe.com/air-quality-5-click
 Alcohol 2,MIKROE,TESTED,mcp3221,I2C,https://www.mikroe.com/alcohol-2-click
 Alcohol 3,MIKROE,TESTED,mcp3221,I2C,https://www.mikroe.com/alcohol-3-click
 Altitude,MIKROE,TESTED,mpl3115,I2C,https://www.mikroe.com/altitude-click
@@ -74,7 +74,7 @@ Lightranger 2,MIKROE,TESTED,vl53l0x,I2C,https://www.mikroe.com/lightranger-2-cli
 LIGHTRANGER 3,MIKROE,TESTED,rfd77402,I2C,https://www.mikroe.com/lightranger-3-click
 LPS22HB,MIKROE,TESTED,lps22hb,I2C,https://www.mikroe.com/lps22hb-click
 LSM303AGR,MIKROE,TESTED,lsm303agr_accel,I2C,https://www.mikroe.com/lsm303agr-click
-LSM6DSL,MIKROE,TESTED,lsm6dsl,SPI,https://www.mikroe.com/lsm6dsl-click
+LSM6DSL,MIKROE,IN PRODUCTION,lsm6dsl,SPI,https://www.mikroe.com/lsm6dsl-click
 Magnetic Linear,MIKROE,TESTED,mcp3221,I2C,https://www.mikroe.com/magnetic-linear-click
 Magnetic Rotary,MIKROE,TESTED,mcp3202,SPI,https://www.mikroe.com/magnetic-rotary-click
 MICROSD,MIKROE,TESTED,mmc_spi,SPI,https://www.mikroe.com/microsd-click
@@ -113,7 +113,7 @@ Temp Hum 9,MIKROE,TESTED,shtc3,I2C,https://www.mikroe.com/temp-hum-9-click
 Temp Log 3,MIKROE,TESTED,jc42,I2C,https://www.mikroe.com/temp-log-3-click
 Temp Log 4,MIKROE,TESTED,jc42,I2C,https://www.mikroe.com/temp-log-4-click
 Temp Log 6,MIKROE,TESTED,max6642,I2C,https://www.mikroe.com/temp-log-6-click
-THERMO CLICK,MIKROE,TESTTED,max31855k,SPI,https://www.mikroe.com/thermo-click-click
+THERMO CLICK,MIKROE,IN PRODUCTION,max31855k,SPI,https://www.mikroe.com/thermo-click-click
 Thermo 12,MIKROE,TESTED,adt7420,I2C,https://www.mikroe.com/thermo-12-click
 Thermo 15,MIKROE,TESTED,lm75a,I2C,https://www.mikroe.com/thermo-15-click
 Thermo 17,MIKROE,TESTED,tmp451,I2C,https://www.mikroe.com/thermo-17-click
