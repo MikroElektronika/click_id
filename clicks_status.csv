@@ -1,0 +1,144 @@
+Click board,Manufacture,Status,Linux Driver,Protocol,URL
+10DOF,MIKROE,TESTED,bmp180,I2C,https://www.mikroe.com/10dof-click
+13DOF 2,MIKROE,TESTED,bme680,I2C,https://www.mikroe.com/13dof-2-click
+3D Hall 3,MIKROE,TESTED,lis2mdl,I2C,https://www.mikroe.com/3d-hall-3-click
+3D Hall 6,MIKROE,TESTED,mcp3204,SPI,https://www.mikroe.com/3d-hall-6-click
+6DOF IMU 2,MIKROE,TESTED,bmi160,I2C,https://www.mikroe.com/6dof-imu-2-click
+6DOF IMU 4,MIKROE,TESTED,icm20602,I2C,https://www.mikroe.com/6dof-imu-4-click
+6DOF IMU 6,MIKROE,TESTED,icm20689,SPI,https://www.mikroe.com/6dof-imu-6-click
+6DOF IMU 8,MIKROE,IN PRODUCTION,ism330dlc,I2C,https://www.mikroe.com/6dof-imu-8-click
+9DOF,MIKROE,TESTED,lsm9ds1-imu,I2C,https://www.mikroe.com/9dof-click
+Accel,MIKROE,IN PRODUCTION,adxl345,I2C,https://www.mikroe.com/accel-click
+ACCEL 3,MIKROE,TESTED,h3lis331dl_accel,I2C,https://www.mikroe.com/accel-3-click
+ACCEL 5,MIKROE,TESTED,bma400,I2C,https://www.mikroe.com/accel-5-click
+ACCEL 6,MIKROE,TESTED,bma280,I2C,https://www.mikroe.com/accel-6-click
+Accel 8,MIKROE,TESTED,mpu6050,I2C,https://www.mikroe.com/accel-8-click
+ADC,MIKROE,TESTED,mcp3204,SPI,https://www.mikroe.com/adc-click
+ADC 2,MIKROE,TESTED,mcp3551,SPI,https://www.mikroe.com/adc-2-click
+ADC 3,MIKROE,TESTED,mcp3428,I2C,https://www.mikroe.com/adc-3-click
+ADC 5,MIKROE,TESTED,adc121s,SPI,https://www.mikroe.com/adc-5-click
+ADC 8,MIKROE,TESTED,ads1115,I2C,https://www.mikroe.com/adc-8-click
+Air Quality 2,MIKROE,TESTED,ams-iaq-core,I2C,https://www.mikroe.com/air-quality-2-click
+Air Quality 3,MIKROE,TESTED,ccs811,I2C,https://www.mikroe.com/air-quality-3-click
+Air Quality 5,MIKROE,IN PRODUCTION,ads1015,I2C,https://www.mikroe.com/air-quality-5-click
+Alcohol 2,MIKROE,TESTED,mcp3221,I2C,https://www.mikroe.com/alcohol-2-click
+Alcohol 3,MIKROE,TESTED,mcp3221,I2C,https://www.mikroe.com/alcohol-3-click
+Altitude,MIKROE,TESTED,mpl3115,I2C,https://www.mikroe.com/altitude-click
+Altitude 3,MIKROE,TESTED,icp10100,I2C,https://www.mikroe.com/altitude-3-click
+Ambient 2,MIKROE,IN PRODUCTION,opt3001,I2C,https://www.mikroe.com/ambient-2-click
+Ambient 4,MIKROE,TESTED,bh1721,I2C,https://www.mikroe.com/ambient-4-click
+Ambient 5,MIKROE,TESTED,veml6030,I2C,https://www.mikroe.com/ambient-5-click
+Ammeter,MIKROE,TESTED,mcp3201,SPI,https://www.mikroe.com/ammeter-click
+Color 2,MIKROE,TESTED,isl29125,I2C,https://www.mikroe.com/color-2-click
+Color 7,MIKROE,TESTED,tcs3472,I2C,https://www.mikroe.com/color-7-click
+Compass,MIKROE,TESTED,lsm303dlhc_magn,I2C,https://www.mikroe.com/compass-click
+COMPASS 2,MIKROE,TESTED,ak8963,I2C,https://www.mikroe.com/compass-2-click
+Current,MIKROE,TESTED,mcp3201,SPI,https://www.mikroe.com/current-click
+DAC,MIKROE,TESTED,mcp4922,SPI,https://www.mikroe.com/dac-click
+DAC 7,MIKROE,TESTED,ad5644r5,SPI,https://www.mikroe.com/dac-7-click
+DIGIPOT,MIKROE,TESTED,mcp4161-103,SPI,https://www.mikroe.com/digipot-click
+DIGIPOT 3,MIKROE,TESTED,ad5231,SPI,https://www.mikroe.com/digipot-3-click
+EEPROM,MIKROE,TESTED,24c08,I2C,https://www.mikroe.com/eeprom-click
+EEPROM 2,MIKROE,TESTED,at25,SPI,https://www.mikroe.com/eeprom-2-click
+EEPROM 3,MIKROE,TESTED,24c256,I2C,https://www.mikroe.com/eeprom-3-click
+Environment,MIKROE,IN PRODUCTION,bme680,I2C,https://www.mikroe.com/environment-click
+ETH,MIKROE,IN PRODUCTION,enc28j60,SPI,https://www.mikroe.com/eth-click
+ETH WIZ,MIKROE,TESTED,w5500,SPI,https://www.mikroe.com/eth-wiz-click
+Flash,MIKROE,TESTED,spi-nor,SPI,https://www.mikroe.com/flash-click
+Flash 2,MIKROE,TESTED,spi-nor,SPI,https://www.mikroe.com/flash-2-click
+Generic,MIKROE,TESTED,spidev,SPI,https://www.mikroe.com/generic-click
+GeoMagnetic,MIKROE,TESTED,bmm150_magn,SPI,https://www.mikroe.com/geomagnetic-click
+GNSS 4,MIKROE,TESTED,neo-m8,UART,https://www.mikroe.com/gnss-4-click
+GNSS 7,MIKROE,IN PRODUCTION,neo-8,UART,https://www.mikroe.com/gnss-7-click
+GNSS ZOE,MIKROE,TESTED,neo-m8,UART,https://www.mikroe.com/gnss-zoe-click
+GSR,MIKROE,TESTED,mcp3201,SPI,https://www.mikroe.com/gsr-click
+GYRO,MIKROE,TESTED,l3gd20,I2C,https://www.mikroe.com/gyro-click
+GYRO 2,MIKROE,TESTED,fxas21002c,I2C,https://www.mikroe.com/gyro-2-click
+Hall Current 2,MIKROE,TESTED,mcp3221,I2C,https://www.mikroe.com/hall-current-2-click
+Hall Current 3,MIKROE,TESTED,mcp3221,I2C,https://www.mikroe.com/hall-current-3-click
+Hall Current 4,MIKROE,TESTED,mcp3221,I2C,https://www.mikroe.com/hall-current-4-click
+HDC1000,MIKROE,TESTED,hdc1000,I2C,https://www.mikroe.com/hdc1000-click
+Heart Rate,MIKROE,TESTED,max30100,I2C,https://www.mikroe.com/heart-rate-click
+Heart Rate 3,MIKROE,TESTED,afe4404,I2C,https://www.mikroe.com/heart-rate-3-click
+Heart Rate 4,MIKROE,IN PRODUCTION,max30102,I2C,https://www.mikroe.com/heart-rate-4-click
+Heart Rate 5,MIKROE,TESTED,afe4404,I2C,https://www.mikroe.com/heart-rate-5-click
+Heart Rate 7,MIKROE,TESTED,afe4404,I2C,https://www.mikroe.com/heart-rate-7-click
+I2C TO SPI,MIKROE,TESTED,sc18is602b,I2C,https://www.mikroe.com/i2c-to-spi-click
+I2C MUX,MIKROE,TESTED,pca9546,I2C,https://www.mikroe.com/i2c-mux-click
+Illuminance,MIKROE,TESTED,tsl2561,I2C,https://www.mikroe.com/illuminance-click
+IR Gesture,MIKROE,TESTED,apds9960,I2C,https://www.mikroe.com/ir-gesture-click
+IR Thermo 2,MIKROE,TESTED,tmp007,I2C,https://www.mikroe.com/ir-thermo-2-click
+LED Driver 7,MIKROE,TESTED,ad5171,I2C,https://www.mikroe.com/led-driver-7-click
+LightRanger,MIKROE,TESTED,vl6180,I2C,https://www.mikroe.com/lightranger-click
+Lightranger 2,MIKROE,TESTED,vl53l0x,I2C,https://www.mikroe.com/lightranger-2-click
+LIGHTRANGER 3,MIKROE,TESTED,rfd77402,I2C,https://www.mikroe.com/lightranger-3-click
+LPS22HB,MIKROE,TESTED,lps22hb,I2C,https://www.mikroe.com/lps22hb-click
+LSM303AGR,MIKROE,TESTED,lsm303agr_accel,I2C,https://www.mikroe.com/lsm303agr-click
+LSM6DSL,MIKROE,IN PRODUCTION,lsm6dsl,SPI,https://www.mikroe.com/lsm6dsl-click
+Magnetic Linear,MIKROE,TESTED,mcp3221,I2C,https://www.mikroe.com/magnetic-linear-click
+Magnetic Rotary,MIKROE,TESTED,mcp3202,SPI,https://www.mikroe.com/magnetic-rotary-click
+MICROSD,MIKROE,TESTED,mmc_spi,SPI,https://www.mikroe.com/microsd-click
+MPU 9DOF,MIKROE,TESTED,mpu9150,I2C,https://www.mikroe.com/mpu-9dof-click
+MPU IMU,MIKROE,TESTED,mpu6000,SPI,https://www.mikroe.com/mpu-imu-click
+NO2,MIKROE,TESTED,mcp3221,I2C,https://www.mikroe.com/no2-click
+NO2 2,MIKROE,TESTED,mcp3201,SPI,https://www.mikroe.com/no2-2-click
+OLEDB,MIKROE,TESTED,fb_ssd1306,SPI,https://www.mikroe.com/oledb-click
+OLEDC,MIKROE,IN PRODUCTION,fb_ssd1351,SPI,https://www.mikroe.com/oledc-click
+OLEDW,MIKROE,TESTED,fb_ssd1306,SPI,https://www.mikroe.com/oledw-click
+Ozone 2,MIKROE,TESTED,mcp3551,SPI,https://www.mikroe.com/ozone-2-click
+Pressure,MIKROE,TESTED,lps331ap,I2C,https://www.mikroe.com/pressure-click
+Pressure 11,MIKROE,TESTED,lps33hw,I2C,https://www.mikroe.com/pressure-11-click
+Pressure 3,MIKROE,TESTED,dps310,I2C,https://www.mikroe.com/pressure-3-click
+Pressure 4,MIKROE,TESTED,bmp280,SPI,https://www.mikroe.com/pressure-4-click
+Proximity,MIKROE,TESTED,vcnl4010,I2C,https://www.mikroe.com/proximity-click
+Proximity 10,MIKROE,TESTED,si1143,I2C,https://www.mikroe.com/proximity-10-click
+Proximity 2,MIKROE,TESTED,max44000,I2C,https://www.mikroe.com/proximity-2-click
+Proximity 5,MIKROE,TESTED,vcnl4035,I2C,https://www.mikroe.com/proximity-5-click
+Proximity 9,MIKROE,TESTED,vcnl4040,I2C,https://www.mikroe.com/proximity-9-click
+PWM,MIKROE,TESTED,pca9685,I2C,https://www.mikroe.com/pwm-click
+RF Meter,MIKROE,TESTED,mcp3201,SPI,https://www.mikroe.com/rf-meter-click
+RFID,MikroE,TESTED,st95hf,SPI,https://www.mikroe.com/rfid-click
+RMS to DC,MIKROE,TESTED,mcp3221,I2C,https://www.mikroe.com/rms-to-dc-click
+RTC 6,MIKROE,TESTED,mcp7941x,I2C,https://www.mikroe.com/rtc-6-click
+SHT,MIKROE,TESTED,sht3x,I2C,https://www.mikroe.com/sht-click
+SHT1x,MIKROE,TESTED,sht11,Raw,https://www.mikroe.com/sht1x-click
+Smoke,MIKROE,TESTED,max30105,I2C,https://www.mikroe.com/smoke-click
+Temp Hum,MIKROE,TESTED,hts221,I2C,https://www.mikroe.com/temp-hum-click
+Temp Hum 11,MIKROE,TESTED,hdc1080,I2C,https://www.mikroe.com/temp-hum-11-click
+TEMP HUM 12 CLICK,MIKROE,TESTED,hdc2080,I2C,https://www.mikroe.com/temp-hum-12-click-click
+TEMP HUM 3 CLICK,MIKROE,TESTED,hdc2010,I2C,https://www.mikroe.com/temp-hum-3-click-click
+TEMP HUM 4,MIKROE,TESTED,hdc1010,I2C,https://www.mikroe.com/temp-hum-4-click
+Temp Hum 7,MIKROE,TESTED,si7020,I2C,https://www.mikroe.com/temp-hum-7-click
+Temp Hum 9,MIKROE,TESTED,shtc3,I2C,https://www.mikroe.com/temp-hum-9-click
+Temp Log 3,MIKROE,TESTED,jc42,I2C,https://www.mikroe.com/temp-log-3-click
+Temp Log 4,MIKROE,TESTED,jc42,I2C,https://www.mikroe.com/temp-log-4-click
+Temp Log 6,MIKROE,TESTED,max6642,I2C,https://www.mikroe.com/temp-log-6-click
+THERMO CLICK,MIKROE,IN PRODUCTION,max31855k,SPI,https://www.mikroe.com/thermo-click-click
+Thermo 12,MIKROE,TESTED,adt7420,I2C,https://www.mikroe.com/thermo-12-click
+Thermo 15,MIKROE,TESTED,lm75a,I2C,https://www.mikroe.com/thermo-15-click
+Thermo 17,MIKROE,TESTED,tmp451,I2C,https://www.mikroe.com/thermo-17-click
+Thermo 3,MIKROE,IN PRODUCTION,tmp102,I2C,https://www.mikroe.com/thermo-3-click
+Thermo 4,MIKROE,TESTED,lm75a,I2C,https://www.mikroe.com/thermo-4-click
+Thermo 7,MIKROE,TESTED,mcp980x,I2C,https://www.mikroe.com/thermo-7-click
+Thermo 8,MIKROE,TESTED,mcp980x,I2C,https://www.mikroe.com/thermo-8-click
+Thermostat 3,MIKROE,TESTED,max31855k,SPI,https://www.mikroe.com/thermostat-3-click
+Thunder,MIKROE,TESTED,as3935,SPI,https://www.mikroe.com/thunder-click
+Altitude 2,MIKROE,TESTED,ms5607,I2C,https://www.mikroe.com/altitude-2-click
+GNSS,MIKROE,TESTED,neo-8,UART,https://www.mikroe.com/gnss-click
+GNSS 2,MIKROE,TESTED,neo-8,UART,https://www.mikroe.com/gnss-2-click
+GNSS 3,MIKROE,TESTED,neo-8,UART,https://www.mikroe.com/gnss-3-click
+GPS,MIKROE,TESTED,neo-8,UART,https://www.mikroe.com/gps-click
+GPS 2,MIKROE,TESTED,neo-8,UART,https://www.mikroe.com/gps-2-click
+GPS 3,MIKROE,TESTED,neo-8,UART,https://www.mikroe.com/gps-3-click
+GPS 4,MIKROE,TESTED,neo-8,UART,https://www.mikroe.com/gps-4-click
+HTU21D,MIKROE,TESTED,htu21,I2C,https://www.mikroe.com/htu21d-click
+NANO GPS,MIKROE,TESTED,neo-8,UART,https://www.mikroe.com/nano-gps-click
+Pressure 7,MIKROE,TESTED,ms5837,I2C,https://www.mikroe.com/pressure-7-click
+Temp Hum 8,MIKROE,TESTED,sht21,I2C,https://www.mikroe.com/temp-hum-8-click
+Thermo 9,MIKROE,TESTED,tsys01,I2C,https://www.mikroe.com/thermo-9-click
+UV 2,MIKROE,TESTED,veml6070,I2C,https://www.mikroe.com/uv-2-click
+UV 3,MIKROE,TESTED,veml6070,I2C,https://www.mikroe.com/uv-3-click
+Vacuum,MIKROE,TESTED,mcp3221,I2C,https://www.mikroe.com/vacuum-click
+Voltmeter,MIKROE,TESTED,mcp3201,SPI,https://www.mikroe.com/voltmeter-click
+Waveform,MIKROE,TESTED,ad9833,SPI,https://www.mikroe.com/waveform-click
+Weather,MIKROE,IN PRODUCTION,bme280,I2C,https://www.mikroe.com/weather-click
