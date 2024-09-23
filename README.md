@@ -45,17 +45,17 @@ ClickID is a hardware & software solution based on a secure authenticator device
 ![clickIDDiagram](images/ClickID.png)
 Fig 1. - The block diagram of ClickID functionality
 
-## Click information in EEPROM
+## ClickID Memory Organization
 
 Each [Click Board™](https://www.mikroe.com/click-boards) is described and identified by the information stored in the EEPROM memory of the [Click Board™](https://www.mikroe.com/click-boards). The [DS28E36](https://datasheets.maximintegrated.com/en/ds/DS28E36.pdf) is used as ID MCU for storing the manifest file and unique identifier of the [Click Board™](https://www.mikroe.com/click-boards). In the table below, you can see EEPROM memory organization:
 
 The EEPROM memory is divided into two slices: 
 
    - permanent data - it is written to a zero page at production time, and this page is locked for changes.
-   - configurable data - it's starting for the first sector, and it is rewritable. This part of EEPROM is reserved for configurable information (Default: Here will be a click manifest used by Embedded Linux OS) 
+   - configurable data - it's starting for the first sector, and it is rewritable. This part of EEPROM is reserved for configurable information (Default: Here will be a [Click Board™](https://www.mikroe.com/click-boards) manifest used by Embedded Linux OS) 
 
 ![Information in first sector](images/fixed_data.png)  
-Fig 2. The Click's permanent information is stored in the zero sector, and the manifest is stored in the rest of the EEPROM.
+Fig 2. The [Click Board™](https://www.mikroe.com/click-boards) permanent information is stored in the zero sector, and the manifest is stored in the rest of the EEPROM.
 
 
 **Permanent data description**  
@@ -71,7 +71,7 @@ Fig 3. The permanent information
  - **Custom** - 1 bit    
       * 0 - Standard Mikroelektronika's board  
       * 1 - Customized board for customer  
- - **Type** - 10 bits (big-endian). Product type (click, display, MCU card, etc.)
+ - **Type** - 10 bits (big-endian). Product type ([Click Board™](https://www.mikroe.com/click-boards), display, MCU card, etc.)
  -  **Reserved** - 5 bits reserved in case that should be needed to increase the length of fields custom or serial
  -   **Serial** - 16 bits (little-endian) reserved for current Mikroelektronika's EPR PID number of hardware board    
 
@@ -80,7 +80,65 @@ Fig 3. The permanent information
 
 ## Variable data 
 
-This is a part of the EEPROM memory, where we store user-configurable information. By default, that is a manifest binary file that contains the necessary information for a specific Linux driver for the [Click Board™](https://www.mikroe.com/click-boards). Further, this section will describe the Click's manifest file format required for the ClickID driver in the Linux kernel. Click manifest is derived from the Greybus manifest. The detailed specification of the Greybus manifest can be read [here](https://raw.githubusercontent.com/cfriedt/greybus-for-zephyr/master/doc/GreybusSpecification.pdf).
+This is a part of the ID chip memory, where we store user-configurable information. By default, that is a [ClickID manifest](#clickid-manifest) binary file that contains the necessary information for a specific Linux driver for the [Click Board™](https://www.mikroe.com/click-boards). 
+
+## Embedded Linux and ClickID
+
+For the purpose of identifying [Click Board™](https://www.mikroe.com/click-boards) in the Embedded Linux enviroment, [mikroBUS™ kernel driver](https://github.com/Ayush1325/linux/tree/mikrobus-base/drivers/misc/mikrobus) has been developed in collaboration with the [BeagleBoard Foundation](https://www.beagleboard.org/).
+To take full advantage of the clickID hot-plug functionality, it is necessary to have a Linux image kernel with the [mikroBUS driver](https://github.com/Ayush1325/linux/tree/mikrobus-base/drivers/misc/mikrobus) enabled.  
+
+Currently available images with the driver enabled are:
+ - [BeagleBoard images](https://www.beagleboard.org/distros) 
+
+If you use one of the mentioned images, it is enough to simply plug the [Click Board™](https://www.mikroe.com/click-boards) into the mikroBUS socket, and Linux will automatically connect your [Click Board™](https://www.mikroe.com/click-boards) with the appropriate driver and expose the interface for working with it.  
+
+Information about the loaded driver can be found at the location ```/sys/bus/mikrobus/devices/mikrobus-0```. Additionally, some basic information can be seen through `dmesg (dmesg | grep mikrobus)`.
+
+Depending on the type of mikroBUS™ Add-On board, the Linux driver could be of various different types. Identify how the driver exposes the data: IIO, net, etc. For sensors, the most common is the IIO driver and you could use all driver functionalities.
+
+**NOTE:** _To be sure that your [Click Board™](https://www.mikroe.com/click-boards) is supported look for the “ID” logo on the back side of the [Click Board™](https://www.mikroe.com/click-boards) and check the currently [supported Click Board™](https://github.com/MikroElektronika/click_id/blob/generate_csv/clicks_status.csv)._
+
+**NOTE:** _Even though the dynamic system allows for Plug-and-Play, [Click Boards™](https://www.mikroe.com/click-boards) are not hot-swappable! When switching between [Click Boards™](https://www.mikroe.com/click-boards), be sure to remove power from the device first in order to prevent damage to the [Click Board™](https://www.mikroe.com/click-boards) or the platform they are connected to._
+
+<!-- ### How to include driver in kernel -->
+
+If you do not have one of the mentioned images, things are slightly more complex:
+
+* Rebuild the [mikroBUS driver](https://github.com/Ayush1325/linux/tree/mikrobus-base/drivers/misc/mikrobus) for your version of the kernel. You can do this by building the driver as a built-in driver or as a module for dynamic loading.  
+ 
+    **NOTE:** _If you build the driver as a module, it is necessary to include both the mikroBUS module 
+        and the mikroBUS_id module._
+
+* Modify the [Linux device tree](https://docs.kernel.org/devicetree/usage-model.html) so the mikroBUS™ compatible socket can be supported.
+
+* After you have applied the mikroBUS™ kernel driver onto the embedded Linux platform, perform the following:
+
+  * Verify the mikroBUS™ kernel driver is enabled by utilizing the following command in the Terminal: `ls /sys/bus/mikrobus/devices/`.
+  * What you will eventually get is something like this: `mikrobus-0` (and/or `mikrobus-1`, `mikrobus-2`, `mikrobus-3` - depending on how many [mikroBUS™](https://download.mikroe.com/documents/standards/mikrobus/mikrobus-standard-specification-v200.pdf) sockets Your embedded Linux Platform supports).
+   
+**Now you can use the driver the same as with the driver included in the prebuilt image.**
+
+## ClickID for Linux driver developers 
+ 
+Currently, database of the [Click Boards™](https://www.mikroe.com/click-boards) is much larger than the number of drivers in Linux, so it is sometimes necessary to add support for a [Click Board™](https://www.mikroe.com/click-boards) in Linux.
+
+Support for a [Click Board™](https://www.mikroe.com/click-boards) in Linux consists of several steps:
+
+* Check if the embedded Linux has the [mikroBUS driver](https://github.com/Ayush1325/linux/tree/mikrobus-base/drivers/misc/mikrobus) installed. If this is not the case, refer to the previous section on how to do this.
+
+* Checking if the module on the [Click Board™](https://www.mikroe.com/click-boards) already has a driver in the Linux kernel. If this is not the case, it is necessary to [develop a Linux driver](https://www.kernel.org/doc/html/v4.13/driver-api/index.html) for the respective module.
+
+* Create a [ClickID manifest](#clickid-manifest) for the[Click Board™](https://www.mikroe.com/click-boards), which is necessary for the host to correctly configure the [Click Board™](https://www.mikroe.com/click-boards) during loading.  [ClickID manifest](#clickid-manifest) file contains the necessary information for a specific Linux driver for the [Click Board™](https://www.mikroe.com/click-boards). For reference, you can analyze the example manifest for the [OLEDC Click](https://github.com/MikroElektronika/click_id/blob/main/clicks/OLEDC/manifest/OLEDC-CLICK.mnfs).
+
+* Create the manifest binary file (mnfb file) from [ClickID manifest](#clickid-manifest) using a [Python tool](https://github.com/MikroElektronika/click_id/tree/main/manifesto) 
+* Write the manifest file to the Click Board™.  
+'``dd if=/lib/firmware/mikrobus/your_manifest.mnfb of=/sys/bus/w1/devices/w1_bus_master1-<unique ID>/mikrobus_manifest'``
+
+**NOTE:** _Make a pull request to this repository if you want to add your ClickID manifest to our database._
+
+## ClickID manifest
+
+This section will describe the [Click Board™](https://www.mikroe.com/click-boards) manifest file format required for the ClickID driver in the Linux kernel. [Click Board™](https://www.mikroe.com/click-boards) manifest is derived from the [Greybus manifest](https://raw.githubusercontent.com/cfriedt/greybus-for-zephyr/master/doc/GreybusSpecification.pdf).
 Below are briefly described only fields of interest for the [Click Board™](https://www.mikroe.com/click-boards) manifest.
 
 The manifest contains a header and an array of descriptors. All descriptors are 32-bit aligned, and the size of each descriptor is a multiple of 4 bytes.
@@ -221,7 +279,7 @@ mikroBus descriptor:
 <br>
 
 The property descriptors are used to pass named properties or named GPIOs to the host. 
-The host system uses this information to properly configure specific click drivers by passing the properties and GPIO name. There can be multiple instances of property descriptors per add-on board manifest.
+The host system uses this information to properly configure specific [Click Board™](https://www.mikroe.com/click-boards) drivers by passing the properties and GPIO name. There can be multiple instances of property descriptors per add-on board manifest.
 
 * length (1 byte)
 * id (1 byte)
